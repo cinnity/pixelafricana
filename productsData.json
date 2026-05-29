@@ -1,13 +1,13 @@
 {
   "products": [
     {
-      "id": "ahdah",
+      "id": "zainab",
       "category": "objets",
       "title": "Ahdah",
       "onSale": true,
       "priceOriginal": "$300.00",
       "priceCurrent": "$250.00",
-      "image": "images/product_ahdah.jpg",
+      "image": "images/objets/zainab.png",
       "altText": "Ahdah minimalist sculpture bust"
     },
     {
