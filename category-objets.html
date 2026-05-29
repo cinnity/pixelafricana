@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Africana - Objets d'art</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-container">
+            <div class="brand-block">
+                <a href="index.html" class="logo-link">
+                    <img src="images/pixelafricana_logo.png" alt="Pixel Africana Logo Logo Symbol" class="logo-img">
+                    <div class="brand-text">
+                        <span class="brand-name">Pixel Africana</span>
+                        <span class="brand-sub">Culture by the Pixel ™</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="header-utilities">
+                <div class="search-box">
+                    <svg class="search-vector-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                    </svg>
+                    <input type="text" placeholder="Search products...">
+                </div>
+                <div class="cart-status-widget">
+                    <span class="cart-total">$0.00</span>
+                    <span class="cart-count">0 items</span>
+
+                    <svg class="cart-vector-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.05 1.4-2.55h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-navigation">
+        <div class="nav-container">
+            <a href="index.html" class="active">Home</a>
+            <a href="about.html">About</a>
+            <a href="cart.html">Cart</a>
+            <a href="checkout.html">Checkout</a>
+            <a href="account.html">My account</a>
+        </div>
+    </nav>
+
+    <main class="catalog-page-wrapper">
+        
+        <nav class="breadcrumb-trail" aria-label="Breadcrumb">
+            <a href="index.html" class="home-vector-link">
+                <svg class="home-vector-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                </svg>
+                <span>Home</span>
+            </a> 
+            <span class="trail-separator">›</span> 
+            <span class="current-trail-node">Objets d'art</span>
+        </nav>
+
+        <h1 class="catalog-main-title">Objets d'art</h1>
+
+        <div class="catalog-filter-bar">
+            <select class="catalog-sort-select" id="sortEngineSelector" aria-label="Sort products">
+                <option value="default" selected>Default sorting</option>
+                <option value="price-low">Sort by price: low to high</option>
+                <option value="price-high">Sort by price: high to low</option>
+            </select>
+            <span class="results-counter" id="catalogResultsCount">Showing 0 results</span>
+        </div>
+
+        <div class="product-display-grid" id="catalogProductInjectionNode"></div>
+    </main>
+
+  <footer class="minimal-footer">
+        <div class="footer-container">
+            <p>&copy; Pixel Africana 2026</p>
+        </div>
+    </footer>
+
+    <script src="shop.js" defer></script>
+</body>
+</html>

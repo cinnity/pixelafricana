@@ -1,0 +1,608 @@
+/* --- Core Interface Color Variables & Structural Foundations --- */
+:root {
+    --text-primary: #333333;
+    --text-muted: #777777;
+    --border-light: #eaeaea;
+    --bg-nav-active: #f9f9f9;
+    --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-stack);
+    color: var(--text-primary);
+    background-color: #ffffff;
+    line-height: 1.4;
+    padding-bottom: 60px;
+    font-family: "Source Sans Pro", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+/* --- Normalized Navigation Layout Engine --- */
+.main-navigation {
+    border-bottom: 1px solid var(--border-light);
+    background-color: #ffffff;
+}
+
+.nav-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center; /* Forces every element to align to the same center baseline */
+    gap: 25px;
+}
+/* --- Re-engineered Cart Status Layout --- */
+.cart-status-widget {
+    display: flex;
+    align-items: center; /* Vertically aligns price, count, and vector icon along a single baseline */
+    gap: 12px;           /* Puts clean, fixed spacing between each individual element */
+    font-size: 0.95rem;
+    cursor: pointer;
+    white-space: nowrap; /* CRITICAL: Prevents the "0 items" text from ever breaking into two lines */
+    min-width: max-content; /* Guarantees the browser container stretches to fit the contents */
+}
+/* --- Re-engineered Vector Search Input Box --- */
+.search-box {
+    display: flex;
+    align-items: center;  /* Vertically matches vector center with input text baseline */
+    gap: 10px;            /* Uniform spacing between vector glass and text string entry */
+    background-color: #f1f1f1;
+    border-radius: 4px;
+    padding: 8px 14px;
+    width: 260px;
+    transition: background-color 0.2s ease;
+}
+
+.search-box:focus-within {
+    background-color: #eaeaea; /* Subtle interactive depth change when typing */
+}
+.brand-name{
+    border-bottom: 1px solid;
+}
+/* Vector Search Icon Alignment Parameters */
+.search-vector-icon {
+    width: 18px;          /* Perfectly balanced footprint to scale with 20px cart footprint */
+    height: 18px;
+    fill: #000000;        /* Solid black matching style definition */
+    flex-shrink: 0;       /* Prevents deformation on ultra-narrow displays */
+}
+
+.search-box input {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    font-size: 0.9rem;
+    color: #333333;
+}
+
+.search-box input::placeholder {
+    color: #777777;       /* Soft, non-intrusive gray placeholder state */
+}
+/* Optional styling to make the text color look clean and crisp */
+.cart-total {
+    font-weight: 600;
+    color: #333333;
+}
+
+.cart-count {
+    color: #777777;
+}
+
+.cart-vector-icon {
+    width: 20px;
+    height: 20px;
+    fill: #000000;
+    flex-shrink: 0; /* Prevents the vector cart image from squishing down on tight screens */
+}
+/* Unified target rules for all links inside the bar container */
+.nav-container a {
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    padding: 16px 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px; /* Perfectly gaps your text from the little arrow symbol */
+    border-bottom: 2px solid transparent; /* Hidden placeholder border to prevent text jumping */
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-container a:hover {
+    color: #000000;
+}
+
+/* --- Perfect Underline State Highlight --- */
+.nav-container a.active {
+    border-bottom-color: #000000; /* Turns on the indicator line precisely on the link baseline */
+    font-weight: 600;
+    color: #000000;
+}
+/* --- Top Branding and Utility Row Styling --- */
+.site-header {
+    border-bottom: 1px solid var(--border-light);
+    padding: 20px 0;
+}
+
+.header-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.brand-block .logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    gap: 15px;
+}
+
+.logo-img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-name {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.brand-sub {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.header-utilities {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+/* Search bar field styling */
+.search-box {
+    position: relative;
+    background-color: #f1f1f1;
+    border-radius: 4px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 240px;
+}
+
+.search-box input {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    font-size: 0.9rem;
+}
+
+/* Header cart summary box */
+.cart-status-widget {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.cart-count {
+    color: var(--text-muted);
+}
+
+/* --- Main Navigation Bar Layout --- */
+.main-navigation {
+    border-bottom: 1px solid var(--border-light);
+}
+
+.nav-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    gap: 25px;
+}
+
+.main-navigation a, .dropdown-item {
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    padding: 16px 0;
+    display: inline-block;
+    transition: color 0.2s ease;
+}
+
+.main-navigation a:hover, .dropdown-item:hover a {
+    color: #000000;
+}
+
+.dropdown-item.active {
+    border-bottom: 2px solid var(--text-primary);
+    font-weight: 600;
+}
+
+/* --- Main Category Grid Component --- */
+.shop-view-wrapper {
+    max-width: 1140px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.page-main-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: #222222;
+    margin-bottom: 40px;
+}
+
+.category-display-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+/* Category individual item blocks */
+.category-card {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    text-align: center;
+    transition: transform 0.25s ease;
+}
+
+.card-media-wrapper {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #fcfcfc;
+    border: 1px solid var(--border-light);
+    margin-bottom: 20px;
+}
+
+.category-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Grow the thumbnail picture slightly when hovered */
+.category-card:hover .category-thumb {
+    transform: scale(1.04);
+}
+
+.category-label {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #111111;
+}
+
+.count-badge {
+    font-weight: bold;
+    color: #000000;
+    margin-left: 2px;
+}
+
+/* --- Fixed Bottom Layout Footer --- */
+.minimal-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f9f9f9;
+    border-top: 1px solid var(--border-light);
+    padding: 15px 0;
+    z-index: 10;
+}
+
+.footer-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* --- Dynamic Screen Viewport Responsiveness --- */
+@media (max-width: 900px) {
+    .category-display-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .header-utilities {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .category-display-grid {
+        grid-template-columns: 1fr;
+    }
+    .search-box {
+        width: 180px;
+    }
+}
+/* --- About Page Structural Layout Framework --- */
+.about-page-wrapper {
+    max-width: 1140px;
+    margin: 30px auto 80px auto;
+    padding: 0 20px;
+}
+
+/* Breadcrumb indexing layout */
+.breadcrumb-trail {
+    font-size: 0.88rem;
+    color: #777777;
+    margin-bottom: 35px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.breadcrumb-trail a {
+    color: #666666;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.breadcrumb-trail a:hover {
+    color: #000000;
+    text-decoration: underline;
+}
+
+.trail-separator {
+    color: #b5b5b5;
+    font-size: 1.1rem;
+    user-select: none;
+}
+
+.current-trail-node {
+    color: #888888;
+}
+
+/* Typography Body Parameters */
+.about-narrative-content {
+    max-width: 1000px; /* Gently constraints narrative width for optimal line reading fatigue */
+}
+
+.about-narrative-content .page-main-title {
+    font-size: 2.6rem;
+    font-weight: 300;
+    color: #222222;
+    margin-bottom: 25px;
+    letter-spacing: -0.5px;
+}
+
+.narrative-paragraph {
+    font-size: 1.05rem;
+    line-height: 1.75; /* Matches the airy, legible line spatial layout in your comp */
+    color: #555555;
+    margin-bottom: 28px;
+    text-align: justify; /* Aligns both margins evenly precisely like the image sample */
+}
+
+/* Ensure mobile presentation handles justified copy legibly */
+@media (max-width: 600px) {
+    .narrative-paragraph {
+        text-align: left;
+        font-size: 1rem;
+        line-height: 1.65;
+    }
+    .about-page-wrapper {
+        margin-top: 20px;
+    }
+}
+/* --- Re-engineered Vector Breadcrumb Home Link --- */
+.breadcrumb-trail {
+    font-size: 0.88rem;
+    color: #777777;
+    margin-bottom: 35px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.home-vector-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px; /* Spaces the vector graphic neatly away from the word "Home" */
+    color: #666666;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.home-vector-link :hover {
+    color: #000000;
+}
+
+/* Vector Home Icon Alignment & Sizing (Matches Cart Engine Scales) */
+.home-vector-icon {
+    width: 16px;          /* Proportionally scaled down slightly to sit elegantly within breadcrumb text */
+    height: 16px;
+    fill: #666666;        /* Matches default text state color */
+    transition: fill 0.2s ease;
+    flex-shrink: 0;       /* Prevents icon distortion */
+}
+
+.home-vector-link:hover .home-vector-icon {
+    fill: #000000;        /* Shifts to solid black on active link hover */
+}
+/* --- Catalog and Category Page Structural Setup --- */
+.catalog-page-wrapper {
+    max-width: 1140px;
+    margin: 30px auto 100px auto;
+    padding: 0 20px;
+}
+
+.catalog-main-title {
+    font-size: 2.6rem;
+    font-weight: 300;
+    color: #222222;
+    margin-bottom: 25px;
+    letter-spacing: -0.5px;
+}
+
+/* --- Filter Dropdown and Results Summary Bar --- */
+.catalog-filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.catalog-sort-select {
+    font-size: 0.95rem;
+    color: #333333;
+    padding: 8px 12px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    background-color: #ffffff;
+    outline: none;
+    cursor: pointer;
+}
+
+.results-counter {
+    font-size: 0.9rem;
+    color: #777777;
+}
+
+/* --- Core Product Loop Layout Matrix --- */
+.product-display-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px 30px;
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.product-image-wrapper {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 6px;
+    border: 1px solid var(--border-light);
+    background-color: #fcfcfc;
+    margin-bottom: 15px;
+}
+
+.product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --- Product Detail Typography & Actions --- */
+.product-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.product-title {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: #111111;
+}
+
+/* Clean, non-intrusive gray-bordered SALE badge */
+.badge-row {
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sale-badge {
+    font-size: 0.72rem;
+    font-weight: bold;
+    color: #555555;
+    border: 1px solid #aaaaaa;
+    padding: 3px 10px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+}
+
+/* Pricing configurations */
+.price-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+}
+
+.price-original {
+    color: #aaaaaa;
+    text-decoration: line-through; /* Slashes out original retail pricing metric */
+}
+
+.price-current {
+    color: #666666;
+    font-weight: 500;
+}
+
+/* --- Uniform Action Buttons --- */
+.add-to-cart-btn {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: #444444;
+    background-color: #eeeeee;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #e2e2e2;
+    color: #111111;
+}
+
+/* --- Dynamic Viewport Overrides --- */
+@media (max-width: 900px) {
+    .product-display-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .catalog-filter-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .product-display-grid {
+        grid-template-columns: 1fr;
+        gap: 45px;
+    }
+}
