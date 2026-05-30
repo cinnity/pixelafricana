@@ -176,7 +176,7 @@ function renderActiveCartPageDisplay() {
         mainSplitGrid.innerHTML = `
             <div style="padding: 60px 20px; text-align: center; grid-column: 1/-1;">
                 <p style="color: #666; font-size: 1.15rem; margin-bottom: 20px;">Your cart is empty.</p>
-                <a href="shop.html" style="display: inline-block; background-color: #2e2e2e; color: #fff; padding: 12px 30px; text-decoration: none; border-radius: 4px;">Return to shop</a>
+                <a href="index.html" style="display: inline-block; background-color: #2e2e2e; color: #fff; padding: 12px 30px; text-decoration: none; border-radius: 4px;">Return to shop</a>
             </div>`;
         return;
     }
@@ -225,7 +225,7 @@ function renderActiveCheckoutSummaryDisplay() {
     // Hard defensive block safety fallback: If someone targets checkout with an empty array, bounce them back to store
     if (shoppingCartState.length === 0) {
         alert("Your shopping cart is currently empty. Redirecting back to store inventory.");
-        window.location.href = "shop.html";
+        window.location.href = "index.html";
         return;
     }
 
