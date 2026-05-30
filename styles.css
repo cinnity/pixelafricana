@@ -21,6 +21,7 @@ body {
     padding-bottom: 60px;
     font-family: "Source Sans Pro", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
+
 /* --- Normalized Navigation Layout Engine --- */
 .main-navigation {
     border-bottom: 1px solid var(--border-light);
@@ -32,24 +33,33 @@ body {
     margin: 0 auto;
     padding: 0 20px;
     display: flex;
-    align-items: center; /* Forces every element to align to the same center baseline */
+    align-items: center;
+    /* Forces every element to align to the same center baseline */
     gap: 25px;
 }
+
 /* --- Re-engineered Cart Status Layout --- */
 .cart-status-widget {
     display: flex;
-    align-items: center; /* Vertically aligns price, count, and vector icon along a single baseline */
-    gap: 12px;           /* Puts clean, fixed spacing between each individual element */
+    align-items: center;
+    /* Vertically aligns price, count, and vector icon along a single baseline */
+    gap: 12px;
+    /* Puts clean, fixed spacing between each individual element */
     font-size: 0.95rem;
     cursor: pointer;
-    white-space: nowrap; /* CRITICAL: Prevents the "0 items" text from ever breaking into two lines */
-    min-width: max-content; /* Guarantees the browser container stretches to fit the contents */
+    white-space: nowrap;
+    /* CRITICAL: Prevents the "0 items" text from ever breaking into two lines */
+    min-width: max-content;
+    /* Guarantees the browser container stretches to fit the contents */
 }
+
 /* --- Re-engineered Vector Search Input Box --- */
 .search-box {
     display: flex;
-    align-items: center;  /* Vertically matches vector center with input text baseline */
-    gap: 10px;            /* Uniform spacing between vector glass and text string entry */
+    align-items: center;
+    /* Vertically matches vector center with input text baseline */
+    gap: 10px;
+    /* Uniform spacing between vector glass and text string entry */
     background-color: #f1f1f1;
     border-radius: 4px;
     padding: 8px 14px;
@@ -58,17 +68,23 @@ body {
 }
 
 .search-box:focus-within {
-    background-color: #eaeaea; /* Subtle interactive depth change when typing */
+    background-color: #eaeaea;
+    /* Subtle interactive depth change when typing */
 }
-.brand-name{
+
+.brand-name {
     border-bottom: 1px solid;
 }
+
 /* Vector Search Icon Alignment Parameters */
 .search-vector-icon {
-    width: 18px;          /* Perfectly balanced footprint to scale with 20px cart footprint */
+    width: 18px;
+    /* Perfectly balanced footprint to scale with 20px cart footprint */
     height: 18px;
-    fill: #000000;        /* Solid black matching style definition */
-    flex-shrink: 0;       /* Prevents deformation on ultra-narrow displays */
+    fill: #000000;
+    /* Solid black matching style definition */
+    flex-shrink: 0;
+    /* Prevents deformation on ultra-narrow displays */
 }
 
 .search-box input {
@@ -81,8 +97,10 @@ body {
 }
 
 .search-box input::placeholder {
-    color: #777777;       /* Soft, non-intrusive gray placeholder state */
+    color: #777777;
+    /* Soft, non-intrusive gray placeholder state */
 }
+
 /* Optional styling to make the text color look clean and crisp */
 .cart-total {
     font-weight: 600;
@@ -97,8 +115,10 @@ body {
     width: 20px;
     height: 20px;
     fill: #000000;
-    flex-shrink: 0; /* Prevents the vector cart image from squishing down on tight screens */
+    flex-shrink: 0;
+    /* Prevents the vector cart image from squishing down on tight screens */
 }
+
 /* Unified target rules for all links inside the bar container */
 .nav-container a {
     text-decoration: none;
@@ -107,8 +127,10 @@ body {
     padding: 16px 0;
     display: inline-flex;
     align-items: center;
-    gap: 4px; /* Perfectly gaps your text from the little arrow symbol */
-    border-bottom: 2px solid transparent; /* Hidden placeholder border to prevent text jumping */
+    gap: 4px;
+    /* Perfectly gaps your text from the little arrow symbol */
+    border-bottom: 2px solid transparent;
+    /* Hidden placeholder border to prevent text jumping */
     transition: color 0.2s ease, border-color 0.2s ease;
 }
 
@@ -118,10 +140,12 @@ body {
 
 /* --- Perfect Underline State Highlight --- */
 .nav-container a.active {
-    border-bottom-color: #000000; /* Turns on the indicator line precisely on the link baseline */
+    border-bottom-color: #000000;
+    /* Turns on the indicator line precisely on the link baseline */
     font-weight: 600;
     color: #000000;
 }
+
 /* --- Top Branding and Utility Row Styling --- */
 .site-header {
     border-bottom: 1px solid var(--border-light);
@@ -221,7 +245,8 @@ body {
     gap: 25px;
 }
 
-.main-navigation a, .dropdown-item {
+.main-navigation a,
+.dropdown-item {
     text-decoration: none;
     color: var(--text-primary);
     font-size: 0.95rem;
@@ -230,7 +255,8 @@ body {
     transition: color 0.2s ease;
 }
 
-.main-navigation a:hover, .dropdown-item:hover a {
+.main-navigation a:hover,
+.dropdown-item:hover a {
     color: #000000;
 }
 
@@ -334,17 +360,21 @@ body {
         flex-direction: column;
         align-items: flex-start;
     }
+
     .header-utilities {
         width: 100%;
         justify-content: space-between;
     }
+
     .category-display-grid {
         grid-template-columns: 1fr;
     }
+
     .search-box {
         width: 180px;
     }
 }
+
 /* --- About Page Structural Layout Framework --- */
 .about-page-wrapper {
     max-width: 1140px;
@@ -385,7 +415,8 @@ body {
 
 /* Typography Body Parameters */
 .about-narrative-content {
-    max-width: 1000px; /* Gently constraints narrative width for optimal line reading fatigue */
+    max-width: 1000px;
+    /* Gently constraints narrative width for optimal line reading fatigue */
 }
 
 .about-narrative-content .page-main-title {
@@ -398,10 +429,12 @@ body {
 
 .narrative-paragraph {
     font-size: 1.05rem;
-    line-height: 1.75; /* Matches the airy, legible line spatial layout in your comp */
+    line-height: 1.75;
+    /* Matches the airy, legible line spatial layout in your comp */
     color: #555555;
     margin-bottom: 28px;
-    text-align: justify; /* Aligns both margins evenly precisely like the image sample */
+    text-align: justify;
+    /* Aligns both margins evenly precisely like the image sample */
 }
 
 /* Ensure mobile presentation handles justified copy legibly */
@@ -411,10 +444,12 @@ body {
         font-size: 1rem;
         line-height: 1.65;
     }
+
     .about-page-wrapper {
         margin-top: 20px;
     }
 }
+
 /* --- Re-engineered Vector Breadcrumb Home Link --- */
 .breadcrumb-trail {
     font-size: 0.88rem;
@@ -428,7 +463,8 @@ body {
 .home-vector-link {
     display: inline-flex;
     align-items: center;
-    gap: 6px; /* Spaces the vector graphic neatly away from the word "Home" */
+    gap: 6px;
+    /* Spaces the vector graphic neatly away from the word "Home" */
     color: #666666;
     text-decoration: none;
     transition: color 0.2s ease;
@@ -440,16 +476,21 @@ body {
 
 /* Vector Home Icon Alignment & Sizing (Matches Cart Engine Scales) */
 .home-vector-icon {
-    width: 16px;          /* Proportionally scaled down slightly to sit elegantly within breadcrumb text */
+    width: 16px;
+    /* Proportionally scaled down slightly to sit elegantly within breadcrumb text */
     height: 16px;
-    fill: #666666;        /* Matches default text state color */
+    fill: #666666;
+    /* Matches default text state color */
     transition: fill 0.2s ease;
-    flex-shrink: 0;       /* Prevents icon distortion */
+    flex-shrink: 0;
+    /* Prevents icon distortion */
 }
 
 .home-vector-link:hover .home-vector-icon {
-    fill: #000000;        /* Shifts to solid black on active link hover */
+    fill: #000000;
+    /* Shifts to solid black on active link hover */
 }
+
 /* --- Catalog and Category Page Structural Setup --- */
 .catalog-page-wrapper {
     max-width: 1140px;
@@ -562,7 +603,8 @@ body {
 
 .price-original {
     color: #aaaaaa;
-    text-decoration: line-through; /* Slashes out original retail pricing metric */
+    text-decoration: line-through;
+    /* Slashes out original retail pricing metric */
 }
 
 .price-current {
@@ -601,11 +643,13 @@ body {
         align-items: flex-start;
         gap: 10px;
     }
+
     .product-display-grid {
         grid-template-columns: 1fr;
         gap: 45px;
     }
 }
+
 /* --- Cart Page Structural Layout Configurations --- */
 .cart-page-wrapper {
     max-width: 1140px;
@@ -617,7 +661,8 @@ body {
     font-size: 3rem;
     font-weight: 300;
     color: #222222;
-    text-align: center; /* Centers the title exactly as shown in the composition */
+    text-align: center;
+    /* Centers the title exactly as shown in the composition */
     margin: 30px 0 60px 0;
 }
 
@@ -674,7 +719,8 @@ body {
 
 .item-title-link {
     font-size: 1.15rem;
-    color: #512da8; /* Distinct deep violet color structure shown in mockup */
+    color: #512da8;
+    /* Distinct deep violet color structure shown in mockup */
     text-decoration: none;
     font-weight: 500;
 }
@@ -865,7 +911,8 @@ body {
 /* Pro Proceed action button */
 .proceed-to-checkout-btn {
     width: 100%;
-    background-color: #2e2e2e; /* Deep grey charcoal tone matching design spec exactly */
+    background-color: #2e2e2e;
+    /* Deep grey charcoal tone matching design spec exactly */
     color: #ffffff;
     border: none;
     padding: 16px;
@@ -887,6 +934,7 @@ body {
         grid-template-columns: 1fr;
         gap: 50px;
     }
+
     .cart-main-title {
         margin-bottom: 30px;
     }
@@ -898,14 +946,17 @@ body {
         flex-direction: column;
         gap: 15px;
     }
+
     .product-total-block {
         align-self: flex-end;
         font-weight: bold;
     }
+
     .text-right {
         max-width: 100%;
     }
 }
+
 /* --- Checkout Core Layout Specifications --- */
 .checkout-page-wrapper {
     max-width: 1140px;
@@ -976,13 +1027,15 @@ body {
     width: 100%;
 }
 
-.input-group input, .input-group select {
+.input-group input,
+.input-group select {
     width: 100%;
     padding: 18px 14px 6px 14px;
     font-size: 0.95rem;
     color: #333333;
     background-color: #ffffff;
-    border: 1px solid #444444; /* Clean dark structural line definitions from comp */
+    border: 1px solid #444444;
+    /* Clean dark structural line definitions from comp */
     border-radius: 5px;
     outline: none;
     height: 54px;
@@ -1002,10 +1055,10 @@ body {
 }
 
 /* Float Label States on Input Interactivity Actions */
-.input-group input:focus ~ label,
-.input-group input:not(:placeholder-shown) ~ label,
-.input-group select:focus ~ label,
-.input-group select:valid ~ label {
+.input-group input:focus~label,
+.input-group input:not(:placeholder-shown)~label,
+.input-group select:focus~label,
+.input-group select:valid~label {
     top: 14px;
     font-size: 0.72rem;
     color: #666666;
@@ -1051,7 +1104,7 @@ body {
 }
 
 /* Emulated Checked State Layout Markings */
-.custom-checkbox input:checked ~ .checkbox-box::after {
+.custom-checkbox input:checked~.checkbox-box::after {
     content: "";
     position: absolute;
     left: 5px;
@@ -1143,7 +1196,8 @@ body {
 }
 
 .place-order-btn {
-    background-color: #2e2e2e; /* Dark slate charcoal tone matching checkout image profile spec exactly */
+    background-color: #2e2e2e;
+    /* Dark slate charcoal tone matching checkout image profile spec exactly */
     color: #ffffff;
     border: none;
     padding: 16px 45px;
@@ -1307,8 +1361,10 @@ body {
         grid-template-columns: 1fr;
         gap: 50px;
     }
+
     .checkout-summary-section {
-        grid-row: 1; /* Pushes the order review summary block to the very top on tablets and mobiles */
+        grid-row: 1;
+        /* Pushes the order review summary block to the very top on tablets and mobiles */
     }
 }
 
@@ -1317,28 +1373,35 @@ body {
         grid-template-columns: 1fr;
         gap: 0;
     }
+
     .form-actions-row {
         flex-direction: column-reverse;
         gap: 25px;
         align-items: flex-start;
     }
+
     .place-order-btn {
         width: 100%;
     }
+
     .checkout-main-title {
         margin-bottom: 35px;
     }
 }
+
 /* --- Re-engineered Floating Label Input Engine --- */
 .input-group {
     position: relative;
-    margin-bottom: 20px; /* Slightly increased for improved structural line breathing */
+    margin-bottom: 20px;
+    /* Slightly increased for improved structural line breathing */
     width: 100%;
 }
 
-.input-group input, .input-group select {
+.input-group input,
+.input-group select {
     width: 100%;
-    padding: 22px 14px 6px 14px; /* Shifted padding downward to give text a perfect lower baseline */
+    padding: 22px 14px 6px 14px;
+    /* Shifted padding downward to give text a perfect lower baseline */
     font-size: 0.95rem;
     color: #333333;
     background-color: #ffffff;
@@ -1358,31 +1421,95 @@ body {
     transform: translateY(-50%);
     font-size: 0.95rem;
     color: #777777;
-    transition: all 0.2s ease-in-out; /* Smoother transition curve */
+    transition: all 0.2s ease-in-out;
+    /* Smoother transition curve */
     pointer-events: none;
     background-color: transparent;
 }
 
 /* --- THE CORRECTION --- */
 /* Target fields when focused OR when the placeholder is NOT showing (user typed something) */
-.input-group input:focus ~ label,
-.input-group input:not(:placeholder-shown) ~ label,
-.input-group select:focus ~ label,
-.input-group select:valid ~ label {
-    top: 13px; /* Pulls the label up high toward the top border line */
+.input-group input:focus~label,
+.input-group input:not(:placeholder-shown)~label,
+.input-group select:focus~label,
+.input-group select:valid~label {
+    top: 13px;
+    /* Pulls the label up high toward the top border line */
     font-size: 0.72rem;
     color: #666666;
-    transform: translateY(0); /* Resets vertical offset to prevent alignment stutter */
+    transform: translateY(0);
+    /* Resets vertical offset to prevent alignment stutter */
 }
 
 /* Style placeholders so they look subtle and don't compete with the label when resting */
 .input-group input::placeholder {
     color: #cccccc;
-    opacity: 0; /* Keeps placeholder invisible while label is resting in center */
+    opacity: 0;
+    /* Keeps placeholder invisible while label is resting in center */
     transition: opacity 0.2s ease;
 }
 
 /* Reveal placeholder metrics only when user actively clicks into a field */
 .input-group input:focus::placeholder {
     opacity: 1;
+}
+
+.success-wrapper {
+    max-width: 600px;
+    margin: 100px auto;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.success-icon {
+    font-size: 3.5rem;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+.success-wrapper h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: #222222;
+    margin-bottom: 15px;
+}
+
+.success-wrapper p {
+    color: #666666;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.continue-shopping-btn {
+    display: inline-block;
+    background-color: #2e2e2e;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 14px 35px;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.continue-shopping-btn:hover {
+    background-color: #111111;
+}
+/* --- Circular Checkmark Vector Specifications --- */
+.success-vector-circle-icon {
+    width: 64px;           /* Perfectly balanced footprint to anchor the text underneath */
+    height: 64px;
+    fill: #14b309;         /* Matches your dark slate charcoal design palette signature */
+    margin-bottom: 25px;
+    display: inline-block;
+}
+
+/* Ensure the wrapper respects structural spacing limits */
+.success-wrapper {
+    max-width: 600px;
+    margin: 100px auto;
+    text-align: center;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* Ensures everything stacks evenly centered on the axis line */
 }

@@ -29,16 +29,6 @@
       "priceCurrent": "$250.00",
       "image": "images/objets/ronkeh.png",
       "altText": "Amina golden reflective sculpture bust"
-    },
-    {
-      "id": "test",
-      "category": "objets",
-      "title": "Test",
-      "onSale": false,
-      "priceOriginal": null,
-      "priceCurrent": "$5.00",
-      "image": "images/objets/ronkeh.png",
-      "altText": "Amina golden reflective sculpture bust"
     }
   ]
 }

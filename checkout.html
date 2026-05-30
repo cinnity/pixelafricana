@@ -152,7 +152,7 @@
                     <p class="block-subtext muted-prompt">Add a shipping address to view shipping options.</p>
                 </section>
 
-                <section class="form-block">
+                <!--section class="form-block">
                     <h2 class="block-heading">Payment options</h2>
 
                     <div class="payment-gateway-container">
@@ -193,8 +193,29 @@
                         <span class="checkbox-box"></span>
                         Add a note to your order
                     </label>
-                </section>
+                </section-->
+                <section class="form-block">
+                    <h2 class="block-heading">Payment options</h2>
+                    <div class="payment-gateway-container"
+                        style="padding: 20px; background-color: #f9f9f9; border: 1px solid #444444; border-radius: 6px;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <span style="font-weight: 500; color: #333;">Secure Credit/Debit Card Processing</span>
+                            <div class="card-logos">
+                            </div>
+                        </div>
+                        <p style="font-size: 0.88rem; color: #666; line-height: 1.4; margin: 0;">
+                            To ensure maximum security, you will be securely redirected to Stripe's encrypted checkout
+                            portal to complete your payment.
+                        </p>
+                    </div>
 
+                    <label class="custom-checkbox">
+                        <input type="checkbox" id="toggleNote">
+                        <span class="checkbox-box"></span>
+                        Add a note to your order
+                    </label>
+                </section>
                 <div class="compliance-row">
                     <p>By proceeding with your purchase you agree to our <a href="#">Terms and Conditions</a> and <a
                             href="#">Privacy Policy</a></p>
