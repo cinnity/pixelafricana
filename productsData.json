@@ -3,7 +3,7 @@
     {
       "id": "zainab",
       "category": "objets",
-      "title": "Ahdah",
+      "title": "Zainab",
       "onSale": true,
       "priceOriginal": "$300.00",
       "priceCurrent": "$250.00",
@@ -11,23 +11,23 @@
       "altText": "Ahdah minimalist sculpture bust"
     },
     {
-      "id": "amano-aminu",
+      "id": "gbenga",
       "category": "objets",
-      "title": "Amano Aminu",
+      "title": "Gbenga",
       "onSale": false,
       "priceOriginal": null,
       "priceCurrent": "$400.00",
-      "image": "images/product_amano.jpg",
+      "image": "images/objets/gbenga_main.png",
       "altText": "Amano Aminu arm wrestling sculpture work"
     },
     {
-      "id": "amina",
+      "id": "ronkeh",
       "category": "objets",
-      "title": "Amina",
+      "title": "Ronkeh",
       "onSale": false,
       "priceOriginal": null,
       "priceCurrent": "$250.00",
-      "image": "images/product_amina.jpg",
+      "image": "images/objets/ronkeh.png",
       "altText": "Amina golden reflective sculpture bust"
     }
   ]

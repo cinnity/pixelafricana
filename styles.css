@@ -606,3 +606,783 @@ body {
         gap: 45px;
     }
 }
+/* --- Cart Page Structural Layout Configurations --- */
+.cart-page-wrapper {
+    max-width: 1140px;
+    margin: 30px auto 120px auto;
+    padding: 0 20px;
+}
+
+.cart-main-title {
+    font-size: 3rem;
+    font-weight: 300;
+    color: #222222;
+    text-align: center; /* Centers the title exactly as shown in the composition */
+    margin: 30px 0 60px 0;
+}
+
+/* Split Column Framework layout */
+.cart-split-grid {
+    display: grid;
+    grid-template-columns: 1.7fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+/* --- Left Side: Item Listings Table --- */
+.cart-items-section {
+    border-top: 1px solid var(--border-light);
+}
+
+.table-header-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    color: var(--text-primary);
+}
+
+.cart-item-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.product-meta-block {
+    display: flex;
+    gap: 25px;
+}
+
+.cart-item-thumb {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid var(--border-light);
+}
+
+.product-identity-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.item-title-link {
+    font-size: 1.15rem;
+    color: #512da8; /* Distinct deep violet color structure shown in mockup */
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.item-title-link:hover {
+    text-decoration: underline;
+}
+
+.item-pricing-stack {
+    font-size: 0.95rem;
+    display: flex;
+    gap: 8px;
+}
+
+.item-orig-price {
+    color: #aaaaaa;
+    text-decoration: line-through;
+}
+
+.item-sale-price {
+    color: #333333;
+    font-weight: 500;
+}
+
+/* Micro-badge saving callouts */
+.saving-badge {
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: #555555;
+    border: 1px solid #cccccc;
+    padding: 3px 8px;
+    border-radius: 3px;
+}
+
+/* Quantity Incrementor Controls block */
+.qty-stepper-box {
+    display: inline-flex;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 8px 0;
+}
+
+.stepper-btn {
+    background-color: #ffffff;
+    border: none;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #777777;
+    transition: background-color 0.15s ease;
+}
+
+.stepper-btn:hover {
+    background-color: #f5f5f5;
+    color: #000000;
+}
+
+.qty-input {
+    border: none;
+    border-left: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
+    width: 45px;
+    height: 32px;
+    text-align: center;
+    font-size: 0.95rem;
+    outline: none;
+    color: #333333;
+    -moz-appearance: textfield;
+}
+
+.qty-input::-webkit-outer-spin-button,
+.qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.remove-item-trigger {
+    background: transparent;
+    border: none;
+    color: #777777;
+    font-size: 0.82rem;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 2px 0;
+}
+
+.remove-item-trigger:hover {
+    color: #cc0000;
+}
+
+.product-total-block {
+    font-size: 1.05rem;
+    color: #333333;
+    padding-top: 2px;
+}
+
+/* --- Right Side: Cart Totals Side Panel --- */
+.totals-section-title {
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: var(--text-primary);
+    letter-spacing: 0.5px;
+    margin-bottom: 15px;
+}
+
+/* Collapsible Coupon UI Drawer Row */
+.coupon-dropdown-trigger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+    font-size: 0.95rem;
+    color: #555555;
+    cursor: pointer;
+}
+
+.coupon-dropdown-trigger .chevron-symbol {
+    font-size: 0.65rem;
+    color: #888888;
+}
+
+/* Summary Financial Layout Matrix */
+.summary-statement-card {
+    margin-bottom: 25px;
+}
+
+.statement-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 0.95rem;
+}
+
+.metric-label {
+    color: #666666;
+}
+
+.font-highlight {
+    font-weight: 600;
+    color: #222222;
+}
+
+.inline-action-link {
+    color: #333333;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.inline-action-link:hover {
+    color: #000000;
+}
+
+.text-right {
+    text-align: right;
+    max-width: 65%;
+    line-height: 1.4;
+}
+
+/* Bold Checkout Bottom Summary String Row */
+.grand-total-row {
+    padding: 25px 0;
+    border-bottom: none;
+    font-size: 1.35rem;
+}
+
+.total-label {
+    font-weight: bold;
+    color: #222222;
+}
+
+.total-value {
+    font-weight: bold;
+    color: #222222;
+}
+
+.currency-code {
+    font-size: 0.95rem;
+    font-weight: normal;
+    color: #666666;
+    margin-left: 2px;
+}
+
+/* Pro Proceed action button */
+.proceed-to-checkout-btn {
+    width: 100%;
+    background-color: #2e2e2e; /* Deep grey charcoal tone matching design spec exactly */
+    color: #ffffff;
+    border: none;
+    padding: 16px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-transform: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.proceed-to-checkout-btn:hover {
+    background-color: #111111;
+}
+
+/* --- Dynamic Viewport Device Overrides --- */
+@media (max-width: 860px) {
+    .cart-split-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+    .cart-main-title {
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cart-item-row {
+        position: relative;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .product-total-block {
+        align-self: flex-end;
+        font-weight: bold;
+    }
+    .text-right {
+        max-width: 100%;
+    }
+}
+/* --- Checkout Core Layout Specifications --- */
+.checkout-page-wrapper {
+    max-width: 1140px;
+    margin: 30px auto 140px auto;
+    padding: 0 20px;
+}
+
+.checkout-main-title {
+    font-size: 3rem;
+    font-weight: 300;
+    color: #222222;
+    text-align: center;
+    margin: 20px 0 60px 0;
+}
+
+.checkout-split-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 70px;
+    align-items: start;
+}
+
+/* --- Left Side: Component Form Blocks --- */
+.form-block {
+    margin-bottom: 45px;
+}
+
+.block-heading {
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: #333333;
+    margin-bottom: 6px;
+}
+
+.block-subtext {
+    font-size: 0.88rem;
+    color: #666666;
+    margin-bottom: 20px;
+}
+
+.block-subtext.muted-prompt {
+    color: #666666;
+    padding: 5px 0;
+}
+
+/* Form Structural Rows */
+.form-row-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.form-toggle-link {
+    background: transparent;
+    border: none;
+    color: #000000;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin: -5px 0 20px 0;
+    display: block;
+}
+
+/* --- Beautiful Floating Label Input Fields Engine --- */
+.input-group {
+    position: relative;
+    margin-bottom: 16px;
+    width: 100%;
+}
+
+.input-group input, .input-group select {
+    width: 100%;
+    padding: 18px 14px 6px 14px;
+    font-size: 0.95rem;
+    color: #333333;
+    background-color: #ffffff;
+    border: 1px solid #444444; /* Clean dark structural line definitions from comp */
+    border-radius: 5px;
+    outline: none;
+    height: 54px;
+    font-family: inherit;
+    appearance: none;
+}
+
+.input-group label {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.95rem;
+    color: #666666;
+    transition: all 0.2s ease;
+    pointer-events: none;
+}
+
+/* Float Label States on Input Interactivity Actions */
+.input-group input:focus ~ label,
+.input-group input:not(:placeholder-shown) ~ label,
+.input-group select:focus ~ label,
+.input-group select:valid ~ label {
+    top: 14px;
+    font-size: 0.72rem;
+    color: #666666;
+}
+
+/* Dynamic handling for clean dropdown positioning */
+.input-group select {
+    padding-top: 20px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M0 0l5 5 5-5z' fill='%23666666'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+}
+
+/* --- Form Checkbox Custom Alignment Track --- */
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.88rem;
+    color: #333333;
+    line-height: 1.4;
+    cursor: pointer;
+    margin: 20px 0;
+    user-select: none;
+}
+
+.custom-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkbox-box {
+    width: 18px;
+    height: 18px;
+    border: 1px solid #444444;
+    border-radius: 4px;
+    flex-shrink: 0;
+    position: relative;
+    background-color: #ffffff;
+}
+
+/* Emulated Checked State Layout Markings */
+.custom-checkbox input:checked ~ .checkbox-box::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    width: 5px;
+    height: 9px;
+    border: solid #000000;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* --- Stripe Emulated Credit Card Container --- */
+.payment-gateway-container {
+    border: 1px solid #444444;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+.gateway-header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e2e2e2;
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+    color: #333333;
+}
+
+.card-logos {
+    display: flex;
+    gap: 6px;
+}
+
+.gateway-body {
+    padding: 20px 16px 8px 16px;
+    background-color: #ffffff;
+}
+
+.secure-code-group {
+    position: relative;
+}
+
+.cvc-hint-icon {
+    position: absolute;
+    right: 14px;
+    top: 17px;
+    width: 20px;
+    height: 20px;
+    fill: #888888;
+}
+
+/* --- Form Footer Disclaimers and Actions --- */
+.compliance-row {
+    border-top: 1px solid var(--border-light);
+    padding: 25px 0;
+    font-size: 0.88rem;
+    color: #444444;
+    line-height: 1.5;
+}
+
+.compliance-row a {
+    color: #333333;
+    text-decoration: underline;
+}
+
+.form-actions-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.back-to-cart-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #333333;
+    text-decoration: underline;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.back-to-cart-link svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+}
+
+.place-order-btn {
+    background-color: #2e2e2e; /* Dark slate charcoal tone matching checkout image profile spec exactly */
+    color: #ffffff;
+    border: none;
+    padding: 16px 45px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.place-order-btn:hover {
+    background-color: #111111;
+}
+
+/* --- Right Side: Persistent Sticky Order Summary Review Panel --- */
+.summary-sticky-card {
+    border: 1px solid #eaeaea;
+    border-radius: 6px;
+    background-color: #ffffff;
+    padding: 10px 24px;
+}
+
+.summary-accordion-item {
+    border-bottom: 1px solid #eaeaea;
+}
+
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    font-size: 0.95rem;
+    color: #444444;
+    cursor: pointer;
+}
+
+.accordion-header .chevron {
+    font-size: 0.65rem;
+    color: #777777;
+}
+
+.accordion-content {
+    padding-bottom: 20px;
+}
+
+/* Product Entry Layout mappings within Sticky review widget card */
+.summary-product-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.thumb-badge-wrap {
+    position: relative;
+    width: 52px;
+    height: 52px;
+}
+
+.summary-product-item .item-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #eaeaea;
+}
+
+.qty-badge {
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    background-color: #808080;
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: bold;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex-grow: 1;
+}
+
+.item-name {
+    font-size: 0.95rem;
+    color: #222222;
+}
+
+.item-prices {
+    display: flex;
+    gap: 8px;
+    font-size: 0.85rem;
+}
+
+.item-prices .orig {
+    color: #b5b5b5;
+    text-decoration: line-through;
+}
+
+.item-prices .current {
+    color: #666666;
+}
+
+.item-row-total {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #222222;
+}
+
+/* Financial summary tables metrics layout */
+.summary-metrics-table {
+    padding-top: 10px;
+}
+
+.metric-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0;
+    font-size: 0.95rem;
+    color: #444444;
+}
+
+.metric-line .value.italic-muted {
+    font-style: italic;
+    color: #777777;
+    font-size: 0.9rem;
+}
+
+.metric-line.total-line {
+    border-top: 1px solid #eaeaea;
+    margin-top: 5px;
+    padding: 24px 0 15px 0;
+    font-size: 1.25rem;
+    color: #111111;
+}
+
+.total-line span:first-child {
+    font-weight: bold;
+}
+
+.total-line .value {
+    font-weight: bold;
+}
+
+.total-line small {
+    font-size: 0.8rem;
+    font-weight: normal;
+    color: #666666;
+    margin-left: 2px;
+}
+
+/* --- Responsive Layout Adjustments --- */
+@media (max-width: 900px) {
+    .checkout-split-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+    .checkout-summary-section {
+        grid-row: 1; /* Pushes the order review summary block to the very top on tablets and mobiles */
+    }
+}
+
+@media (max-width: 500px) {
+    .form-row-2col {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    .form-actions-row {
+        flex-direction: column-reverse;
+        gap: 25px;
+        align-items: flex-start;
+    }
+    .place-order-btn {
+        width: 100%;
+    }
+    .checkout-main-title {
+        margin-bottom: 35px;
+    }
+}
+/* --- Re-engineered Floating Label Input Engine --- */
+.input-group {
+    position: relative;
+    margin-bottom: 20px; /* Slightly increased for improved structural line breathing */
+    width: 100%;
+}
+
+.input-group input, .input-group select {
+    width: 100%;
+    padding: 22px 14px 6px 14px; /* Shifted padding downward to give text a perfect lower baseline */
+    font-size: 0.95rem;
+    color: #333333;
+    background-color: #ffffff;
+    border: 1px solid #444444;
+    border-radius: 5px;
+    outline: none;
+    height: 56px;
+    font-family: inherit;
+    appearance: none;
+}
+
+/* Base Resting Label Position Configuration */
+.input-group label {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.95rem;
+    color: #777777;
+    transition: all 0.2s ease-in-out; /* Smoother transition curve */
+    pointer-events: none;
+    background-color: transparent;
+}
+
+/* --- THE CORRECTION --- */
+/* Target fields when focused OR when the placeholder is NOT showing (user typed something) */
+.input-group input:focus ~ label,
+.input-group input:not(:placeholder-shown) ~ label,
+.input-group select:focus ~ label,
+.input-group select:valid ~ label {
+    top: 13px; /* Pulls the label up high toward the top border line */
+    font-size: 0.72rem;
+    color: #666666;
+    transform: translateY(0); /* Resets vertical offset to prevent alignment stutter */
+}
+
+/* Style placeholders so they look subtle and don't compete with the label when resting */
+.input-group input::placeholder {
+    color: #cccccc;
+    opacity: 0; /* Keeps placeholder invisible while label is resting in center */
+    transition: opacity 0.2s ease;
+}
+
+/* Reveal placeholder metrics only when user actively clicks into a field */
+.input-group input:focus::placeholder {
+    opacity: 1;
+}
