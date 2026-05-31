@@ -1,35 +1,43 @@
 /**
- * Pixel Africana - Consolidated Core Store Engine
+ * Pixel Africana - Unified Store Engine
  * Manages universal state variables, local storage, tracking, 
  * and page-specific layout render loops in one single file.
  */
 
 // ==========================================
-// 1. UNIVERSAL STATE TRACKING DATA ARCHITECTURE
+// 1. GLOBAL STATE & TRACKING ARCHITECTURE
 // ==========================================
 let shoppingCartState = JSON.parse(localStorage.getItem('pixel_cart_items')) || [];
 let inventoryMasterDataset = [];
-const targetedCategoryScope = "objets";
 
+// Unified Initialization Bootstrapper
 document.addEventListener("DOMContentLoaded", () => {
-    // Fire off global navigation counters immediately on all page loads
+    // Run header updates instantly across all views
     updateGlobalHeaderCartWidgets();
 
-    // TARGET ASSIGNMENT CHECK A: Are we on a Category product listing page?
-    if (document.getElementById('catalogProductInjectionNode')) {
-        initializeCatalogProductDeck();
+    // Check A: Are we on the generic Category template page?
+    const catalogGridNode = document.getElementById('catalogProductInjectionNode');
+    if (catalogGridNode) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentCategoryScope = urlParams.get('type') || 'objets'; 
+        initializeCatalogProductDeck(currentCategoryScope);
     }
 
-    // TARGET ASSIGNMENT CHECK B: Are we on the structural Cart processing page?
+    // Check B: Are we on the structural Cart processing page?
     if (document.getElementById('cartItemsTargetNode')) {
         renderActiveCartPageDisplay();
     }
 
-    // TARGET ASSIGNMENT CHECK C: Are we on the functional Checkout page?
+    // Check C: Are we on the functional Checkout page?
     if (document.getElementById('checkoutForm')) {
         renderActiveCheckoutSummaryDisplay();
+        setupCheckoutFormSubmission(); 
     }
-    if (document.getElementById('checkoutForm')) { setupCheckoutFormSubmission(); }
+
+    // Check D: Are we on the dynamic Product Detail View page?
+    if (document.getElementById('productDetailContainer')) {
+        initializeProductDetailEngine();
+    }
 });
 
 // ==========================================
@@ -55,7 +63,6 @@ function addItemToCart(productId, productTitle, productPrice, productImage) {
 function removeProductFromCart(productId) {
     shoppingCartState = shoppingCartState.filter(item => item.id !== productId);
     syncCartToStorage();
-    // Safety check: only call render routines if the current page has the nodes loaded
     if (document.getElementById('cartItemsTargetNode')) renderActiveCartPageDisplay();
 }
 
@@ -95,19 +102,25 @@ function updateGlobalHeaderCartWidgets() {
 }
 
 // ==========================================
-// 3. PAGE-SPECIFIC CODE MODULES (SAFEGUARDS ENFORCED)
+// 3. CATALOG GRID & TEMPLATE RENDERING
 // ==========================================
-
-// Catalog Page Initialization Logic
-function initializeCatalogProductDeck() {
+function initializeCatalogProductDeck(categoryScope) {
     fetch('productsData.json')
         .then(response => response.json())
         .then(data => {
-            inventoryMasterDataset = data.products.filter(p => p.category === targetedCategoryScope);
+            inventoryMasterDataset = data.products.filter(p => p.category === categoryScope);
+            
+            // Dynamically update headings out of URL values
+            const pageTitleNode = document.getElementById('catalogPageTitle');
+            const breadcrumbNode = document.getElementById('catalogBreadcrumbTitle');
+            
+            if (pageTitleNode) pageTitleNode.innerText = `${categoryScope}`;
+            if (breadcrumbNode) breadcrumbNode.innerText = `${categoryScope}`;
+
             renderProductCatalogGrid(inventoryMasterDataset);
             setupCatalogEventListeners();
         })
-        .catch(err => console.error("Error reading data file:", err));
+        .catch(err => console.error("Error running template deck:", err));
 }
 
 function renderProductCatalogGrid(productsList) {
@@ -121,9 +134,15 @@ function renderProductCatalogGrid(productsList) {
     productsList.forEach(item => {
         const cardHTML = `
             <article class="product-card">
-                <div class="product-image-wrapper"><img src="${item.image}" alt="${item.altText}" class="product-img"></div>
+                <div class="product-image-wrapper">
+                    <a href="product-detail.html?id=${item.id}">
+                        <img src="${item.image}" alt="${item.altText}" class="product-img">
+                    </a>
+                </div>
                 <div class="product-details">
-                    <h2 class="product-title">${item.title}</h2>
+                    <h2 class="product-title">
+                        <a href="product-detail.html?id=${item.id}" style="text-decoration:none; color:inherit;">${item.title}</a>
+                    </h2>
                     <div class="badge-row">${item.onSale ? '<span class="sale-badge">SALE!</span>' : ''}</div>
                     <div class="price-row">
                         ${item.onSale ? `<span class="price-original">${item.priceOriginal}</span>` : ''}
@@ -165,7 +184,9 @@ function setupCatalogEventListeners() {
     });
 }
 
-// Cart Page Layout Builder Routine
+// ==========================================
+// 4. CART DISPLAY MODELLING WORKSPACE
+// ==========================================
 function renderActiveCartPageDisplay() {
     const listContainer = document.getElementById('cartItemsTargetNode');
     const summaryContainer = document.getElementById('cartSummaryStatementTargetNode');
@@ -188,6 +209,7 @@ function renderActiveCartPageDisplay() {
         const rowTotal = item.price * item.quantity;
         computedSubtotal += rowTotal;
 
+        console.log(item)
         listHTML += `
             <div class="cart-item-row">
                 <div class="product-meta-block">
@@ -213,16 +235,15 @@ function renderActiveCartPageDisplay() {
         <div class="statement-row metrics-row adjustment-row"><span class="metric-label">Shipping</span><span class="metric-value text-right"><a href="#" class="inline-action-link">Add address for options</a></span></div>
         <div class="statement-row grand-total-row"><span class="total-label">Total</span><span class="total-value">$${computedSubtotal.toFixed(2)} <span class="currency-code">USD</span></span></div>`;
 }
+
 // ==========================================
-// 4. CHECKOUT PAGE RENDERING CONTROLLERS
+// 5. CHECKOUT SECURE RUNTIME PIPELINES
 // ==========================================
 function renderActiveCheckoutSummaryDisplay() {
     const accordionNode = document.querySelector('.summary-accordion-item.open .accordion-content');
     const metricsNode = document.querySelector('.summary-metrics-table');
-
     if (!accordionNode || !metricsNode) return;
 
-    // Hard defensive block safety fallback: If someone targets checkout with an empty array, bounce them back to store
     if (shoppingCartState.length === 0) {
         alert("Your shopping cart is currently empty. Redirecting back to store inventory.");
         window.location.href = "index.html";
@@ -232,7 +253,6 @@ function renderActiveCheckoutSummaryDisplay() {
     let itemsHTML = "";
     let computedSubtotal = 0;
 
-    // Map over actual live state cart items array tracking metrics
     shoppingCartState.forEach(item => {
         const rowTotal = item.price * item.quantity;
         computedSubtotal += rowTotal;
@@ -245,50 +265,31 @@ function renderActiveCheckoutSummaryDisplay() {
                 </div>
                 <div class="item-meta">
                     <span class="item-name">${item.title}</span>
-                    <div class="item-prices">
-                        <span class="current">$${item.price.toFixed(2)}</span>
-                    </div>
+                    <div class="item-prices"><span class="current">$${item.price.toFixed(2)}</span></div>
                 </div>
                 <span class="item-row-total">$${rowTotal.toFixed(2)}</span>
-            </div>
-        `;
+            </div>`;
     });
 
-    // Inject matching rows into view portal 
     accordionNode.innerHTML = itemsHTML;
-
-    // Recalculate financial breakdown cells accurately based on current local array
     metricsNode.innerHTML = `
-        <div class="metric-line">
-            <span>Subtotal</span>
-            <span class="value font-weight-600">$${computedSubtotal.toFixed(2)}</span>
-        </div>
-        <div class="metric-line">
-            <span>Shipping</span>
-            <span class="value italic-muted">No shipping options available</span>
-        </div>
-        <div class="metric-line total-line">
-            <span>Total</span>
-            <span class="value">$${computedSubtotal.toFixed(2)} <small>USD</small></span>
-        </div>
-    `;
+        <div class="metric-line"><span>Subtotal</span><span class="value font-weight-600">$${computedSubtotal.toFixed(2)}</span></div>
+        <div class="metric-line"><span>Shipping</span><span class="value italic-muted">No shipping options available</span></div>
+        <div class="metric-line total-line"><span>Total</span><span class="value">$${computedSubtotal.toFixed(2)} <small>USD</small></span></div>`;
 }
-
-// Append this routing engine block into your shopEngine.js framework
 
 function setupCheckoutFormSubmission() {
     const formNode = document.getElementById('checkoutForm');
     if (!formNode) return;
 
     formNode.addEventListener('submit', async (e) => {
-        e.preventDefault(); // Intercept default browser page refreshes
+        e.preventDefault();
 
         const submitBtn = formNode.querySelector('.place-order-btn');
         submitBtn.innerText = "Processing Transaction...";
         submitBtn.disabled = true;
 
         try {
-            // Post your live localStorage array directly to your serverless endpoint route
             const response = await fetch('/api/checkout', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -298,9 +299,7 @@ function setupCheckoutFormSubmission() {
             const sessionData = await response.json();
 
             if (sessionData.url) {
-                // Clear the shopper's local cart array tracking states prior to redirecting
                 localStorage.removeItem('pixel_cart_items');
-                // Instantly teleport the client over to Stripe's secure payment terminal screen
                 window.location.href = sessionData.url;
             } else {
                 throw new Error(sessionData.error || "Failed to initialize Stripe engine.");
@@ -313,3 +312,5 @@ function setupCheckoutFormSubmission() {
     });
 }
 
+// ==========================================
+//
