@@ -127,8 +127,8 @@ function initializeCatalogProductDeck(categoryScope) {
             const pageTitleNode = document.getElementById('catalogPageTitle');
             const breadcrumbNode = document.getElementById('catalogBreadcrumbTitle');
             
-            if (pageTitleNode) pageTitleNode.innerText = `${categoryScope} Collection`;
-            if (breadcrumbNode) breadcrumbNode.innerText = `${categoryScope} Collection`;
+            if (pageTitleNode) pageTitleNode.innerText = `${categoryScope}`;
+            if (breadcrumbNode) breadcrumbNode.innerText = `${categoryScope}`;
 
             renderProductCatalogGrid(inventoryMasterDataset);
             setupCatalogEventListeners();
