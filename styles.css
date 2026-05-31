@@ -1724,7 +1724,7 @@ body {
 }
 
 .add-to-cart-action-btn {
-    background-color: #a36b93;
+    background-color: #555;
     /* Muted plum palette matching button frame from mock exactly */
     color: #ffffff;
     border: none;
