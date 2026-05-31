@@ -1,21 +1,34 @@
 /**
  * Pixel Africana - Unified Store Engine
- * Manages universal state variables, local storage, tracking, 
- * and page-specific layout render loops in one single file.
+ * Manages global state arrays, local storage configurations, 
+ * path resolution handlers, and page-specific layout render loops.
  */
 
 // ==========================================
-// 1. GLOBAL STATE & TRACKING ARCHITECTURE
+// 1. GLOBAL STATE & PATH RESOLUTION UTILITIES
 // ==========================================
 let shoppingCartState = JSON.parse(localStorage.getItem('pixel_cart_items')) || [];
 let inventoryMasterDataset = [];
 
+/**
+ * Universal Path Correction Utility
+ * Safely converts relative data paths into absolute root references
+ * preventing broken imagery hooks across different directory layers.
+ */
+function resolveAbsoluteImagePath(imgSrc) {
+    if (!imgSrc) return '/images/placeholder.jpg'; 
+    if (imgSrc.startsWith('/') || imgSrc.startsWith('http')) {
+        return imgSrc;
+    }
+    return '/' + imgSrc;
+}
+
 // Unified Initialization Bootstrapper
 document.addEventListener("DOMContentLoaded", () => {
-    // Run header updates instantly across all views
+    // Sync the shopping cart navigation widgets immediately on every page load
     updateGlobalHeaderCartWidgets();
 
-    // Check A: Are we on the generic Category template page?
+    // TARGET CHECK A: Are we on the dynamic Category template listing page?
     const catalogGridNode = document.getElementById('catalogProductInjectionNode');
     if (catalogGridNode) {
         const urlParams = new URLSearchParams(window.location.search);
@@ -23,18 +36,18 @@ document.addEventListener("DOMContentLoaded", () => {
         initializeCatalogProductDeck(currentCategoryScope);
     }
 
-    // Check B: Are we on the structural Cart processing page?
+    // TARGET CHECK B: Are we on the structural Cart processing page?
     if (document.getElementById('cartItemsTargetNode')) {
         renderActiveCartPageDisplay();
     }
 
-    // Check C: Are we on the functional Checkout page?
+    // TARGET CHECK C: Are we on the functional Checkout page?
     if (document.getElementById('checkoutForm')) {
         renderActiveCheckoutSummaryDisplay();
         setupCheckoutFormSubmission(); 
     }
 
-    // Check D: Are we on the dynamic Product Detail View page?
+    // TARGET CHECK D: Are we on the dynamic Product Detail View page?
     if (document.getElementById('productDetailContainer')) {
         initializeProductDetailEngine();
     }
@@ -53,7 +66,7 @@ function addItemToCart(productId, productTitle, productPrice, productImage) {
             id: productId,
             title: productTitle,
             price: numericPrice,
-            image: productImage,
+            image: resolveAbsoluteImagePath(productImage), // Enforce stable storage paths
             quantity: 1
         });
     }
@@ -108,14 +121,14 @@ function initializeCatalogProductDeck(categoryScope) {
     fetch('productsData.json')
         .then(response => response.json())
         .then(data => {
-            inventoryMasterDataset = data.products.filter(p => p.category === categoryScope);
+            // Lowercase mapping avoids casing discrepancies between data loops and URL params
+            inventoryMasterDataset = data.products.filter(p => p.category.toLowerCase() === categoryScope.toLowerCase());
             
-            // Dynamically update headings out of URL values
             const pageTitleNode = document.getElementById('catalogPageTitle');
             const breadcrumbNode = document.getElementById('catalogBreadcrumbTitle');
             
-            if (pageTitleNode) pageTitleNode.innerText = `${categoryScope}`;
-            if (breadcrumbNode) breadcrumbNode.innerText = `${categoryScope}`;
+            if (pageTitleNode) pageTitleNode.innerText = `${categoryScope} Collection`;
+            if (breadcrumbNode) breadcrumbNode.innerText = `${categoryScope} Collection`;
 
             renderProductCatalogGrid(inventoryMasterDataset);
             setupCatalogEventListeners();
@@ -136,7 +149,7 @@ function renderProductCatalogGrid(productsList) {
             <article class="product-card">
                 <div class="product-image-wrapper">
                     <a href="product-detail.html?id=${item.id}">
-                        <img src="${item.image}" alt="${item.altText}" class="product-img">
+                        <img src="${resolveAbsoluteImagePath(item.image)}" alt="${item.altText}" class="product-img">
                     </a>
                 </div>
                 <div class="product-details">
@@ -209,11 +222,10 @@ function renderActiveCartPageDisplay() {
         const rowTotal = item.price * item.quantity;
         computedSubtotal += rowTotal;
 
-        console.log(item)
         listHTML += `
             <div class="cart-item-row">
                 <div class="product-meta-block">
-                    <img src="${item.image}" alt="${item.title}" class="cart-item-thumb">
+                    <img src="${resolveAbsoluteImagePath(item.image)}" alt="${item.title}" class="cart-item-thumb">
                     <div class="product-identity-details">
                         <a href="#" class="item-title-link">${item.title}</a>
                         <div class="item-pricing-stack"><span class="item-sale-price">$${item.price.toFixed(2)}</span></div>
@@ -260,7 +272,7 @@ function renderActiveCheckoutSummaryDisplay() {
         itemsHTML += `
             <div class="summary-product-item" style="margin-bottom: 16px;">
                 <div class="thumb-badge-wrap">
-                    <img src="${item.image}" alt="${item.title}" class="item-thumb">
+                    <img src="${resolveAbsoluteImagePath(item.image)}" alt="${item.title}" class="item-thumb">
                     <span class="qty-badge">${item.quantity}</span>
                 </div>
                 <div class="item-meta">
@@ -313,4 +325,137 @@ function setupCheckoutFormSubmission() {
 }
 
 // ==========================================
-//
+// 6. PRODUCT DETAIL VIEW DYNAMIC ENGINES
+// ==========================================
+function initializeProductDetailEngine() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const targetProductId = urlParams.get('id');
+    if (!targetProductId) return;
+
+    fetch('productsData.json')
+        .then(response => response.json())
+        .then(data => {
+            const productMatch = data.products.find(p => p.id === targetProductId);
+
+            if (!productMatch) {
+                const detailContainer = document.getElementById('productDetailContainer');
+                if (detailContainer) {
+                    detailContainer.innerHTML = `<p style="grid-column: 1/-1; text-align:center; padding: 50px 0; color:#666;">Product not found. <a href="index.html">Return to Category.</a></p>`;
+                }
+                return;
+            }
+
+            const categoryLinkNode = document.getElementById('breadcrumbCategoryLink');
+            const currentProductNode = document.getElementById('breadcrumbCurrentNode');
+
+            if (categoryLinkNode) {
+                categoryLinkNode.href = `category.html?type=${productMatch.category}`;
+                categoryLinkNode.innerText = `${productMatch.category} Collections`;
+            }
+            if (currentProductNode) {
+                currentProductNode.innerText = productMatch.title;
+            }
+
+            buildProductDetailHTML(productMatch);
+        })
+        .catch(err => console.error("Error running detail engine:", err));
+}
+
+function buildProductDetailHTML(product) {
+    const container = document.getElementById('productDetailContainer');
+    if (!container) return;
+
+    container.setAttribute('data-product-id', product.id);
+
+    let galleryThumbsHTML = "";
+    if (product.gallery && product.gallery.length > 0) {
+        product.gallery.forEach((imgSrc, index) => {
+            // Apply the path resolver to loop structures cleanly
+            const absoluteSrc = resolveAbsoluteImagePath(imgSrc);
+            galleryThumbsHTML += `<img src="${absoluteSrc}" alt="${product.title} view ${index + 1}" class="thumb-node ${index === 0 ? 'active' : ''}" onclick="updateStageView(this)">`;
+        });
+    } else {
+        const absoluteDefaultSrc = resolveAbsoluteImagePath(product.image);
+        galleryThumbsHTML = `<img src="${absoluteDefaultSrc}" class="thumb-node active" onclick="updateStageView(this)">`;
+    }
+
+    container.innerHTML = `
+        <div class="product-gallery-column">
+            <div class="main-stage-image-wrap">
+                <img src="${resolveAbsoluteImagePath(product.image)}" alt="${product.title}" id="mainStageImage" class="stage-img">
+                <button class="zoom-overlay-trigger" aria-label="Zoom view">
+                    <svg viewBox="0 0 24 24" class="flat-black-zoom-vector">
+                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="gallery-thumbnails-strip">${galleryThumbsHTML}</div>
+        </div>
+
+        <div class="product-purchase-column">
+            <h1 class="p-title">${product.title}</h1>
+            <div class="p-reviews-row"><span class="stars-gold">★★★★★</span><span class="reviews-count">(0 customer reviews)</span></div>
+            <div class="p-technical-ledger">
+                <div class="ledger-line"><span class="lbl">SKU:</span> <span class="val">N/A</span></div>
+                <div class="ledger-line"><span class="lbl">Category:</span> <span class="val"><a href="category.html?type=${product.category}" style="text-transform: capitalize;">${product.category} Collections</a></span></div>
+                <div class="ledger-line"><span class="lbl">Tag:</span> <span class="val">Premium</span></div>
+            </div>
+            <div class="p-price-display" id="productDisplayPrice">${product.priceCurrent}</div>
+            <div class="model-spec-badge-card">
+                <span class="ref-code">REF 0652/168/800</span>
+                <p class="spec-text">Standard Premium Fit | Carefully handcrafted culture pieces.</p>
+            </div>
+            <div class="purchase-actions-row">
+                <div class="qty-stepper-box">
+                    <button class="stepper-btn" onclick="adjustLocalQuantityInput(-1)">−</button>
+                    <input type="number" id="detailQtyInput" class="qty-input" value="1" min="1" aria-label="Quantity">
+                    <button class="stepper-btn" onclick="adjustLocalQuantityInput(1)">+</button>
+                </div>
+                <button class="add-to-cart-action-btn" id="detailAddToCartBtn">Add To Cart</button>
+            </div>
+        </div>`;
+
+    bindProductDetailActions();
+}
+
+function bindProductDetailActions() {
+    const addBtn = document.getElementById('detailAddToCartBtn');
+    if (!addBtn) return;
+
+    addBtn.addEventListener('click', () => {
+        const qtyInput = document.getElementById('detailQtyInput');
+        const qty = qtyInput ? parseInt(qtyInput.value) : 1;
+        const priceText = document.getElementById('productDisplayPrice').innerText;
+        
+        // Isolate pathname to prevent full URL repetition strings passing to array states
+        const stageImg = document.getElementById('mainStageImage');
+        const imgSrc = stageImg ? new URL(stageImg.src).pathname : "";
+        
+        const productId = document.getElementById('productDetailContainer').getAttribute('data-product-id');
+        const productTitle = document.querySelector('.p-title').innerText;
+        
+        for (let i = 0; i < qty; i++) {
+            addItemToCart(productId, productTitle, priceText, imgSrc);
+        }
+        alert(`Added (${qty}) "${productTitle}" item${qty === 1 ? '' : 's'} to your shopping cart.`);
+    });
+}
+
+function updateStageView(thumbnailElement) {
+    document.querySelectorAll('.thumb-node').forEach(t => t.classList.remove('active'));
+    thumbnailElement.classList.add('active');
+    
+    const stageImg = document.getElementById('mainStageImage');
+    if (stageImg) {
+        // Enforce straight assignment of element src to mirror asset updates cleanly
+        stageImg.src = thumbnailElement.src;
+    }
+}
+
+function adjustLocalQuantityInput(amount) {
+    const input = document.getElementById('detailQtyInput');
+    if (!input) return;
+    let val = parseInt(input.value) + amount;
+    if (val < 1) val = 1;
+    input.value = val;
+}
