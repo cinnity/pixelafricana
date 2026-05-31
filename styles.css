@@ -1724,7 +1724,7 @@ body {
 }
 
 .add-to-cart-action-btn {
-    background-color: #555;
+    background-color: #888;
     /* Muted plum palette matching button frame from mock exactly */
     color: #ffffff;
     border: none;
@@ -1740,7 +1740,7 @@ body {
 }
 
 .add-to-cart-action-btn:hover {
-    background-color: #8b557b;
+    background-color: #555;
 }
 
 /* --- Trust Compliance Seals Badge Block --- */
