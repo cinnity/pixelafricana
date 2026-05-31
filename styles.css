@@ -104,7 +104,7 @@ body {
 /* Optional styling to make the text color look clean and crisp */
 .cart-total {
     font-weight: 600;
-    color: #333333;
+    color:green;
 }
 
 .cart-totals-section {
