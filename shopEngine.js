@@ -16,7 +16,7 @@ let inventoryMasterDataset = [];
  * preventing broken imagery hooks across different directory layers.
  */
 function resolveAbsoluteImagePath(imgSrc) {
-    if (!imgSrc) return '/images/placeholder.jpg'; 
+    if (!imgSrc) return '/images/placeholder.jpg';
     if (imgSrc.startsWith('/') || imgSrc.startsWith('http')) {
         return imgSrc;
     }
@@ -28,31 +28,34 @@ document.addEventListener("DOMContentLoaded", () => {
     // Sync the shopping cart navigation widgets immediately on every page load
     updateGlobalHeaderCartWidgets();
 
-    // TARGET CHECK A: Are we on the dynamic Category template listing page?
+    // 1. ISOLATED CHECK: Are we on the Category Shop Listing Page?
     const catalogGridNode = document.getElementById('catalogProductInjectionNode');
     if (catalogGridNode) {
         const urlParams = new URLSearchParams(window.location.search);
-        const currentCategoryScope = urlParams.get('type') || 'objets'; 
+        const currentCategoryScope = urlParams.get('type') || 'objets';
         initializeCatalogProductDeck(currentCategoryScope);
+        return; // Stop execution here so it doesn't leak into other page logics
     }
 
-    // TARGET CHECK B: Are we on the structural Cart processing page?
-    if (document.getElementById('cartItemsTargetNode')) {
-        renderActiveCartPageDisplay();
-    }
-
-    // TARGET CHECK C: Are we on the functional Checkout page?
-    if (document.getElementById('checkoutForm')) {
-        renderActiveCheckoutSummaryDisplay();
-        setupCheckoutFormSubmission(); 
-    }
-
-    // TARGET CHECK D: Are we on the dynamic Product Detail View page?
+    // 2. ISOLATED CHECK: Are we on the dynamic Product Detail View page?
     if (document.getElementById('productDetailContainer')) {
         initializeProductDetailEngine();
+        return;
+    }
+
+    // 3. ISOLATED CHECK: Are we on the structural Cart processing page?
+    if (document.getElementById('cartItemsTargetNode')) {
+        renderActiveCartPageDisplay();
+        return;
+    }
+
+    // 4. ISOLATED CHECK: Are we on the functional Checkout page?
+    if (document.getElementById('checkoutForm')) {
+        renderActiveCheckoutSummaryDisplay();
+        setupCheckoutFormSubmission();
+        return;
     }
 });
-
 // ==========================================
 // 2. UNIVERSAL LOCAL STORAGE CONTROLLERS
 // ==========================================
@@ -117,23 +120,31 @@ function updateGlobalHeaderCartWidgets() {
 // ==========================================
 // 3. CATALOG GRID & TEMPLATE RENDERING
 // ==========================================
+
+// Inside shopEngine.js -> Update your initializeCatalogProductDeck function:
+
 function initializeCatalogProductDeck(categoryScope) {
-    fetch('productsData.json')
+    // Query your secure Vercel Serverless API endpoint
+    fetch(`/api/category?type=${categoryScope}`)
         .then(response => response.json())
         .then(data => {
-            // Lowercase mapping avoids casing discrepancies between data loops and URL params
-            inventoryMasterDataset = data.products.filter(p => p.category.toLowerCase() === categoryScope.toLowerCase());
-            
+            // Your API already filters the items, so map them to the layout directly
+            inventoryMasterDataset = data.products;
+
+            // DYNAMIC SEO TITLE INJECTION (Spiders execute this smoothly)
+            const formattedCategoryName = categoryScope.charAt(0).toUpperCase() + categoryScope.slice(1);
+            document.title = `Pixel Africana - Premium ${formattedCategoryName} Collection`;
+
             const pageTitleNode = document.getElementById('catalogPageTitle');
             const breadcrumbNode = document.getElementById('catalogBreadcrumbTitle');
-            
-            if (pageTitleNode) pageTitleNode.innerText = `${categoryScope}`;
-            if (breadcrumbNode) breadcrumbNode.innerText = `${categoryScope}`;
+
+            if (pageTitleNode) pageTitleNode.innerText = `${categoryScope} Collection`;
+            if (breadcrumbNode) breadcrumbNode.innerText = `${categoryScope} Collection`;
 
             renderProductCatalogGrid(inventoryMasterDataset);
             setupCatalogEventListeners();
         })
-        .catch(err => console.error("Error running template deck:", err));
+        .catch(err => console.error("Error running serverless dynamic template:", err));
 }
 
 function renderProductCatalogGrid(productsList) {
@@ -426,14 +437,14 @@ function bindProductDetailActions() {
         const qtyInput = document.getElementById('detailQtyInput');
         const qty = qtyInput ? parseInt(qtyInput.value) : 1;
         const priceText = document.getElementById('productDisplayPrice').innerText;
-        
+
         // Isolate pathname to prevent full URL repetition strings passing to array states
         const stageImg = document.getElementById('mainStageImage');
         const imgSrc = stageImg ? new URL(stageImg.src).pathname : "";
-        
+
         const productId = document.getElementById('productDetailContainer').getAttribute('data-product-id');
         const productTitle = document.querySelector('.p-title').innerText;
-        
+
         for (let i = 0; i < qty; i++) {
             addItemToCart(productId, productTitle, priceText, imgSrc);
         }
@@ -444,7 +455,7 @@ function bindProductDetailActions() {
 function updateStageView(thumbnailElement) {
     document.querySelectorAll('.thumb-node').forEach(t => t.classList.remove('active'));
     thumbnailElement.classList.add('active');
-    
+
     const stageImg = document.getElementById('mainStageImage');
     if (stageImg) {
         // Enforce straight assignment of element src to mirror asset updates cleanly
