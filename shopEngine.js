@@ -350,7 +350,7 @@ function initializeProductDetailEngine() {
 
             if (categoryLinkNode) {
                 categoryLinkNode.href = `category.html?type=${productMatch.category}`;
-                categoryLinkNode.innerText = `${productMatch.category} Collections`;
+                categoryLinkNode.innerText = `${productMatch.category}`;
             }
             if (currentProductNode) {
                 currentProductNode.innerText = productMatch.title;
@@ -397,7 +397,7 @@ function buildProductDetailHTML(product) {
             <div class="p-reviews-row"><span class="stars-gold">★★★★★</span><span class="reviews-count">(0 customer reviews)</span></div>
             <div class="p-technical-ledger">
                 <div class="ledger-line"><span class="lbl">SKU:</span> <span class="val">N/A</span></div>
-                <div class="ledger-line"><span class="lbl">Category:</span> <span class="val"><a href="category.html?type=${product.category}" style="text-transform: capitalize;">${product.category} Collections</a></span></div>
+                <div class="ledger-line"><span class="lbl">Category:</span> <span class="val"><a href="category.html?type=${product.category}" style="text-transform: capitalize;">${product.category}</a></span></div>
                 <div class="ledger-line"><span class="lbl">Tag:</span> <span class="val">Premium</span></div>
             </div>
             <div class="p-price-display" id="productDisplayPrice">${product.priceCurrent}</div>
