@@ -1926,61 +1926,94 @@ body {
     fill: #111111;
 }
 
-/* Transparent Overlay Sheet Panel */
+/* ==========================================
+   MOBILE-OPTIMIZED ART POEM OVERLAY SHEET
+   ========================================== */
+
 .art-poem-overlay-sheet {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.9); /* High clarity white canvas layer */
+    background-color: rgba(255, 255, 255, 0.98); /* Slightly more solid white background to hide background image lines on small mobile screens */
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 30px;
-    text-align: center;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    
+    /* FIX 1: Force vertical scrolling inside the overlay container boundaries if text overflows */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* Ensures butter-smooth inertial scrolling momentum on iOS safari devices */
+    
+    /* FIX 2: Align text starting from the top block instead of forcing flex-center positioning */
+    display: block; 
+    padding: 60px 24px 30px 24px; /* Generous top padding prevents text from running directly underneath the absolute close button */
     box-sizing: border-box;
     z-index: 10;
 }
 
-/* Display State Modifiers */
+/* Display Modifier State Toggle */
 .art-poem-overlay-sheet.active {
     opacity: 1;
     visibility: visible;
 }
 
+/* Absolute Floating Close Button Container Alignment */
 .poem-close-btn {
     position: absolute;
     top: 15px;
     right: 15px;
     background: none;
     border: none;
-    font-size: 1.5rem;
+    font-size: 1.8rem; /* Slightly enlarged target for finger tap accessibility on mobile touch layers */
     cursor: pointer;
     color: #666666;
     line-height: 1;
+    z-index: 11; /* Stays locked comfortably above the text while scrolling happens below it */
+    padding: 5px 10px;
 }
 
-.poem-close-btn:hover { color: #111111; }
+.poem-close-btn:hover { 
+    color: #111111; 
+}
+
+/* Text Context Layout Content Adjustments */
+.poem-text-content {
+    width: 100%;
+    max-width: 450px; /* Restricts line lengths to an ultra-readable text column width */
+    margin: 0 auto; /* Horizontally centers the structural poem text block container on all viewports */
+    text-align: center;
+}
 
 .poem-text-content h3 {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 400;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 24px;
     letter-spacing: 1px;
+    color: #111111;
 }
 
 .poem-stanza-line {
     font-family: Georgia, serif;
     font-style: italic;
     font-size: 1.05rem;
-    line-height: 1.8;
-    color: #333333;
-    margin-bottom: 8px;
+    line-height: 1.8; /* Expands line spacing to ensure comfortable legibility across all handheld displays */
+    color: #222222;
+    margin-bottom: 10px;
+    white-space: normal; /* Prevents text from trying to run off the screen horizontally */
+}
+
+/* Media Query Specific Fallback Overrides for Extra Tiny Smartphone viewports */
+@media (max-width: 480px) {
+    .art-poem-overlay-sheet {
+        padding: 55px 16px 25px 16px; /* Tightens side padding margins on micro-screens to give words maximal layout real estate */
+    }
+    
+    .poem-stanza-line {
+        font-size: 0.95rem; /* Subtly dials back font sizing to keep stanzas clean and well-balanced */
+        line-height: 1.6;
+    }
 }
 /* ==========================================
    IMAGE-SPECIFIC HOVER POP EFFECT
