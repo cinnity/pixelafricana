@@ -1,5 +1,5 @@
 /**
- * Pixel Africana - Unified Store Engine
+ * Pixel Africana - Unified Store Engine (Fixed Client-Side)
  * Manages global state arrays, local storage configurations, 
  * path resolution handlers, and page-specific layout render loops.
  */
@@ -25,37 +25,38 @@ function resolveAbsoluteImagePath(imgSrc) {
 
 // Unified Initialization Bootstrapper
 document.addEventListener("DOMContentLoaded", () => {
-    // Sync the shopping cart navigation widgets immediately on every page load
     updateGlobalHeaderCartWidgets();
 
-    // 1. ISOLATED CHECK: Are we on the Category Shop Listing Page?
-    const catalogGridNode = document.getElementById('catalogProductInjectionNode');
-    if (catalogGridNode) {
-        const urlParams = new URLSearchParams(window.location.search);
-        const currentCategoryScope = urlParams.get('type') || 'objets';
-        initializeCatalogProductDeck(currentCategoryScope);
-        return; // Stop execution here so it doesn't leak into other page logics
-    }
+    const currentPath = window.location.pathname.toLowerCase();
 
-    // 2. ISOLATED CHECK: Are we on the dynamic Product Detail View page?
-    if (document.getElementById('productDetailContainer')) {
+    // 1. ROUTE CHECK: Product Detail View
+    if (currentPath.includes('product-detail.html') || document.getElementById('productDetailContainer')) {
         initializeProductDetailEngine();
         return;
     }
 
-    // 3. ISOLATED CHECK: Are we on the structural Cart processing page?
-    if (document.getElementById('cartItemsTargetNode')) {
+    // 2. ROUTE CHECK: Category Shop Listings Grid
+    if (currentPath.includes('category.html') || document.getElementById('catalogProductInjectionNode')) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentCategoryScope = urlParams.get('type') || 'objets';
+        initializeCatalogProductDeck(currentCategoryScope);
+        return;
+    }
+
+    // 3. ROUTE CHECK: Shopping Cart Display Manager
+    if (currentPath.includes('cart.html') || document.getElementById('cartItemsTargetNode')) {
         renderActiveCartPageDisplay();
         return;
     }
 
-    // 4. ISOLATED CHECK: Are we on the functional Checkout page?
+    // 4. ROUTE CHECK: Checkout Pipeline Terminal
     if (document.getElementById('checkoutForm')) {
         renderActiveCheckoutSummaryDisplay();
         setupCheckoutFormSubmission();
         return;
     }
 });
+
 // ==========================================
 // 2. UNIVERSAL LOCAL STORAGE CONTROLLERS
 // ==========================================
@@ -69,7 +70,7 @@ function addItemToCart(productId, productTitle, productPrice, productImage) {
             id: productId,
             title: productTitle,
             price: numericPrice,
-            image: resolveAbsoluteImagePath(productImage), // Enforce stable storage paths
+            image: resolveAbsoluteImagePath(productImage),
             quantity: 1
         });
     }
@@ -120,18 +121,14 @@ function updateGlobalHeaderCartWidgets() {
 // ==========================================
 // 3. CATALOG GRID & TEMPLATE RENDERING
 // ==========================================
-
-// Inside shopEngine.js -> Update your initializeCatalogProductDeck function:
-
 function initializeCatalogProductDeck(categoryScope) {
-    // Query your secure Vercel Serverless API endpoint
-    fetch(`/api/category?type=${categoryScope}`)
+    fetch('productsData.json')
         .then(response => response.json())
         .then(data => {
-            // Your API already filters the items, so map them to the layout directly
-            inventoryMasterDataset = data.products;
+            inventoryMasterDataset = data.products.filter(
+                p => p.category.toLowerCase() === categoryScope.toLowerCase()
+            );
 
-            // DYNAMIC SEO TITLE INJECTION (Spiders execute this smoothly)
             const formattedCategoryName = categoryScope.charAt(0).toUpperCase() + categoryScope.slice(1);
             document.title = `Pixel Africana - Premium ${formattedCategoryName} Collection`;
 
@@ -144,7 +141,9 @@ function initializeCatalogProductDeck(categoryScope) {
             renderProductCatalogGrid(inventoryMasterDataset);
             setupCatalogEventListeners();
         })
-        .catch(err => console.error("Error running serverless dynamic template:", err));
+        .catch(err => {
+            console.error("Error running client-side dynamic template:", err);
+        });
 }
 
 function renderProductCatalogGrid(productsList) {
@@ -346,12 +345,12 @@ function initializeProductDetailEngine() {
     fetch('productsData.json')
         .then(response => response.json())
         .then(data => {
-            const productMatch = data.products.find(p => p.id === targetProductId);
+            const productMatch = data.products.find(p => p.id.toLowerCase() === targetProductId.toLowerCase());
 
             if (!productMatch) {
                 const detailContainer = document.getElementById('productDetailContainer');
                 if (detailContainer) {
-                    detailContainer.innerHTML = `<p style="grid-column: 1/-1; text-align:center; padding: 50px 0; color:#666;">Product not found. <a href="index.html">Return to Category.</a></p>`;
+                    detailContainer.innerHTML = `<p style="grid-column: 1/-1; text-align:center; padding: 50px 0; color:#666;">Product not found. <a href="index.html">Return to Home.</a></p>`;
                 }
                 return;
             }
@@ -369,7 +368,7 @@ function initializeProductDetailEngine() {
 
             buildProductDetailHTML(productMatch);
         })
-        .catch(err => console.error("Error running detail engine:", err));
+        .catch(err => console.error("Error running detail engine safety pipeline:", err));
 }
 
 function buildProductDetailHTML(product) {
@@ -381,7 +380,6 @@ function buildProductDetailHTML(product) {
     let galleryThumbsHTML = "";
     if (product.gallery && product.gallery.length > 0) {
         product.gallery.forEach((imgSrc, index) => {
-            // Apply the path resolver to loop structures cleanly
             const absoluteSrc = resolveAbsoluteImagePath(imgSrc);
             galleryThumbsHTML += `<img src="${absoluteSrc}" alt="${product.title} view ${index + 1}" class="thumb-node ${index === 0 ? 'active' : ''}" onclick="updateStageView(this)">`;
         });
@@ -390,15 +388,41 @@ function buildProductDetailHTML(product) {
         galleryThumbsHTML = `<img src="${absoluteDefaultSrc}" class="thumb-node active" onclick="updateStageView(this)">`;
     }
 
+    let poemLinesHTML = "";
+    if (product.poem && product.poem.length > 0) {
+        product.poem.forEach(line => {
+            poemLinesHTML += `<p class="poem-stanza-line">${line}</p>`;
+        });
+    } else {
+        poemLinesHTML = `<p class="poem-stanza-line">Handcrafted cultural art token documentation.</p>`;
+    }
+
+    // FIXED: Combined the left gallery elements and the right purchase columns into a single unified template literal string
     container.innerHTML = `
         <div class="product-gallery-column">
             <div class="main-stage-image-wrap">
                 <img src="${resolveAbsoluteImagePath(product.image)}" alt="${product.title}" id="mainStageImage" class="stage-img">
+                
                 <button class="zoom-overlay-trigger" aria-label="Zoom view">
-                    <svg viewBox="0 0 24 24" class="flat-black-zoom-vector">
+                    <svg viewBox="0 0 24 24" class="action-vector-icon">
                         <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
                     </svg>
                 </button>
+
+                <button class="poem-overlay-trigger" id="openPoemTrigger" aria-label="Read piece profile">
+                    <svg viewBox="0 0 24 24" class="action-vector-icon" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 9V7a2 2 0 0 1 2-2h2M15 5h2a2 2 0 0 1 2 2v2M5 15v2a2 2 0 0 0 2 2h2M15 19h2a2 2 0 0 0 2-2v-2" />
+                        <path d="M9 9h6M9 12h6M9 15h4" />
+                    </svg>
+                </button>
+
+                <div class="art-poem-overlay-sheet" id="poemOverlaySheet">
+                    <button class="poem-close-btn" id="closePoemTrigger" aria-label="Close sheet">&times;</button>
+                    <div class="poem-text-content">
+                        <h3>${product.title}</h3>
+                        ${poemLinesHTML}
+                    </div>
+                </div>
             </div>
             <div class="gallery-thumbnails-strip">${galleryThumbsHTML}</div>
         </div>
@@ -414,7 +438,7 @@ function buildProductDetailHTML(product) {
             <div class="p-price-display" id="productDisplayPrice">${product.priceCurrent}</div>
             <div class="model-spec-badge-card">
                 <span class="ref-code">REF 0652/168/800</span>
-                <p class="spec-text">Standard Premium Fit | Carefully handcrafted culture pieces.</p>
+                <p class="spec-text">Standard Premium Fit | Handcrafted cultural pieces.</p>
             </div>
             <div class="purchase-actions-row">
                 <div class="qty-stepper-box">
@@ -427,8 +451,8 @@ function buildProductDetailHTML(product) {
         </div>`;
 
     bindProductDetailActions();
+    bindPoemOverlayInteractions();
 }
-
 function bindProductDetailActions() {
     const addBtn = document.getElementById('detailAddToCartBtn');
     if (!addBtn) return;
@@ -438,7 +462,6 @@ function bindProductDetailActions() {
         const qty = qtyInput ? parseInt(qtyInput.value) : 1;
         const priceText = document.getElementById('productDisplayPrice').innerText;
 
-        // Isolate pathname to prevent full URL repetition strings passing to array states
         const stageImg = document.getElementById('mainStageImage');
         const imgSrc = stageImg ? new URL(stageImg.src).pathname : "";
 
@@ -452,14 +475,34 @@ function bindProductDetailActions() {
     });
 }
 
+function bindPoemOverlayInteractions() {
+    const openBtn = document.getElementById('openPoemTrigger');
+    const closeBtn = document.getElementById('closePoemTrigger');
+    const sheetOverlay = document.getElementById('poemOverlaySheet');
+
+    if (!openBtn || !closeBtn || !sheetOverlay) return;
+
+    openBtn.addEventListener('click', () => {
+        sheetOverlay.classList.add('active');
+    });
+
+    closeBtn.addEventListener('click', () => {
+        sheetOverlay.classList.remove('active');
+    });
+}
+
 function updateStageView(thumbnailElement) {
     document.querySelectorAll('.thumb-node').forEach(t => t.classList.remove('active'));
     thumbnailElement.classList.add('active');
 
     const stageImg = document.getElementById('mainStageImage');
     if (stageImg) {
-        // Enforce straight assignment of element src to mirror asset updates cleanly
         stageImg.src = thumbnailElement.src;
+    }
+
+    const sheetOverlay = document.getElementById('poemOverlaySheet');
+    if (sheetOverlay) {
+        sheetOverlay.classList.remove('active');
     }
 }
 

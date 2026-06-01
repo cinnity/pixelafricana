@@ -104,7 +104,7 @@ body {
 /* Optional styling to make the text color look clean and crisp */
 .cart-total {
     font-weight: 600;
-    color:green;
+    color: #333333;
 }
 
 .cart-totals-section {
@@ -1885,4 +1885,157 @@ body {
 .current-trail-node{
     font-weight: bold;
     color: black;
+}
+/* Ensure the image container frames elements cleanly */
+.main-stage-image-wrap {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Action Control Icons Base Grid Styling */
+.zoom-overlay-trigger,
+.poem-overlay-trigger {
+    position: absolute;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #eaeaea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 0;
+}
+
+.zoom-overlay-trigger { top: 15px; }
+.poem-overlay-trigger { top: 65px; } /* Stacked precisely right under the zoom glass */
+
+.zoom-overlay-trigger:hover,
+.poem-overlay-trigger:hover {
+    background-color: #ffffff;
+    transform: scale(1.05);
+}
+
+.action-vector-icon {
+    width: 20px;
+    height: 20px;
+    fill: #111111;
+}
+
+/* Transparent Overlay Sheet Panel */
+.art-poem-overlay-sheet {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9); /* High clarity white canvas layer */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    text-align: center;
+    box-sizing: border-box;
+    z-index: 10;
+}
+
+/* Display State Modifiers */
+.art-poem-overlay-sheet.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.poem-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666666;
+    line-height: 1;
+}
+
+.poem-close-btn:hover { color: #111111; }
+
+.poem-text-content h3 {
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.poem-stanza-line {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #333333;
+    margin-bottom: 8px;
+}
+/* ==========================================
+   IMAGE-SPECIFIC HOVER POP EFFECT
+   ========================================== */
+
+/* 1. Reset the outer card container to stay static */
+.product-card {
+    border: 1px solid #eaeaea;
+    border-radius: 4px;
+    background-color: #ffffff;
+    padding: 16px;
+    /* Remove any structural hover lifting movements from the outer shell */
+    transition: border-color 0.3s ease; 
+}
+
+.product-card:hover {
+    border-color: #b5b5b5; /* Subtle frame shift on the background border link */
+}
+
+/* 2. Define the baseline properties for the image wrap frame */
+.product-image-wrapper {
+    position: relative;
+    overflow: hidden;
+    background-color: #f9f9f9;
+    border-radius: 2px;
+    
+    /* Smoothly handle the scale and shadow transitions on the frame container */
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, box-shadow;
+    z-index: 1; /* Ensures the rising shadow floats over background layers cleanly */
+}
+
+/* 3. When the user hovers anywhere over the product card, make ONLY the image pop */
+.product-card:hover .product-image-wrapper {
+    /* Create a deep, soft shadow underneath the image layer boundary box */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+    
+    /* Scale the entire image container slightly up and out toward the viewer */
+    transform: scale(1.02); 
+}
+
+/* 4. Optional: Keep the inner source picture crisp and aligned */
+.product-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    /* Ensures no inner clipping jumps during the container scale transition */
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+/* Clean target handler inside your styles.css file */
+.poem-overlay-trigger .action-vector-icon {
+    width: 30px;
+    height: 30px;
+    fill: none !important; /* Prevents the browser from filling lines with solid black blocks */
+    stroke: #111111;       /* Clean, stark black lines */
+    stroke-width: 1px;     /* Consistently matches the magnifying glass width */
 }

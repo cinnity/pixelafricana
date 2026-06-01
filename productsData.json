@@ -7,8 +7,31 @@
       "onSale": true,
       "priceOriginal": "$300.00",
       "priceCurrent": "$250.00",
-      "image": "images/sculpture/zainab.png",
-      "altText": "Zainab sculpture bust"
+      "image": "images/sculpture/zainab/zainab_front_1.png",
+      "altText": "Zainab sculpture bust",
+      "gallery": [
+        "images/sculpture/zainab/zainab_front_1.png",
+        "images/sculpture/zainab/zainab_side_right_1.png",
+        "images/sculpture/zainab/zainab_side_left_1.png"
+      ],
+      "poem": [
+        "Where desert and grassland meet beneath a vast sky,",
+        "she sat in quiet majesty—",
+        "a daughter of the Sahel,",
+        "a keeper of memory,",
+        "Around her neck rested beads like small moons,",
+        "each one holding a memory:",
+        "a grandmother's song,",
+        "the rhythm of pestles against millet",
+        "the laughter of girls gathering water",
+        "beneath an acacia's patient shade.",
+        "And when evening descended across the savanna,",
+        "painting gold across the dust-filled air,",
+        "she remained still as a sculpture,",
+        "yet alive with the stories of countless women",
+        "whose names history forgot",
+        "but whose strength shaped the land."
+      ]
     },
     {
       "id": "gbenga",
@@ -17,9 +40,13 @@
       "onSale": false,
       "priceOriginal": null,
       "priceCurrent": "$400.00",
-      "image": "images/sculpture/gbenga_main.png",
+      "image": "images/sculpture/gbenga/gbenga_front_1.png",
       "altText": "Gbenga sculpture work",
       "gallery": [
+        "images/sculpture/gbenga/gbenga_front_1.png",
+        "images/sculpture/gbenga/gbenga_right.png",
+        "images/sculpture/gbenga/gbenga_left.png",
+        "images/sculpture/gbenga/gbenga_rear.png"
       ]
     },
     {
@@ -29,10 +56,25 @@
       "onSale": false,
       "priceOriginal": null,
       "priceCurrent": "$250.00",
-      "image": "images/sculpture/ronkeh.png",
+      "image": "images/sculpture/ronkeh/ronkeh_front_2.png",
       "altText": "Ronkeh sculpture bust",
       "gallery": [
-       
+        "images/sculpture/ronkeh/ronkeh_front_2.png",
+        "images/sculpture/ronkeh/ronkeh_side_1.png"
+      ],
+      "poem": [
+        "They knew when Ronke had arrived.",
+        "No, she did not seek attention,",
+        "just that elegance followed her like perfume.",
+        "as though Victoria Island itself had stepped through the door,",
+        "draped in silk and gold,",
+        "carrying the scent of ambition and ocean air.",
+        "Layer upon layer of sculpted fabric,",
+        "sweeping outward in graceful folds,",
+        "framing her face with the grandeur of a royal crown.",
+        "less of an accessory, more of a declaration—",
+        "tribute perhaps, to the women who came before her,",
+        "who understood that dignity could be worn as beautifully as silk."
       ]
     },
     {
@@ -42,10 +84,27 @@
       "onSale": false,
       "priceOriginal": null,
       "priceCurrent": "$250.00",
-      "image": "images/sculpture/amina.jpg",
+      "image": "images/sculpture/amina/amina_front_1.png",
       "altText": "Amina golden reflective sculpture bust",
       "gallery": [
-        
+        "images/sculpture/amina/amina_front_1.png",
+        "images/sculpture/amina/amina_side_2.png",
+        "images/sculpture/amina/amina_rear_1.png",
+        "images/sculpture/amina/amina_rear_2.png"
+      ],
+      "poem": [
+        "Before the sun rose over the red earth of Zazzau,",
+        "before merchants unfolded indigo cloth beneath the market awnings,",
+        "She was already awake.",
+        "Moving through the ancient city like a quiet song,",
+        "past walls the color of clay and memory,",
+        "past courtyards where women pounded millet",
+        "to the rhythm of generations.",
+        "The morning knew her.",
+        "It settled softly upon the folds of her headscarf,",
+        "caught in the bronze rings at her ears,",
+        "and lingered upon her face",
+        "as though reluctant to leave."
       ]
     }
   ]
