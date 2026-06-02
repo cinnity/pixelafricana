@@ -2072,3 +2072,142 @@ body {
     stroke: #111111;       /* Clean, stark black lines */
     stroke-width: 1px;     /* Consistently matches the magnifying glass width */
 }
+/* ==========================================
+   HOMEPAGE CATEGORIES GRID GRID LAYOUT
+   ========================================== */
+
+/* Wrapper structure formatting */
+.shop-view-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.page-main-title {
+    font-size: 3rem;
+    font-weight: 300;
+    margin-bottom: 40px;
+    color: #111111;
+}
+
+/* Force elements out of a column stack into an inline layout grid row */
+.collection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+/* Individual Category Presentation Box */
+.collection-card {
+    background-color: #fcfcfc;
+    border: 1px solid #eaeaea;
+    border-radius: 6px;
+    padding: 30px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 160px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Micro interaction lift on hover */
+.collection-card:hover {
+    background-color: #ffffff;
+    border-color: #111111;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+}
+
+.collection-card h3 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #111111;
+}
+
+/* Dynamic counter text spacing formatting label */
+.category-count-badge {
+    font-size: 0.95rem;
+    color: #666666;
+    margin-bottom: 20px;
+    display: block;
+    text-transform: capitalize;
+}
+
+/* Explore button styling alignment layout */
+.view-collection-link {
+    display: inline-block;
+    align-self: flex-start;
+    color: #111111;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-bottom: 2px solid #111111;
+    padding-bottom: 4px;
+    transition: opacity 0.2s ease;
+}
+
+.view-collection-link:hover {
+    opacity: 0.7;
+}
+/* ==========================================
+   HOMEPAGE CARD COLLECTION IMAGES LAYOUT
+   ========================================== */
+
+/* Update your base collection card to stack its image above its text details cleanly */
+.collection-card {
+    background-color: #ffffff;
+    border: 1px solid #c5c5c5;
+    border-radius: 6px;
+    padding: 0; /* Clear padding so the image frames out flush against the top boundaries */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 340px; /* Expands height dimensions to leave room for both the photo and typography */
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Image preview frame constraints */
+.collection-image-preview {
+    width: 100%;
+    height: 200px; /* Locks the thumbnail frame height */
+    overflow: hidden;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* Force the sculpture thumbnail to fill out its bounding box area elegantly */
+.collection-thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Crops and scales the artwork natively without warping or distorting aspect ratios */
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Subtle image zoom scaling trick when users hover anywhere on the card */
+.collection-card:hover .collection-thumb-img {
+    transform: scale(1.04);
+}
+
+/* Shift the padding completely down onto the text container details layer */
+.collection-card-details {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+}
+/* ==========================================
+   CONDITIONAL EMPTY STATE CLASS DEFINITIONS
+   ========================================== */
+
+/* Freezes and dims any card category that has 0 items inside the database */
+.collection-card.card-empty {
+    opacity: 0.35 !important;    /* Fades down the image lookbooks and typography uniformly */
+    pointer-events: none !important; /* Disables all hover animations, zoom tricks, and clicks */
+    box-shadow: none !important; /* Prevents card shadows from popping out on mouse over */
+    transform: none !important;  /* Stops the card from physically lifting up on hover */
+    cursor: default !important;  /* Forces the mouse pointer back to a default arrow state */
+}

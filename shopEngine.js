@@ -1,5 +1,5 @@
 /**
- * Pixel Africana - Unified Store Engine (Fixed Client-Side)
+ * Pixel Africana - Unified Store Engine (Fixed Client-Side Asset Resolution)
  * Manages global state arrays, local storage configurations, 
  * path resolution handlers, and page-specific layout render loops.
  */
@@ -12,17 +12,67 @@ let inventoryMasterDataset = [];
 
 /**
  * Universal Path Correction Utility
- * Safely converts relative data paths into absolute root references
- * preventing broken imagery hooks across different directory layers.
+ * Safely converts relative data paths into absolute root references.
+ * FIXED: Detects old root folder placements and automatically maps them 
+ * down to their new, eponymous sculpture folder structure layouts.
+ */
+/**
+ * Universal Path Correction Utility
+ * Safely converts relative data paths into absolute root references.
+ * REWORKED: Bulletproof folder routing matches your exact asset directory setup.
+ */
+/**
+ * Universal Path Correction Utility
+ * Safely converts relative data paths into absolute root references.
+ * REWORKED: Self-cleans double-nested strings to guarantee exact URL lookups.
+ */
+/**
+ * Universal Path Correction Utility
+ * Safely converts relative data paths into absolute root references.
+ * FIXED: Explicit substring matching prevents truncation errors, ensuring
+ * Amina is correctly routed to her subfolder without dropping path layers.
  */
 function resolveAbsoluteImagePath(imgSrc) {
     if (!imgSrc) return '/images/placeholder.jpg';
-    if (imgSrc.startsWith('/') || imgSrc.startsWith('http')) {
-        return imgSrc;
+    
+    let path = imgSrc;
+    
+    // 1. Clean up leading dots and relative slash artifacts
+    if (path.startsWith('./')) path = path.slice(2);
+    if (path.startsWith('/')) path = path.slice(1);
+    
+    // 2. Normalize legacy singular "sculpture" folder typos automatically
+    if (path.startsWith('images/sculpture/')) {
+        path = path.replace('images/sculpture/', 'images/sculptures/');
     }
-    return '/' + imgSrc;
+    
+    // 3. Extract just the clean, raw filename (e.g., "amina_front_1.png")
+    const filename = path.split('/').pop();
+    const lowercaseFile = filename.toLowerCase();
+    
+    // 4. BULLETPROOF ROUTING: Match the exact folder name based on the filename prefix
+    let targetSubfolder = '';
+    
+    if (lowercaseFile.includes('amina')) {
+        targetSubfolder = 'amina';
+    } else if (lowercaseFile.includes('zainab') || lowercaseFile.includes('zaina')) {
+        targetSubfolder = 'zainab';
+    } else if (lowercaseFile.includes('gbenga')) {
+        targetSubfolder = 'gbenga';
+    } else if (lowercaseFile.includes('ronkeh') || lowercaseFile.includes('ronke')) {
+        targetSubfolder = 'ronkeh';
+    } else if (lowercaseFile.includes('pitatan')) {
+        targetSubfolder = 'pitatan';
+    }
+    
+    // 5. If a matching subfolder was found, build the absolute nested route
+    if (targetSubfolder) {
+        return `/images/sculptures/${targetSubfolder}/${filename}`;
+    }
+    
+    // Safety fallback line if no specific sculpture prefix matches
+    return `/images/sculptures/${filename}`;
 }
-
 // Unified Initialization Bootstrapper
 document.addEventListener("DOMContentLoaded", () => {
     updateGlobalHeaderCartWidgets();
@@ -35,25 +85,28 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    // 2. ROUTE CHECK: Category Shop Listings Grid
-    if (currentPath.includes('category.html') || document.getElementById('catalogProductInjectionNode')) {
-        const urlParams = new URLSearchParams(window.location.search);
-        const currentCategoryScope = urlParams.get('type') || 'objets';
-        initializeCatalogProductDeck(currentCategoryScope);
-        return;
-    }
-
-    // 3. ROUTE CHECK: Shopping Cart Display Manager
+    // 2. ROUTE CHECK: Shopping Cart Display Manager
     if (currentPath.includes('cart.html') || document.getElementById('cartItemsTargetNode')) {
         renderActiveCartPageDisplay();
         return;
     }
 
-    // 4. ROUTE CHECK: Checkout Pipeline Terminal
+    // 3. ROUTE CHECK: Checkout Pipeline Terminal
     if (document.getElementById('checkoutForm')) {
         renderActiveCheckoutSummaryDisplay();
         setupCheckoutFormSubmission();
         return;
+    }
+
+    // 4. MULTI-ROUTE CHECK FOR INDEX & CATEGORY COMPATIBILITY
+    if (document.querySelector('.category-count-badge')) {
+        calculateDynamicHomepageCounters();
+    }
+
+    if (document.getElementById('catalogProductInjectionNode')) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentCategoryScope = urlParams.get('type') || 'sculpture';
+        initializeCatalogProductDeck(currentCategoryScope);
     }
 });
 
@@ -70,31 +123,31 @@ function addItemToCart(productId, productTitle, productPrice, productImage) {
             id: productId,
             title: productTitle,
             price: numericPrice,
-            image: resolveAbsoluteImagePath(productImage),
+            image: productImage, // Store raw path; resolver dynamically builds deep absolute routes on render
             quantity: 1
         });
     }
     syncCartToStorage();
 }
 
-function removeProductFromCart(productId) {
+window.removeProductFromCart = function(productId) {
     shoppingCartState = shoppingCartState.filter(item => item.id !== productId);
     syncCartToStorage();
     if (document.getElementById('cartItemsTargetNode')) renderActiveCartPageDisplay();
-}
+};
 
-function updateProductQuantity(productId, newQuantity) {
+window.updateProductQuantity = function(productId, newQuantity) {
     const targetItem = shoppingCartState.find(item => item.id === productId);
     if (!targetItem) return;
 
     targetItem.quantity = parseInt(newQuantity);
     if (targetItem.quantity <= 0) {
-        removeProductFromCart(productId);
+        window.removeProductFromCart(productId);
         return;
     }
     syncCartToStorage();
     if (document.getElementById('cartItemsTargetNode')) renderActiveCartPageDisplay();
-}
+};
 
 function syncCartToStorage() {
     localStorage.setItem('pixel_cart_items', JSON.stringify(shoppingCartState));
@@ -126,7 +179,7 @@ function initializeCatalogProductDeck(categoryScope) {
         .then(response => response.json())
         .then(data => {
             inventoryMasterDataset = data.products.filter(
-                p => p.category.toLowerCase() === categoryScope.toLowerCase()
+                p => p.category && p.category.toLowerCase() === categoryScope.toLowerCase()
             );
 
             const formattedCategoryName = categoryScope.charAt(0).toUpperCase() + categoryScope.slice(1);
@@ -195,16 +248,19 @@ function setupCatalogEventListeners() {
         });
     }
 
-    document.getElementById('catalogProductInjectionNode').addEventListener('click', (e) => {
-        if (e.target.classList.contains('add-to-cart-btn')) {
-            const id = e.target.getAttribute('data-id');
-            const match = inventoryMasterDataset.find(p => p.id === id);
-            if (match) {
-                addItemToCart(match.id, match.title, match.priceCurrent, match.image);
-                alert(`"${match.title}" added to your cart.`);
+    const injectionNode = document.getElementById('catalogProductInjectionNode');
+    if (injectionNode) {
+        injectionNode.addEventListener('click', (e) => {
+            if (e.target.classList.contains('add-to-cart-btn')) {
+                const id = e.target.getAttribute('data-id');
+                const match = inventoryMasterDataset.find(p => p.id === id);
+                if (match) {
+                    addItemToCart(match.id, match.title, match.priceCurrent, match.image);
+                    alert(`"${match.title}" added to your cart.`);
+                }
             }
-        }
-    });
+        });
+    }
 }
 
 // ==========================================
@@ -237,14 +293,14 @@ function renderActiveCartPageDisplay() {
                 <div class="product-meta-block">
                     <img src="${resolveAbsoluteImagePath(item.image)}" alt="${item.title}" class="cart-item-thumb">
                     <div class="product-identity-details">
-                        <a href="#" class="item-title-link">${item.title}</a>
+                        <a href="product-detail.html?id=${item.id}" class="item-title-link">${item.title}</a>
                         <div class="item-pricing-stack"><span class="item-sale-price">$${item.price.toFixed(2)}</span></div>
                         <div class="qty-stepper-box">
-                            <button class="stepper-btn" onclick="updateProductQuantity('${item.id}', ${item.quantity - 1})">−</button>
-                            <input type="number" class="qty-input" value="${item.quantity}" min="1" onchange="updateProductQuantity('${item.id}', this.value)">
-                            <button class="stepper-btn" onclick="updateProductQuantity('${item.id}', ${item.quantity + 1})">+</button>
+                            <button class="stepper-btn" onclick="window.updateProductQuantity('${item.id}', ${item.quantity - 1})">−</button>
+                            <input type="number" class="qty-input" value="${item.quantity}" min="1" onchange="window.updateProductQuantity('${item.id}', this.value)">
+                            <button class="stepper-btn" onclick="window.updateProductQuantity('${item.id}', ${item.quantity + 1})">+</button>
                         </div>
-                        <button class="remove-item-trigger" onclick="removeProductFromCart('${item.id}')">Remove item</button>
+                        <button class="remove-item-trigger" onclick="window.removeProductFromCart('${item.id}')">Remove item</button>
                     </div>
                 </div>
                 <div class="product-total-block"><span class="line-item-total">$${rowTotal.toFixed(2)}</span></div>
@@ -381,11 +437,11 @@ function buildProductDetailHTML(product) {
     if (product.gallery && product.gallery.length > 0) {
         product.gallery.forEach((imgSrc, index) => {
             const absoluteSrc = resolveAbsoluteImagePath(imgSrc);
-            galleryThumbsHTML += `<img src="${absoluteSrc}" alt="${product.title} view ${index + 1}" class="thumb-node ${index === 0 ? 'active' : ''}" onclick="updateStageView(this)">`;
+            galleryThumbsHTML += `<img src="${absoluteSrc}" alt="${product.title} view ${index + 1}" class="thumb-node ${index === 0 ? 'active' : ''}" onclick="window.updateStageView(this)">`;
         });
     } else {
         const absoluteDefaultSrc = resolveAbsoluteImagePath(product.image);
-        galleryThumbsHTML = `<img src="${absoluteDefaultSrc}" class="thumb-node active" onclick="updateStageView(this)">`;
+        galleryThumbsHTML = `<img src="${absoluteDefaultSrc}" class="thumb-node active" onclick="window.updateStageView(this)">`;
     }
 
     let poemLinesHTML = "";
@@ -397,7 +453,6 @@ function buildProductDetailHTML(product) {
         poemLinesHTML = `<p class="poem-stanza-line">Handcrafted cultural art token documentation.</p>`;
     }
 
-    // FIXED: Combined the left gallery elements and the right purchase columns into a single unified template literal string
     container.innerHTML = `
         <div class="product-gallery-column">
             <div class="main-stage-image-wrap">
@@ -442,9 +497,9 @@ function buildProductDetailHTML(product) {
             </div>
             <div class="purchase-actions-row">
                 <div class="qty-stepper-box">
-                    <button class="stepper-btn" onclick="adjustLocalQuantityInput(-1)">−</button>
+                    <button class="stepper-btn" onclick="window.adjustLocalQuantityInput(-1)">−</button>
                     <input type="number" id="detailQtyInput" class="qty-input" value="1" min="1" aria-label="Quantity">
-                    <button class="stepper-btn" onclick="adjustLocalQuantityInput(1)">+</button>
+                    <button class="stepper-btn" onclick="window.adjustLocalQuantityInput(1)">+</button>
                 </div>
                 <button class="add-to-cart-action-btn" id="detailAddToCartBtn">Add To Cart</button>
             </div>
@@ -453,6 +508,9 @@ function buildProductDetailHTML(product) {
     bindProductDetailActions();
     bindPoemOverlayInteractions();
 }
+/**
+ * Binds Add-To-Cart actions on the dynamic product details sheet template panel
+ */
 function bindProductDetailActions() {
     const addBtn = document.getElementById('detailAddToCartBtn');
     if (!addBtn) return;
@@ -460,20 +518,49 @@ function bindProductDetailActions() {
     addBtn.addEventListener('click', () => {
         const qtyInput = document.getElementById('detailQtyInput');
         const qty = qtyInput ? parseInt(qtyInput.value) : 1;
-        const priceText = document.getElementById('productDisplayPrice').innerText;
+        
+        const priceElement = document.getElementById('productDisplayPrice');
+        const priceText = priceElement ? priceElement.innerText : "$0.00";
 
         const stageImg = document.getElementById('mainStageImage');
         const imgSrc = stageImg ? new URL(stageImg.src).pathname : "";
 
-        const productId = document.getElementById('productDetailContainer').getAttribute('data-product-id');
-        const productTitle = document.querySelector('.p-title').innerText;
+        const detailContainer = document.getElementById('productDetailContainer');
+        const productId = detailContainer ? detailContainer.getAttribute('data-product-id') : "unknown";
+        
+        const titleElement = document.querySelector('.p-title');
+        const productTitle = titleElement ? titleElement.innerText : "Premium Piece";
 
+        // Add the items to our active shopping cart session data structure loop arrays
         for (let i = 0; i < qty; i++) {
             addItemToCart(productId, productTitle, priceText, imgSrc);
         }
         alert(`Added (${qty}) "${productTitle}" item${qty === 1 ? '' : 's'} to your shopping cart.`);
     });
 }
+
+window.updateStageView = function(thumbnailElement) {
+    document.querySelectorAll('.thumb-node').forEach(t => t.classList.remove('active'));
+    thumbnailElement.classList.add('active');
+
+    const stageImg = document.getElementById('mainStageImage');
+    if (stageImg) {
+        stageImg.src = thumbnailElement.src;
+    }
+
+    const sheetOverlay = document.getElementById('poemOverlaySheet');
+    if (sheetOverlay) {
+        sheetOverlay.classList.remove('active');
+    }
+};
+
+window.adjustLocalQuantityInput = function(amount) {
+    const input = document.getElementById('detailQtyInput');
+    if (!input) return;
+    let val = parseInt(input.value) + amount;
+    if (val < 1) val = 1;
+    input.value = val;
+};
 
 function bindPoemOverlayInteractions() {
     const openBtn = document.getElementById('openPoemTrigger');
@@ -491,25 +578,45 @@ function bindPoemOverlayInteractions() {
     });
 }
 
-function updateStageView(thumbnailElement) {
-    document.querySelectorAll('.thumb-node').forEach(t => t.classList.remove('active'));
-    thumbnailElement.classList.add('active');
+// ==========================================
+// 7. HOMEPAGE DYNAMIC INVENTORY COUNTERS
+// ==========================================
+function calculateDynamicHomepageCounters() {
+    const badgeNodes = document.querySelectorAll('.category-count-badge');
+    if (badgeNodes.length === 0) return;
 
-    const stageImg = document.getElementById('mainStageImage');
-    if (stageImg) {
-        stageImg.src = thumbnailElement.src;
-    }
+    fetch('productsData.json')
+        .then(response => {
+            if (!response.ok) throw new Error("Network issues reading JSON stream.");
+            return response.json();
+        })
+        .then(data => {
+            const masterProductsList = data.products || [];
 
-    const sheetOverlay = document.getElementById('poemOverlaySheet');
-    if (sheetOverlay) {
-        sheetOverlay.classList.remove('active');
-    }
-}
+            badgeNodes.forEach(badge => {
+                const targetCategory = badge.getAttribute('data-category');
+                if (!targetCategory) return;
 
-function adjustLocalQuantityInput(amount) {
-    const input = document.getElementById('detailQtyInput');
-    if (!input) return;
-    let val = parseInt(input.value) + amount;
-    if (val < 1) val = 1;
-    input.value = val;
+                const matchingItems = masterProductsList.filter(
+                    product => product.category && product.category.toLowerCase() === targetCategory.toLowerCase()
+                );
+
+                const countAmount = matchingItems.length;
+                badge.innerText = `${countAmount} item${countAmount === 1 ? '' : 's'}`;
+
+                // CONDITIONAL LOGIC ENGINE: Target the parent card component wrapper 
+                const parentCard = badge.closest('.collection-card');
+                if (parentCard) {
+                    if (countAmount === 0) {
+                        parentCard.classList.add('card-empty');
+                    } else {
+                        parentCard.classList.remove('card-empty');
+                    }
+                }
+            });
+        })
+        .catch(err => {
+            console.error("Error calculating runtime collection badges:", err);
+            badgeNodes.forEach(badge => badge.innerText = "Explore Collection");
+        });
 }
