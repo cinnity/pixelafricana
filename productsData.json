@@ -31,7 +31,8 @@
         "yet alive with the stories of countless women",
         "whose names history forgot",
         "but whose strength shaped the land."
-      ]
+      ],
+      "isCustomizeable": true
     },
     {
       "id": "gbenga",
@@ -57,7 +58,14 @@
         "but the kind that comes from honoring both heritage and possibility,",
         "the kind earned through consistency, through integrity,",
         "old values, even in a new time"
-      ]
+      ],
+      "custom_options": {
+        "image": "images/sculptures/gbenga/gbenga_edit.png",
+        "headgear":["type_1","type_2","type_3"],
+        "earring":[],
+        "necklace":[],
+        "top":[]
+      }
     },
     {
       "id": "ronkeh",
@@ -85,7 +93,8 @@
         "less of an accessory, more of a declaration—",
         "tribute perhaps, to the women who came before her,",
         "who understood that dignity could be worn as beautifully as silk."
-      ]
+      ],
+      "isCustomizeable": false
     },
     {
       "id": "amina",
@@ -115,7 +124,8 @@
         "caught in the bronze rings at her ears,",
         "and lingered upon her face",
         "as though reluctant to leave."
-      ]
+      ],
+      "isCustomizeable": true
     }
   ]
 }

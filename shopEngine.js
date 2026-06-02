@@ -450,10 +450,10 @@ function buildProductDetailHTML(product) {
             poemLinesHTML += `<p class="poem-stanza-line">${line}</p>`;
         });
     } else {
-        poemLinesHTML = `<p class="poem-stanza-line">Handcrafted cultural art token documentation.</p>`;
+        poemLinesHTML = `<p class="poem-stanza-line">Premiuum cultural art token documentation.</p>`;
     }
 
-    container.innerHTML = `
+  container.innerHTML = `
         <div class="product-gallery-column">
             <div class="main-stage-image-wrap">
                 <img src="${resolveAbsoluteImagePath(product.image)}" alt="${product.title}" id="mainStageImage" class="stage-img">
@@ -468,6 +468,14 @@ function buildProductDetailHTML(product) {
                     <svg viewBox="0 0 24 24" class="action-vector-icon" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M5 9V7a2 2 0 0 1 2-2h2M15 5h2a2 2 0 0 1 2 2v2M5 15v2a2 2 0 0 0 2 2h2M15 19h2a2 2 0 0 0 2-2v-2" />
                         <path d="M9 9h6M9 12h6M9 15h4" />
+                    </svg>
+                </button>
+                <!--button id="customizeSculptureBtn" class="customize-overlay-trigger customize-btn-circle" data-tooltip="Request Bespoke Variation" aria-label="Request Bespoke Variation"-->
+                <button id="customizeSculptureBtn" class="customize-overlay-trigger customize-btn-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles inline-icon">
+                        <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275Z"/>
+                        <path d="m5 3 1 2.5L8.5 6 6 7 5 9.5 4 7 1.5 6 4 5.5Z"/>
+                        <path d="m19 17 1 2.5 2.5.5-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1Z"/>
                     </svg>
                 </button>
 
@@ -493,7 +501,7 @@ function buildProductDetailHTML(product) {
             <div class="p-price-display" id="productDisplayPrice">${product.priceCurrent}</div>
             <div class="model-spec-badge-card">
                 <span class="ref-code">REF 0652/168/800</span>
-                <p class="spec-text">Standard Premium Fit | Handcrafted cultural pieces.</p>
+                <p class="spec-text">Standard Premium cultural pieces.</p>
             </div>
             <div class="purchase-actions-row">
                 <div class="qty-stepper-box">
