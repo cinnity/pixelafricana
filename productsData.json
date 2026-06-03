@@ -12,7 +12,8 @@
       "gallery": [
         "images/sculptures/zainab/zainab_front_1.png",
         "images/sculptures/zainab/zainab_side_right_1.png",
-        "images/sculptures/zainab/zainab_side_left_1.png"
+        "images/sculptures/zainab/zainab_side_left_1.png",
+        "images/sculptures/zainab/zainab_scale.png"
       ],
       "poem": [
         "Where desert and grassland meet beneath a vast sky,",
@@ -47,7 +48,8 @@
         "images/sculptures/gbenga/gbenga_front_1.png",
         "images/sculptures/gbenga/gbenga_right.png",
         "images/sculptures/gbenga/gbenga_left.png",
-        "images/sculptures/gbenga/gbenga_rear.png"
+        "images/sculptures/gbenga/gbenga_rear.png",
+        "images/sculptures/gbenga/gbenga_scale.png"
       ],
       "poem": [
         "As the lagoon meets the Atlantic,",
@@ -61,10 +63,14 @@
       ],
       "custom_options": {
         "image": "images/sculptures/gbenga/gbenga_edit.png",
-        "headgear":["type_1","type_2","type_3"],
-        "earring":[],
-        "necklace":[],
-        "top":[]
+        "headgear": [
+          "type_1",
+          "type_2",
+          "type_3"
+        ],
+        "earring": [],
+        "necklace": [],
+        "top": []
       }
     },
     {
@@ -78,7 +84,8 @@
       "altText": "Ronkeh sculpture bust",
       "gallery": [
         "images/sculptures/ronkeh/ronkeh_front_2.png",
-        "images/sculptures/ronkeh/ronkeh_side_1.png"
+        "images/sculptures/ronkeh/ronkeh_side_1.png",
+        "images/sculptures/ronkeh/ronkeh_scale.png"
       ],
       "poem": [
         "They knew when Ronke had arrived.",
@@ -109,7 +116,40 @@
         "images/sculptures/amina/amina_front_1.png",
         "images/sculptures/amina/amina_side_2.png",
         "images/sculptures/amina/amina_rear_1.png",
-        "images/sculptures/amina/amina_rear_2.png"
+        "images/sculptures/amina/amina_rear_2.png",
+        "images/sculptures/amina/amina_scale.png",
+        "images/sculptures/amina/amina_scale_ruler.png"
+      ],
+      "poem": [
+        "Before the sun rose over the red earth of Zazzau,",
+        "before merchants unfolded indigo cloth beneath the market awnings,",
+        "She was already awake.",
+        "Moving through the ancient city like a quiet song,",
+        "past walls the color of clay and memory,",
+        "past courtyards where women pounded millet",
+        "to the rhythm of generations.",
+        "The morning knew her.",
+        "It settled softly upon the folds of her headscarf,",
+        "caught in the bronze rings at her ears,",
+        "and lingered upon her face",
+        "as though reluctant to leave."
+      ],
+      "isCustomizeable": true
+    },
+    {
+      "id": "kesha",
+      "category": "sculpture",
+      "title": "Kesha",
+      "onSale": false,
+      "priceOriginal": null,
+      "priceCurrent": "$350.00",
+      "image": "images/sculptures/kesha/kesha_front_1.png",
+      "altText": "Kesha in prayer sculpture bust",
+      "gallery": [
+        "images/sculptures/kesha/kesha_front_1.png",
+        "images/sculptures/kesha/kesha_side_left.png",
+        "images/sculptures/kesha/kesha_back_left.png",
+        "images/sculptures/kesha/kesha_scale.png"
       ],
       "poem": [
         "Before the sun rose over the red earth of Zazzau,",

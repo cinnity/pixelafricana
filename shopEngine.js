@@ -11,26 +11,9 @@ let shoppingCartState = JSON.parse(localStorage.getItem('pixel_cart_items')) || 
 let inventoryMasterDataset = [];
 
 /**
- * Universal Path Correction Utility
- * Safely converts relative data paths into absolute root references.
- * FIXED: Detects old root folder placements and automatically maps them 
- * down to their new, eponymous sculpture folder structure layouts.
- */
-/**
- * Universal Path Correction Utility
- * Safely converts relative data paths into absolute root references.
- * REWORKED: Bulletproof folder routing matches your exact asset directory setup.
- */
-/**
- * Universal Path Correction Utility
- * Safely converts relative data paths into absolute root references.
- * REWORKED: Self-cleans double-nested strings to guarantee exact URL lookups.
- */
-/**
- * Universal Path Correction Utility
- * Safely converts relative data paths into absolute root references.
- * FIXED: Explicit substring matching prevents truncation errors, ensuring
- * Amina is correctly routed to her subfolder without dropping path layers.
+ * Universal Path Correction Utility (DYNAMIC VERSION)
+ * Eliminates all hardcoded names. Automatically extracts the correct 
+ * subfolder directory right out of the filename prefix.
  */
 function resolveAbsoluteImagePath(imgSrc) {
     if (!imgSrc) return '/images/placeholder.jpg';
@@ -41,39 +24,37 @@ function resolveAbsoluteImagePath(imgSrc) {
     if (path.startsWith('./')) path = path.slice(2);
     if (path.startsWith('/')) path = path.slice(1);
     
-    // 2. Normalize legacy singular "sculpture" folder typos automatically
+    // 2. Normalize legacy singular folder typos automatically
     if (path.startsWith('images/sculpture/')) {
         path = path.replace('images/sculpture/', 'images/sculptures/');
     }
     
-    // 3. Extract just the clean, raw filename (e.g., "amina_front_1.png")
+    // 3. If it's already a full, complete path, just pass it through safely
+    if (path.startsWith('images/sculptures/') && path.split('/').length >= 4) {
+        return '/' + path;
+    }
+    
+    // 4. DYNAMIC RESOLVER: Grab the filename (e.g., "kesha_front_1.png")
     const filename = path.split('/').pop();
     const lowercaseFile = filename.toLowerCase();
     
-    // 4. BULLETPROOF ROUTING: Match the exact folder name based on the filename prefix
-    let targetSubfolder = '';
+    // Dynamically grab everything before the first underscore as the folder name!
+    // "kesha_front_1.png" -> split('_') -> ["kesha", "front", "1.png"] -> [0] is "kesha"
+    let targetSubfolder = lowercaseFile.split('_')[0].split('.')[0];
     
-    if (lowercaseFile.includes('amina')) {
-        targetSubfolder = 'amina';
-    } else if (lowercaseFile.includes('zainab') || lowercaseFile.includes('zaina')) {
-        targetSubfolder = 'zainab';
-    } else if (lowercaseFile.includes('gbenga')) {
-        targetSubfolder = 'gbenga';
-    } else if (lowercaseFile.includes('ronkeh') || lowercaseFile.includes('ronke')) {
+    // Quick fallback mapping rule for your singular spelling outlier: Ronke vs Ronkeh
+    if (targetSubfolder === 'ronke') {
         targetSubfolder = 'ronkeh';
-    } else if (lowercaseFile.includes('pitatan')) {
-        targetSubfolder = 'pitatan';
     }
     
-    // 5. If a matching subfolder was found, build the absolute nested route
+    // 5. Build and return the absolute path dynamically
     if (targetSubfolder) {
         return `/images/sculptures/${targetSubfolder}/${filename}`;
     }
     
-    // Safety fallback line if no specific sculpture prefix matches
+    // Ultimate safety baseline fallback
     return `/images/sculptures/${filename}`;
-}
-// Unified Initialization Bootstrapper
+}// Unified Initialization Bootstrapper
 document.addEventListener("DOMContentLoaded", () => {
     updateGlobalHeaderCartWidgets();
 
@@ -456,8 +437,20 @@ function buildProductDetailHTML(product) {
   container.innerHTML = `
         <div class="product-gallery-column">
             <div class="main-stage-image-wrap">
+                <button class="stage-nav-arrow left-arrow" id="prevStageImageBtn" aria-label="Previous image">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+
                 <img src="${resolveAbsoluteImagePath(product.image)}" alt="${product.title}" id="mainStageImage" class="stage-img">
                 
+                <button class="stage-nav-arrow right-arrow" id="nextStageImageBtn" aria-label="Next image">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+
                 <button class="zoom-overlay-trigger" aria-label="Zoom view">
                     <svg viewBox="0 0 24 24" class="action-vector-icon">
                         <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
@@ -470,8 +463,8 @@ function buildProductDetailHTML(product) {
                         <path d="M9 9h6M9 12h6M9 15h4" />
                     </svg>
                 </button>
-                <!--button id="customizeSculptureBtn" class="customize-overlay-trigger customize-btn-circle" data-tooltip="Request Bespoke Variation" aria-label="Request Bespoke Variation"-->
-                <button id="customizeSculptureBtn" class="customize-overlay-trigger customize-btn-circle">
+
+                <button id="customizeSculptureBtn" class="customize-overlay-trigger customize-btn-circle" data-tooltip="Request Bespoke Variation" aria-label="Request Bespoke Variation">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles inline-icon">
                         <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275Z"/>
                         <path d="m5 3 1 2.5L8.5 6 6 7 5 9.5 4 7 1.5 6 4 5.5Z"/>
@@ -513,38 +506,112 @@ function buildProductDetailHTML(product) {
             </div>
         </div>`;
 
-    bindProductDetailActions();
+    bindProductDetailActions(product);
     bindPoemOverlayInteractions();
 }
 /**
  * Binds Add-To-Cart actions on the dynamic product details sheet template panel
  */
-function bindProductDetailActions() {
+/**
+ * Action Interfaces & Event Closure Controllers
+ * FIXED: Passed 'product' into parameters to eliminate the ReferenceError,
+ * and normalized the guard clause to ensure chevron bindings run flawlessly.
+ */
+function bindProductDetailActions(product) { // <--- FIXED: Added product parameter
     const addBtn = document.getElementById('detailAddToCartBtn');
-    if (!addBtn) return;
+    
+    // Bind Add to Cart only if the button exists, without blocking the rest of the script
+    if (addBtn) {
+        addBtn.addEventListener('click', () => {
+            const qtyInput = document.getElementById('detailQtyInput');
+            const qty = qtyInput ? parseInt(qtyInput.value) : 1;
+            
+            const priceElement = document.getElementById('productDisplayPrice');
+            const priceText = priceElement ? priceElement.innerText : "$0.00";
 
-    addBtn.addEventListener('click', () => {
-        const qtyInput = document.getElementById('detailQtyInput');
-        const qty = qtyInput ? parseInt(qtyInput.value) : 1;
+            const stageImg = document.getElementById('mainStageImage');
+            const imgSrc = stageImg ? new URL(stageImg.src).pathname : "";
+
+            const detailContainer = document.getElementById('productDetailContainer');
+            const productId = detailContainer ? detailContainer.getAttribute('data-product-id') : "unknown";
+            
+            const titleElement = document.querySelector('.p-title');
+            const productTitle = titleElement ? titleElement.innerText : "Premium Piece";
+
+            // Loop and add the items to our active shopping cart session
+            for (let i = 0; i < qty; i++) {
+                if (typeof addItemToCart === 'function') {
+                    addItemToCart(productId, productTitle, priceText, imgSrc);
+                }
+            }
+            alert(`Added (${qty}) "${productTitle}" item${qty === 1 ? '' : 's'} to your shopping cart.`);
+        });
+    }
+
+ // =========================================================================
+    // 3. CAROUSEL CHEVRON NAVIGATION LOGIC ENGINE (DEBUGGED & ROBUST)
+    // =========================================================================
+    const prevBtn = document.getElementById('prevStageImageBtn');
+    const nextBtn = document.getElementById('nextStageImageBtn');
+    const mainStageImg = document.getElementById('mainStageImage');
+
+    // Force show the buttons initially for testing to ensure CSS positions them right
+    if (prevBtn) prevBtn.style.display = 'flex';
+    if (nextBtn) nextBtn.style.display = 'flex';
+
+    if (prevBtn && nextBtn && mainStageImg) {
+        // Fallback: If product.gallery is missing or empty, build a fake 1-item array using the main image
+        const rawGallery = (product && product.gallery && product.gallery.length > 0) 
+            ? product.gallery 
+            : [product.image];
+
+        const galleryPaths = rawGallery.map(img => resolveAbsoluteImagePath(img));
         
-        const priceElement = document.getElementById('productDisplayPrice');
-        const priceText = priceElement ? priceElement.innerText : "$0.00";
-
-        const stageImg = document.getElementById('mainStageImage');
-        const imgSrc = stageImg ? new URL(stageImg.src).pathname : "";
-
-        const detailContainer = document.getElementById('productDetailContainer');
-        const productId = detailContainer ? detailContainer.getAttribute('data-product-id') : "unknown";
-        
-        const titleElement = document.querySelector('.p-title');
-        const productTitle = titleElement ? titleElement.innerText : "Premium Piece";
-
-        // Add the items to our active shopping cart session data structure loop arrays
-        for (let i = 0; i < qty; i++) {
-            addItemToCart(productId, productTitle, priceText, imgSrc);
+        // Normalize the comparison paths by making sure both check styles drop the domain prefix
+        let currentSrc = mainStageImg.getAttribute('src') || "";
+        if (currentSrc.startsWith(window.location.origin)) {
+            currentSrc = currentSrc.replace(window.location.origin, "");
         }
-        alert(`Added (${qty}) "${productTitle}" item${qty === 1 ? '' : 's'} to your shopping cart.`);
-    });
+        
+        let currentImgIndex = galleryPaths.indexOf(currentSrc);
+        if (currentImgIndex === -1) currentImgIndex = 0;
+
+        // Hide arrows ONLY if we are 100% sure the gallery ledger has only one file asset
+        if (galleryPaths.length <= 1) {
+            prevBtn.style.style.setProperty('display', 'none', 'important');
+            nextBtn.style.style.setProperty('display', 'none', 'important');
+        }
+
+        function updateCarouselStageImage(newIndex) {
+            currentImgIndex = newIndex;
+            
+            if (currentImgIndex < 0) currentImgIndex = galleryPaths.length - 1;
+            if (currentImgIndex >= galleryPaths.length) currentImgIndex = 0;
+            
+            mainStageImg.setAttribute('src', galleryPaths[currentImgIndex]);
+
+            const thumbnails = document.querySelectorAll('.thumb-img');
+            thumbnails.forEach((thumb, idx) => {
+                if (idx === currentImgIndex) {
+                    thumb.classList.add('active-thumb-ring');
+                } else {
+                    thumb.classList.remove('active-thumb-ring');
+                }
+            });
+        }
+
+        prevBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            updateCarouselStageImage(currentImgIndex - 1);
+        });
+
+        nextBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            updateCarouselStageImage(currentImgIndex + 1);
+        });
+    }
 }
 
 window.updateStageView = function(thumbnailElement) {

@@ -2288,3 +2288,50 @@ disable the tooltip momentarily
     visibility: visible;
     transform: translateY(-50%) translateX(0);
 }
+/* Ensure the image container is relative so absolute arrows lock securely to its frame edges */
+.main-stage-image-wrap {
+    position: relative;
+}
+
+/* Base structural layout for overlay slider arrows */
+.stage-nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.85) !important;
+    color: #111111 !important;
+    border: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+    z-index: 5;
+    opacity: 0; /* Keeps layout clean by default */
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease, background-color 0.2s ease;
+}
+
+/* Horizontal positioning anchors */
+.stage-nav-arrow.left-arrow {
+    left: 15px;
+}
+
+.stage-nav-arrow.right-arrow {
+    right: 15px;
+}
+
+/* Hovering the photo frame brings up navigation triggers dynamically */
+.main-stage-image-wrap:hover .stage-nav-arrow {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Dark contrast shift on button hover */
+.stage-nav-arrow:hover {
+    background: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
