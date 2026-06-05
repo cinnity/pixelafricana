@@ -17,41 +17,41 @@ let inventoryMasterDataset = [];
  */
 function resolveAbsoluteImagePath(imgSrc) {
     if (!imgSrc) return '/images/placeholder.jpg';
-    
+
     let path = imgSrc;
-    
+
     // 1. Clean up leading dots and relative slash artifacts
     if (path.startsWith('./')) path = path.slice(2);
     if (path.startsWith('/')) path = path.slice(1);
-    
+
     // 2. Normalize legacy singular folder typos automatically
     if (path.startsWith('images/sculpture/')) {
         path = path.replace('images/sculpture/', 'images/sculptures/');
     }
-    
+
     // 3. If it's already a full, complete path, just pass it through safely
     if (path.startsWith('images/sculptures/') && path.split('/').length >= 4) {
         return '/' + path;
     }
-    
+
     // 4. DYNAMIC RESOLVER: Grab the filename (e.g., "kesha_front_1.png")
     const filename = path.split('/').pop();
     const lowercaseFile = filename.toLowerCase();
-    
+
     // Dynamically grab everything before the first underscore as the folder name!
     // "kesha_front_1.png" -> split('_') -> ["kesha", "front", "1.png"] -> [0] is "kesha"
     let targetSubfolder = lowercaseFile.split('_')[0].split('.')[0];
-    
+
     // Quick fallback mapping rule for your singular spelling outlier: Ronke vs Ronkeh
     if (targetSubfolder === 'ronke') {
         targetSubfolder = 'ronkeh';
     }
-    
+
     // 5. Build and return the absolute path dynamically
     if (targetSubfolder) {
         return `/images/sculptures/${targetSubfolder}/${filename}`;
     }
-    
+
     // Ultimate safety baseline fallback
     return `/images/sculptures/${filename}`;
 }// Unified Initialization Bootstrapper
@@ -111,13 +111,13 @@ function addItemToCart(productId, productTitle, productPrice, productImage) {
     syncCartToStorage();
 }
 
-window.removeProductFromCart = function(productId) {
+window.removeProductFromCart = function (productId) {
     shoppingCartState = shoppingCartState.filter(item => item.id !== productId);
     syncCartToStorage();
     if (document.getElementById('cartItemsTargetNode')) renderActiveCartPageDisplay();
 };
 
-window.updateProductQuantity = function(productId, newQuantity) {
+window.updateProductQuantity = function (productId, newQuantity) {
     const targetItem = shoppingCartState.find(item => item.id === productId);
     if (!targetItem) return;
 
@@ -418,13 +418,13 @@ function buildProductDetailHTML(product) {
     if (product.gallery && product.gallery.length > 0) {
         product.gallery.forEach((imgSrc, index) => {
             const absoluteSrc = resolveAbsoluteImagePath(imgSrc);
-            galleryThumbsHTML += `<img src="${absoluteSrc}" alt="${product.title} view ${index + 1}" class="thumb-node ${index === 0 ? 'active' : ''}" onclick="window.updateStageView(this)">`;
+            // FIXED: Class named 'thumb-node', active state is 'active', click bindings synced
+            galleryThumbsHTML += `<img src="${absoluteSrc}" alt="${product.title} view ${index + 1}" class="thumb-node ${index === 0 ? 'active' : ''}" onclick="window.syncMainStageImageFromThumbnail(this)">`;
         });
     } else {
         const absoluteDefaultSrc = resolveAbsoluteImagePath(product.image);
-        galleryThumbsHTML = `<img src="${absoluteDefaultSrc}" class="thumb-node active" onclick="window.updateStageView(this)">`;
+        galleryThumbsHTML = `<img src="${absoluteDefaultSrc}" class="thumb-node active" onclick="window.syncMainStageImageFromThumbnail(this)">`;
     }
-
     let poemLinesHTML = "";
     if (product.poem && product.poem.length > 0) {
         product.poem.forEach(line => {
@@ -434,7 +434,7 @@ function buildProductDetailHTML(product) {
         poemLinesHTML = `<p class="poem-stanza-line">Premiuum cultural art token documentation.</p>`;
     }
 
-  container.innerHTML = `
+    container.innerHTML = `
         <div class="product-gallery-column">
             <div class="main-stage-image-wrap">
                 <button class="stage-nav-arrow left-arrow" id="prevStageImageBtn" aria-label="Previous image">
@@ -519,13 +519,73 @@ function buildProductDetailHTML(product) {
  */
 function bindProductDetailActions(product) { // <--- FIXED: Added product parameter
     const addBtn = document.getElementById('detailAddToCartBtn');
-    
+
+    // =========================================================================
+    // GLOBAL THUMBNAIL CLICK SWITCHER (VIDEO & MP4 AWARE)
+    // =========================================================================
+    window.syncMainStageImageFromThumbnail = function (thumbElement) {
+        const currentStageMedia = document.getElementById('mainStageImage');
+        if (!currentStageMedia || !thumbElement) return;
+
+        const targetSrc = thumbElement.getAttribute('src');
+        const isVideo = targetSrc.toLowerCase().endsWith('.mp4');
+
+        if (isVideo) {
+            // 1. If thumbnail is an MP4, construct a hardware-accelerated looping Video Player
+            const videoNode = document.createElement('video');
+            videoNode.id = 'mainStageImage';
+            videoNode.className = 'stage-img video-stage-asset';
+            videoNode.src = targetSrc;
+            videoNode.autoplay = true;
+            videoNode.loop = true;
+            videoNode.muted = true;
+            videoNode.playsInline = true;
+            videoNode.setAttribute('preload', 'auto');
+
+            currentStageMedia.replaceWith(videoNode);
+            videoNode.play().catch(err => console.log("Autoplay context initialization blocked:", err));
+        } else {
+            // 2. If thumbnail is a standard image, revert back to an <img> element
+            if (currentStageMedia.tagName === 'VIDEO') {
+                const imgNode = document.createElement('img');
+                imgNode.id = 'mainStageImage';
+                imgNode.className = 'stage-img';
+                imgNode.src = targetSrc;
+                imgNode.alt = product && product.title ? product.title : "Sculpture Gallery View";
+
+                currentStageMedia.replaceWith(imgNode);
+            } else {
+                // If it's already an image tag, just smoothly swap the source path tracking route
+                currentStageMedia.setAttribute('src', targetSrc);
+            }
+        }
+        // Sync active styling rings across the thumbnail strip elements
+        
+        document.querySelectorAll('.thumb-node').forEach(t => t.classList.remove('active'));
+        thumbElement.classList.add('active');
+
+        // CRUCIAL SYNC: Update the global carousel index tracker so chevrons don't jump backwards
+        const prevBtn = document.getElementById('prevStageImageBtn');
+        const nextBtn = document.getElementById('nextStageImageBtn');
+        if (product && product.gallery && product.gallery.length > 1) {
+            const galleryPaths = product.gallery.map(img => resolveAbsoluteImagePath(img));
+            let currentSrc = targetSrc;
+            if (currentSrc.startsWith(window.location.origin)) {
+                currentSrc = currentSrc.replace(window.location.origin, "");
+            }
+            const updateCarouselIndex = galleryPaths.indexOf(currentSrc);
+            if (updateCarouselIndex !== -1) {
+                // This forces the chevron memory index to align with what you just clicked!
+                window.currentCarouselImgIndex = updateCarouselIndex;
+            }
+        }
+    };
     // Bind Add to Cart only if the button exists, without blocking the rest of the script
     if (addBtn) {
         addBtn.addEventListener('click', () => {
             const qtyInput = document.getElementById('detailQtyInput');
             const qty = qtyInput ? parseInt(qtyInput.value) : 1;
-            
+
             const priceElement = document.getElementById('productDisplayPrice');
             const priceText = priceElement ? priceElement.innerText : "$0.00";
 
@@ -534,7 +594,7 @@ function bindProductDetailActions(product) { // <--- FIXED: Added product parame
 
             const detailContainer = document.getElementById('productDetailContainer');
             const productId = detailContainer ? detailContainer.getAttribute('data-product-id') : "unknown";
-            
+
             const titleElement = document.querySelector('.p-title');
             const productTitle = titleElement ? titleElement.innerText : "Premium Piece";
 
@@ -548,73 +608,108 @@ function bindProductDetailActions(product) { // <--- FIXED: Added product parame
         });
     }
 
- // =========================================================================
+    // =========================================================================
     // 3. CAROUSEL CHEVRON NAVIGATION LOGIC ENGINE (DEBUGGED & ROBUST)
+    // =========================================================================
+    // =========================================================================
+    // 3. CAROUSEL CHEVRON NAVIGATION LOGIC ENGINE (FULLY SYNCED RIM FIX)
     // =========================================================================
     const prevBtn = document.getElementById('prevStageImageBtn');
     const nextBtn = document.getElementById('nextStageImageBtn');
     const mainStageImg = document.getElementById('mainStageImage');
 
-    // Force show the buttons initially for testing to ensure CSS positions them right
-    if (prevBtn) prevBtn.style.display = 'flex';
-    if (nextBtn) nextBtn.style.display = 'flex';
-
     if (prevBtn && nextBtn && mainStageImg) {
-        // Fallback: If product.gallery is missing or empty, build a fake 1-item array using the main image
-        const rawGallery = (product && product.gallery && product.gallery.length > 0) 
-            ? product.gallery 
+        const rawGallery = (product && product.gallery && product.gallery.length > 0)
+            ? product.gallery
             : [product.image];
 
         const galleryPaths = rawGallery.map(img => resolveAbsoluteImagePath(img));
-        
-        // Normalize the comparison paths by making sure both check styles drop the domain prefix
+
         let currentSrc = mainStageImg.getAttribute('src') || "";
         if (currentSrc.startsWith(window.location.origin)) {
             currentSrc = currentSrc.replace(window.location.origin, "");
         }
-        
-        let currentImgIndex = galleryPaths.indexOf(currentSrc);
-        if (currentImgIndex === -1) currentImgIndex = 0;
 
-        // Hide arrows ONLY if we are 100% sure the gallery ledger has only one file asset
+        // Initialize or update a persistent global index tracker
+        window.currentCarouselImgIndex = galleryPaths.indexOf(currentSrc);
+        if (window.currentCarouselImgIndex === -1) window.currentCarouselImgIndex = 0;
+
+        // Automatically hide navigation arrows if there is only one image asset
         if (galleryPaths.length <= 1) {
-            prevBtn.style.style.setProperty('display', 'none', 'important');
-            nextBtn.style.style.setProperty('display', 'none', 'important');
+            if (prevBtn) prevBtn.style.display = 'none';
+            if (nextBtn) nextBtn.style.display = 'none';
         }
 
         function updateCarouselStageImage(newIndex) {
-            currentImgIndex = newIndex;
-            
-            if (currentImgIndex < 0) currentImgIndex = galleryPaths.length - 1;
-            if (currentImgIndex >= galleryPaths.length) currentImgIndex = 0;
-            
-            mainStageImg.setAttribute('src', galleryPaths[currentImgIndex]);
+            // Update our globally tracked state pointer
+            window.currentCarouselImgIndex = newIndex;
 
-            const thumbnails = document.querySelectorAll('.thumb-img');
-            thumbnails.forEach((thumb, idx) => {
-                if (idx === currentImgIndex) {
-                    thumb.classList.add('active-thumb-ring');
+            if (window.currentCarouselImgIndex < 0) {
+                window.currentCarouselImgIndex = galleryPaths.length - 1;
+            }
+            if (window.currentCarouselImgIndex >= galleryPaths.length) {
+                window.currentCarouselImgIndex = 0;
+            }
+
+            const targetPath = galleryPaths[window.currentCarouselImgIndex];
+            const isVideo = targetPath.toLowerCase().endsWith('.mp4');
+            const currentStageMedia = document.getElementById('mainStageImage');
+
+            // 1. Dynamic media node reconstruction (handles MP4 vs JPG transitions)
+            if (isVideo) {
+                if (currentStageMedia.tagName !== 'VIDEO') {
+                    const videoNode = document.createElement('video');
+                    videoNode.id = 'mainStageImage';
+                    videoNode.className = 'stage-img video-stage-asset';
+                    videoNode.autoplay = true;
+                    videoNode.loop = true;
+                    videoNode.muted = true;
+                    videoNode.playsInline = true;
+                    videoNode.src = targetPath;
+                    currentStageMedia.replaceWith(videoNode);
                 } else {
-                    thumb.classList.remove('active-thumb-ring');
+                    currentStageMedia.src = targetPath;
+                }
+            } else {
+                if (currentStageMedia.tagName === 'VIDEO') {
+                    const imgNode = document.createElement('img');
+                    imgNode.id = 'mainStageImage';
+                    imgNode.className = 'stage-img';
+                    imgNode.src = targetPath;
+                    imgNode.alt = product.title || "Sculpture View";
+                    currentStageMedia.replaceWith(imgNode);
+                } else {
+                    currentStageMedia.setAttribute('src', targetPath);
+                }
+            }
+
+            // 2. FIXED: Core Thumbnail active rim synchronization loop tracker
+            const thumbnails = document.querySelectorAll('.thumb-node');
+            thumbnails.forEach((thumb, idx) => {
+                if (idx === window.currentCarouselImgIndex) {
+                    thumb.classList.add('active');
+                } else {
+                    thumb.classList.remove('active');
                 }
             });
         }
 
+        // Attach absolute boundary progression parameters onto navigation buttons
         prevBtn.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            updateCarouselStageImage(currentImgIndex - 1);
+            updateCarouselStageImage(window.currentCarouselImgIndex - 1);
         });
 
         nextBtn.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            updateCarouselStageImage(currentImgIndex + 1);
+            updateCarouselStageImage(window.currentCarouselImgIndex + 1);
         });
     }
 }
 
-window.updateStageView = function(thumbnailElement) {
+window.updateStageView = function (thumbnailElement) {
     document.querySelectorAll('.thumb-node').forEach(t => t.classList.remove('active'));
     thumbnailElement.classList.add('active');
 
@@ -629,7 +724,7 @@ window.updateStageView = function(thumbnailElement) {
     }
 };
 
-window.adjustLocalQuantityInput = function(amount) {
+window.adjustLocalQuantityInput = function (amount) {
     const input = document.getElementById('detailQtyInput');
     if (!input) return;
     let val = parseInt(input.value) + amount;

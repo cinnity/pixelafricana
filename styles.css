@@ -2335,3 +2335,19 @@ disable the tooltip momentarily
     background: #ffffff !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
+/* Core thumbnail styles inside your gallery column strip */
+.thumb-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent; /* Hidden base buffer padding prevents layout jumps */
+    transition: border-color 0.2s ease, opacity 0.2s ease;
+    opacity: 0.6;
+}
+
+/* The active frame selector class updated dynamically by the script engine */
+.thumb-img.active-thumb-ring {
+    border-color: #111111 !important; /* Sharp black frame matching your branding guide */
+    opacity: 1 !important;              /* Brings thumbnail back to full visual strength */
+}
