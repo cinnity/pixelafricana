@@ -1838,6 +1838,7 @@ body {
         max-width: 100%;
     }
 }
+
 /* --- Core Structural Framework for category.html --- */
 
 .catalog-page-wrapper {
@@ -1882,10 +1883,12 @@ body {
     gap: 30px;
     margin-top: 20px;
 }
-.current-trail-node{
+
+.current-trail-node {
     font-weight: bold;
     color: black;
 }
+
 /* Ensure the image container frames elements cleanly */
 .main-stage-image-wrap {
     position: relative;
@@ -1911,8 +1914,15 @@ body {
     padding: 0;
 }
 
-.zoom-overlay-trigger { top: 15px; }
-.poem-overlay-trigger { top: 65px; } /* Stacked precisely right under the zoom glass */
+.zoom-overlay-trigger {
+    top: 15px;
+}
+
+.poem-overlay-trigger {
+    top: 65px;
+}
+
+/* Stacked precisely right under the zoom glass */
 
 .zoom-overlay-trigger:hover,
 .poem-overlay-trigger:hover {
@@ -1936,18 +1946,21 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.9); /* Slightly more solid white background to hide background image lines on small mobile screens */
+    background-color: rgba(255, 255, 255, 0.9);
+    /* Slightly more solid white background to hide background image lines on small mobile screens */
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    
+
     /* FIX 1: Force vertical scrolling inside the overlay container boundaries if text overflows */
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch; /* Ensures butter-smooth inertial scrolling momentum on iOS safari devices */
-    
+    -webkit-overflow-scrolling: touch;
+    /* Ensures butter-smooth inertial scrolling momentum on iOS safari devices */
+
     /* FIX 2: Align text starting from the top block instead of forcing flex-center positioning */
-    display: block; 
-    padding: 60px 24px 30px 24px; /* Generous top padding prevents text from running directly underneath the absolute close button */
+    display: block;
+    padding: 60px 24px 30px 24px;
+    /* Generous top padding prevents text from running directly underneath the absolute close button */
     box-sizing: border-box;
     z-index: 10;
 }
@@ -1965,23 +1978,27 @@ body {
     right: 15px;
     background: none;
     border: none;
-    font-size: 1.8rem; /* Slightly enlarged target for finger tap accessibility on mobile touch layers */
+    font-size: 1.8rem;
+    /* Slightly enlarged target for finger tap accessibility on mobile touch layers */
     cursor: pointer;
     color: #666666;
     line-height: 1;
-    z-index: 11; /* Stays locked comfortably above the text while scrolling happens below it */
+    z-index: 11;
+    /* Stays locked comfortably above the text while scrolling happens below it */
     padding: 5px 10px;
 }
 
-.poem-close-btn:hover { 
-    color: #111111; 
+.poem-close-btn:hover {
+    color: #111111;
 }
 
 /* Text Context Layout Content Adjustments */
 .poem-text-content {
     width: 100%;
-    max-width: 450px; /* Restricts line lengths to an ultra-readable text column width */
-    margin: 0 auto; /* Horizontally centers the structural poem text block container on all viewports */
+    max-width: 450px;
+    /* Restricts line lengths to an ultra-readable text column width */
+    margin: 0 auto;
+    /* Horizontally centers the structural poem text block container on all viewports */
     text-align: center;
 }
 
@@ -1998,23 +2015,28 @@ body {
     font-family: Georgia, serif;
     font-style: italic;
     font-size: 1.05rem;
-    line-height: 1.8; /* Expands line spacing to ensure comfortable legibility across all handheld displays */
+    line-height: 1.8;
+    /* Expands line spacing to ensure comfortable legibility across all handheld displays */
     color: #222222;
     margin-bottom: 10px;
-    white-space: normal; /* Prevents text from trying to run off the screen horizontally */
+    white-space: normal;
+    /* Prevents text from trying to run off the screen horizontally */
 }
 
 /* Media Query Specific Fallback Overrides for Extra Tiny Smartphone viewports */
 @media (max-width: 480px) {
     .art-poem-overlay-sheet {
-        padding: 55px 16px 25px 16px; /* Tightens side padding margins on micro-screens to give words maximal layout real estate */
+        padding: 55px 16px 25px 16px;
+        /* Tightens side padding margins on micro-screens to give words maximal layout real estate */
     }
-    
+
     .poem-stanza-line {
-        font-size: 0.95rem; /* Subtly dials back font sizing to keep stanzas clean and well-balanced */
+        font-size: 0.95rem;
+        /* Subtly dials back font sizing to keep stanzas clean and well-balanced */
         line-height: 1.6;
     }
 }
+
 /* ==========================================
    IMAGE-SPECIFIC HOVER POP EFFECT
    ========================================== */
@@ -2026,11 +2048,12 @@ body {
     background-color: #ffffff;
     padding: 16px;
     /* Remove any structural hover lifting movements from the outer shell */
-    transition: border-color 0.3s ease; 
+    transition: border-color 0.3s ease;
 }
 
 .product-card:hover {
-    border-color: #b5b5b5; /* Subtle frame shift on the background border link */
+    border-color: #b5b5b5;
+    /* Subtle frame shift on the background border link */
 }
 
 /* 2. Define the baseline properties for the image wrap frame */
@@ -2039,21 +2062,22 @@ body {
     overflow: hidden;
     background-color: #f9f9f9;
     border-radius: 2px;
-    
+
     /* Smoothly handle the scale and shadow transitions on the frame container */
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform, box-shadow;
-    z-index: 1; /* Ensures the rising shadow floats over background layers cleanly */
+    z-index: 1;
+    /* Ensures the rising shadow floats over background layers cleanly */
 }
 
 /* 3. When the user hovers anywhere over the product card, make ONLY the image pop */
 .product-card:hover .product-image-wrapper {
     /* Create a deep, soft shadow underneath the image layer boundary box */
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-    
+
     /* Scale the entire image container slightly up and out toward the viewer */
-    transform: scale(1.02); 
+    transform: scale(1.02);
 }
 
 /* 4. Optional: Keep the inner source picture crisp and aligned */
@@ -2064,14 +2088,19 @@ body {
     /* Ensures no inner clipping jumps during the container scale transition */
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 /* Clean target handler inside your styles.css file */
 .poem-overlay-trigger .action-vector-icon {
     width: 30px;
     height: 30px;
-    fill: none !important; /* Prevents the browser from filling lines with solid black blocks */
-    stroke: #111111;       /* Clean, stark black lines */
-    stroke-width: 1px;     /* Consistently matches the magnifying glass width */
+    fill: none !important;
+    /* Prevents the browser from filling lines with solid black blocks */
+    stroke: #111111;
+    /* Clean, stark black lines */
+    stroke-width: 1px;
+    /* Consistently matches the magnifying glass width */
 }
+
 /* ==========================================
    HOMEPAGE CATEGORIES GRID GRID LAYOUT
    ========================================== */
@@ -2152,6 +2181,7 @@ body {
 .view-collection-link:hover {
     opacity: 0.7;
 }
+
 /* ==========================================
    HOMEPAGE CARD COLLECTION IMAGES LAYOUT
    ========================================== */
@@ -2161,18 +2191,21 @@ body {
     background-color: #ffffff;
     border: 1px solid #c5c5c5;
     border-radius: 6px;
-    padding: 0; /* Clear padding so the image frames out flush against the top boundaries */
+    padding: 0;
+    /* Clear padding so the image frames out flush against the top boundaries */
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    min-height: 340px; /* Expands height dimensions to leave room for both the photo and typography */
+    min-height: 340px;
+    /* Expands height dimensions to leave room for both the photo and typography */
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Image preview frame constraints */
 .collection-image-preview {
     width: 100%;
-    height: 200px; /* Locks the thumbnail frame height */
+    height: 200px;
+    /* Locks the thumbnail frame height */
     overflow: hidden;
     background-color: #f9f9f9;
     border-bottom: 1px solid #f0f0f0;
@@ -2182,7 +2215,8 @@ body {
 .collection-thumb-img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Crops and scales the artwork natively without warping or distorting aspect ratios */
+    object-fit: cover;
+    /* Crops and scales the artwork natively without warping or distorting aspect ratios */
     transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -2199,24 +2233,32 @@ body {
     flex-grow: 1;
     justify-content: space-between;
 }
+
 /* ==========================================
    CONDITIONAL EMPTY STATE CLASS DEFINITIONS
    ========================================== */
 
 /* Freezes and dims any card category that has 0 items inside the database */
 .collection-card.card-empty {
-    opacity: 0.35 !important;    /* Fades down the image lookbooks and typography uniformly */
-    pointer-events: none !important; /* Disables all hover animations, zoom tricks, and clicks */
-    box-shadow: none !important; /* Prevents card shadows from popping out on mouse over */
-    transform: none !important;  /* Stops the card from physically lifting up on hover */
-    cursor: default !important;  /* Forces the mouse pointer back to a default arrow state */
+    opacity: 0.35 !important;
+    /* Fades down the image lookbooks and typography uniformly */
+    pointer-events: none !important;
+    /* Disables all hover animations, zoom tricks, and clicks */
+    box-shadow: none !important;
+    /* Prevents card shadows from popping out on mouse over */
+    transform: none !important;
+    /* Stops the card from physically lifting up on hover */
+    cursor: default !important;
+    /* Forces the mouse pointer back to a default arrow state */
 }
+
 /* Core absolute layout parameters for the floating media stage badges */
 .zoom-overlay-trigger,
 .poem-overlay-trigger,
 .customize-overlay-trigger {
     position: absolute;
-    right: 20px; /* Aligns them uniformly along the right boundary wall of the image */
+    right: 20px;
+    /* Aligns them uniformly along the right boundary wall of the image */
     width: 44px;
     height: 44px;
     border-radius: 50% !important;
@@ -2238,12 +2280,15 @@ body {
 }
 
 .poem-overlay-trigger {
-    top: 74px; /* Suspends neatly below the zoom lens button */
+    top: 74px;
+    /* Suspends neatly below the zoom lens button */
 }
 
 .customize-overlay-trigger {
-    top: 128px; /* Standard 54px vertical offset places it right beneath the poem */
-    opacity:0.3 /*disable temporarily*/
+    top: 128px;
+    /* Standard 54px vertical offset places it right beneath the poem */
+    opacity: 0.3
+        /*disable temporarily*/
 }
 
 /* Hover Adjustments */
@@ -2288,6 +2333,7 @@ disable the tooltip momentarily
     visibility: visible;
     transform: translateY(-50%) translateX(0);
 }
+
 /* Ensure the image container is relative so absolute arrows lock securely to its frame edges */
 .main-stage-image-wrap {
     position: relative;
@@ -2310,7 +2356,8 @@ disable the tooltip momentarily
     cursor: pointer;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
     z-index: 5;
-    opacity: 0; /* Keeps layout clean by default */
+    opacity: 0;
+    /* Keeps layout clean by default */
     visibility: hidden;
     transition: opacity 0.25s ease, visibility 0.25s ease, background-color 0.2s ease;
 }
@@ -2335,19 +2382,119 @@ disable the tooltip momentarily
     background: #ffffff !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
+
 /* Core thumbnail styles inside your gallery column strip */
 .thumb-img {
     width: 60px;
     height: 60px;
     object-fit: cover;
     cursor: pointer;
-    border: 2px solid transparent; /* Hidden base buffer padding prevents layout jumps */
+    border: 2px solid transparent;
+    /* Hidden base buffer padding prevents layout jumps */
     transition: border-color 0.2s ease, opacity 0.2s ease;
     opacity: 0.6;
 }
 
 /* The active frame selector class updated dynamically by the script engine */
 .thumb-img.active-thumb-ring {
-    border-color: #111111 !important; /* Sharp black frame matching your branding guide */
-    opacity: 1 !important;              /* Brings thumbnail back to full visual strength */
+    border-color: #111111 !important;
+    /* Sharp black frame matching your branding guide */
+    opacity: 1 !important;
+    /* Brings thumbnail back to full visual strength */
+}
+
+/* CSS specifically styled to match the horizontal card grid from your screenshot */
+.step-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+}
+
+.step-card {
+    background: #ffffff;
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.step-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+}
+
+.step-image-preview {
+    width: 100%;
+    height: 240px;
+    /* Aligns card height beautifully */
+    background-color: #fafafa;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.step-thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Ensures consistency across varied image aspects */
+}
+
+.step-card-details {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.step-number {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #8c6239;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.step-card-details h3 {
+    font-size: 1.4rem;
+    color: #111111;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.step-card-details p {
+    font-size: 0.95rem;
+    color: #666666;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Mobile Breakpoint to cleanly transition to a vertical stack */
+@media (max-width: 900px) {
+    .step-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .step-image-preview {
+        height: 280px;
+    }
+}
+
+.stepNumber {
+    position: absolute;
+    font-size: 4em;
+    font-weight: bold;
+    margin-top: -15px;
+    padding-top: 0;
+    color: white;
+    -webkit-text-stroke: 2px #909090;
 }

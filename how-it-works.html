@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pixel Africana - Product Detail</title>
+    <title>PixelAfricana - How It Works</title>
     <link rel="icon" type="image/x-icon" href="/cinnity_favicon.ico">
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 </head>
 
 <body>
@@ -31,10 +32,10 @@
                     </svg>
                     <input type="text" placeholder="Search products...">
                 </div>
-
                 <div class="cart-status-widget" onclick="location.href='cart.html'" style="cursor: pointer;">
-                    <span class="cart-total">$0.00</span>
-                    <span class="cart-count">0 items</span>
+                    <span class="cart-total"></span>
+                    <span class="cart-count"></span>
+
                     <svg class="cart-vector-icon" viewBox="0 0 24 24" aria-hidden="true">
                         <path
                             d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.05 1.4-2.55h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" />
@@ -47,33 +48,62 @@
     <nav class="main-navigation">
         <div class="nav-container">
             <a href="index.html" class="nav-item">Home</a>
-            <a href="cart.html" class="nav-item">Cart</a>
-            <a href="checkout.html" class="nav-item">Checkout</a>
+            <a href="cart.html">Cart</a>
+            <a href="checkout.html">Checkout</a>
             <a href="about.html" class="nav-item">About</a>
-            <a href="how-it-works.html" class="nav-item">How It Works</a>
+            <a href="how-it-works.html" class="nav-item active">How It Works</a>
         </div>
     </nav>
 
+    <main class="shop-view-wrapper">
 
-    <main class="product-view-wrapper">
-        <nav class="breadcrumb-trail" aria-label="Breadcrumb">
-            <a href="index.html" class="home-vector-link">Home</a>
-            <span class="trail-separator">›</span>
+        <div class="step-grid">
 
-            <a href="category.html" id="breadcrumbCategoryLink" style="text-transform: capitalize;">Collections</a>
+            <div class="step-card"><div class="stepNumber">1</div>
+                <div class="step-image-preview">
+                    <img src="images/locate.png" alt="Locating QR code on sculpture base" class="step-thumb-img">
+                </div>
+                <div class="step-card-details">
+                    <span class="step-number">Step 01</span>
+                    <h3>Locate the Code</h3>
+                    <p>Examine the artwork to locate the unique QR code embedded seamlessly into the custom geometric
+                        base of the sculpture.</p>
+                </div>
+            </div>
 
-            <span class="trail-separator">›</span>
+            <div class="step-card"><div class="stepNumber">2</div>
+                <div class="step-image-preview">
+                    <img src="images/scan.png" alt="Scanning QR code with mobile phone" class="step-thumb-img">
+                </div>
+                <div class="step-card-details">
+                    <span class="step-number">Step 02</span>
+                    <h3>Scan the Code</h3>
+                    <p>Open your smartphone camera app or reader tool. Frame and focus on the digital anchor to quickly
+                        scan the interface.</p>
+                </div>
+            </div>
 
-            <span class="current-trail-node" id="breadcrumbCurrentNode">Product Detail View</span>
-        </nav>
-        <div class="product-split-grid" id="productDetailContainer"></div>
+            <div class="step-card"><div class="stepNumber">3</div>
+                <div class="step-image-preview">
+                    <img src="images/read.png" alt="Custom poetry application displayed on mobile device"
+                        class="step-thumb-img">
+                </div>
+                <div class="step-card-details">
+                    <span class="step-number">Step 03</span>
+                    <h3>Unveil the Verse</h3>
+                    <p>Launch the resulting landing link to unveil a profile of the subject piece that in poetic verse enlivens the subject and situates it in its context.
+                        </p>
+                </div>
+            </div>
+
+        </div>
     </main>
+
     <footer class="minimal-footer">
         <div class="footer-container">
             <p>&copy; Pixel Africana 2026</p>
         </div>
     </footer>
-
     <script src="shopEngine.js" defer></script>
 </body>
 
