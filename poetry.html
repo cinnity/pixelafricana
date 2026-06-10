@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelAfricana - Cultural Poetic Profiles</title>
+    <link rel="icon" type="image/x-icon" href="/cinnity_favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
+
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="header-container">
+            <div class="brand-block">
+                <a href="index.html" class="logo-link">
+                    <img src="images/pixelafricana_logo.png" alt="Pixel Africana Logo Symbol" class="logo-img">
+                    <div class="brand-text">
+                        <span class="brand-name">PixelAfricana</span>
+                        <span class="brand-sub">Culture by the Pixel ™</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="header-utilities">
+                <div class="search-box">
+                    <svg class="search-vector-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                    </svg>
+                    <input type="text" placeholder="Search products...">
+                </div>
+                <div class="cart-status-widget" onclick="location.href='cart.html'" style="cursor: pointer;">
+                    <span class="cart-total">$400.00</span>
+                    <span class="cart-count">1 item</span>
+
+                    <svg class="cart-vector-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.05 1.4-2.55h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="main-navigation">
+        <div class="nav-container">
+            <a href="index.html" class="nav-item">Home</a>
+            <a href="cart.html">Cart</a>
+            <a href="checkout.html">Checkout</a>
+            <a href="about.html" class="nav-item">About</a>
+            <a href="how-it-works.html" class="nav-item">How It Works</a>
+            <a href="poetry.html" class="nav-item active">Poetry</a>
+        </div>
+    </nav>
+
+    <main class="shop-view-wrapper">
+
+        <div class="poetry-pagination-bar" id="topPagination">
+            <button class="nav-chevron-btn" id="prevBtnTop" aria-label="Previous Profile">
+                <svg viewBox="0 0 24 24">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+                </svg>
+            </button>
+            <div class="page-indicators" id="indicatorsTop"></div>
+            <button class="nav-chevron-btn" id="nextBtnTop" aria-label="Next Profile">
+                <svg viewBox="0 0 24 24">
+                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="profile-showcase-card">
+            <div class="profile-grid-layout" id="profileContent">
+            </div>
+        </div>
+
+        <div class="poetry-pagination-bar bottom-bar" id="bottomPagination">
+            <button class="nav-chevron-btn" id="prevBtnBottom" aria-label="Previous Profile">
+                <svg viewBox="0 0 24 24">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+                </svg>
+            </button>
+            <div class="page-indicators" id="indicatorsBottom"></div>
+            <button class="nav-chevron-btn" id="nextBtnBottom" aria-label="Next Profile">
+                <svg viewBox="0 0 24 24">
+                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+                </svg>
+            </button>
+        </div>
+
+    </main>
+
+    <footer class="minimal-footer">
+        <div class="footer-container">
+            <p>&copy; Pixel Africana 2026</p>
+        </div>
+    </footer>
+
+    <script>
+        // Directly mapped database from user-provided production productsData JSON structure
+        const productsData = {
+            "products": [
+                {
+                    "id": "zainab",
+                    "category": "sculpture",
+                    "title": "Zainab",
+                    "onSale": false,
+                    "priceOriginal": "$300.00",
+                    "priceCurrent": "$300.00",
+                    "image": "images/sculptures/zainab/zainab_front_1.png",
+                    "profileImage": "images/sculptures/zainab/zainab_vector.png",
+                    "altText": "Zainab sculpture bust",
+                    "gallery": [
+                        "images/sculptures/zainab/zainab_front_1.png",
+                        "images/sculptures/zainab/zainab_side_right_1.png",
+                        "images/sculptures/zainab/zainab_side_left_1.png",
+                        "images/sculptures/zainab/zainab_scale.png"
+                    ],
+                    "poem": [
+                        "Where desert and grassland meet beneath a vast sky,",
+                        "she sat in quiet majesty—",
+                        "a daughter of the Sahel,",
+                        "a keeper of memory,",
+                        "Around her neck rested beads like small moons,",
+                        "each one holding a memory:",
+                        "a grandmother's song,",
+                        "the rhythm of pestles against millet",
+                        "the laughter of girls gathering water",
+                        "beneath an acacia's patient shade.",
+                        "And when evening descended across the savanna,",
+                        "painting gold across the dust-filled air,",
+                        "she remained still as a sculpture,",
+                        "yet alive with the stories of countless women",
+                        "whose names history forgot",
+                        "but whose strength shaped the land."
+                    ],
+                    "isCustomizeable": true
+                },
+                {
+                    "id": "gbenga",
+                    "category": "sculpture",
+                    "title": "Gbenga",
+                    "onSale": false,
+                    "priceOriginal": null,
+                    "priceCurrent": "$350.00",
+                    "image": "images/sculptures/gbenga/gbenga_front_1.png",
+                    "profileImage": "images/sculptures/gbenga/gbenga_vector.png",
+                    "altText": "Gbenga sculpture work",
+                    "gallery": [
+                        "images/sculptures/gbenga/gbenga_front_1.png",
+                        "images/sculptures/gbenga/gbenga_right.png",
+                        "images/sculptures/gbenga/gbenga_left.png",
+                        "images/sculptures/gbenga/gbenga_rear.png",
+                        "images/sculptures/gbenga/gbenga_scale.png"
+                    ],
+                    "poem": [
+                        "As the lagoon meets the Atlantic,",
+                        "and ancient waters become one with new currents",
+                        "So too tradition, flows into modernity",
+                        "If dignity were a cloak, it would fit him well.",
+                        "Not the loud dignity of titles and achievements,",
+                        "but the kind that comes from honoring both heritage and possibility,",
+                        "the kind earned through consistency, through integrity,",
+                        "old values, even in a new time"
+                    ],
+                    "custom_options": {
+                        "image": "images/sculptures/gbenga/gbenga_edit.png",
+                        "headgear": ["type_1", "type_2", "type_3"],
+                        "earring": [], "necklace": [], "top": []
+                    }
+                },
+                {
+                    "id": "ronkeh",
+                    "category": "sculpture",
+                    "title": "Ronkeh",
+                    "onSale": false,
+                    "priceOriginal": null,
+                    "priceCurrent": "$350.00",
+                    "image": "images/sculptures/ronkeh/ronkeh_front_2.png",
+                    "profileImage": "images/sculptures/ronkeh/ronkeh_vector.png",
+                    "altText": "Ronkeh sculpture bust",
+                    "gallery": [
+                        "images/sculptures/ronkeh/ronkeh_front_2.png",
+                        "images/sculptures/ronkeh/ronkeh_side_1.png",
+                        "images/sculptures/ronkeh/ronkeh_scale.png"
+                    ],
+                    "poem": [
+                        "They knew when Ronke had arrived.",
+                        "No, she did not seek attention,",
+                        "just that elegance followed her like perfume.",
+                        "as though Victoria Island itself had stepped through the door,",
+                        "draped in silk and gold,",
+                        "carrying the scent of ambition and ocean air.",
+                        "Layer upon layer of sculpted fabric,",
+                        "sweeping outward in graceful folds,",
+                        "framing her face with the grandeur of a royal crown.",
+                        "less of an accessory, more of a declaration—",
+                        "tribute perhaps, to the women who came before her,",
+                        "who understood that dignity could be worn as beautifully as silk."
+                    ],
+                    "isCustomizeable": false
+                },
+                {
+                    "id": "amina",
+                    "category": "sculpture",
+                    "title": "Amina",
+                    "onSale": false,
+                    "priceOriginal": null,
+                    "priceCurrent": "$350.00",
+                    "image": "images/sculptures/amina/amina_front_1.png",
+                    "profileImage": "images/sculptures/amina/amina_vector.png",
+                    "altText": "Amina golden reflective sculpture bust",
+                    "gallery": [
+                        "images/sculptures/amina/amina_front_1.png",
+                        "images/sculptures/amina/amina_side_2.png",
+                        "images/sculptures/amina/amina_rear_1.png",
+                        "images/sculptures/amina/amina_rear_2.png",
+                        "images/sculptures/amina/amina_scale.png",
+                        "images/sculptures/amina/amina_scale_ruler.png"
+                    ],
+                    "poem": [
+                        "Before the sun rose over the red earth of Zazzau,",
+                        "before merchants unfolded indigo cloth beneath the market awnings,",
+                        "She was already awake.",
+                        "Moving through the ancient city like a quiet song,",
+                        "past walls the color of clay and memory,",
+                        "past courtyards where women pounded millet",
+                        "to the rhythm of generations.",
+                        "The morning knew her.",
+                        "It settled softly upon the folds of her headscarf,",
+                        "caught in the bronze rings at her ears,",
+                        "and lingered upon her face",
+                        "as though reluctant to leave."
+                    ],
+                    "isCustomizeable": true
+                },
+                {
+                    "id": "kesha",
+                    "category": "sculpture",
+                    "title": "Kesha",
+                    "onSale": false,
+                    "priceOriginal": null,
+                    "priceCurrent": "$350.00",
+                    "image": "images/sculptures/kesha/kesha_front_1.png",
+                    "profileImage": "images/sculptures/kesha/kesha_vector.png",
+                    "altText": "Kesha in prayer sculpture bust",
+                    "gallery": [
+                        "images/sculptures/kesha/kesha_front_1.png",
+                        "images/sculptures/kesha/kesha_side_left.png",
+                        "images/sculptures/kesha/kesha_back_left.png",
+                        "images/sculptures/kesha/kesha_scale.png"
+                    ],
+                    "poem": [
+                        "Naming and claiming, needs, wants and desires",
+                        "binding and loosing the people and systems",
+                        "that stand in her way",
+                        "Fervent even in slience that change will come,",
+                        "and tomorrow will be better",
+                        "just as the man of God says it will be",
+                        "So Here she kneels at the edge of a season",
+                        "made long by strife of bandits and strikes of professors",
+                        "So that school breaks separated not days and weeks",
+                        "but years and seasons and three years became five",
+                        "But here she is at the gates of tomorrow",
+                        "daring to believe that dream job will come and husband in short order",
+                        "and so she prays."
+                    ],
+                    "isCustomizeable": true
+                },
+                {
+                    "id": "trophy",
+                    "category": "sculpture",
+                    "title": "Trophy",
+                    "onSale": false,
+                    "priceOriginal": null,
+                    "priceCurrent": "$450.00",
+                    "image": "images/sculptures/trophy/trophy_1.png",
+                    "profileImage": "images/sculptures/trophy/trophy_vector.png",
+                    "altText": "trophy sculpture",
+                    "gallery": ["images/sculptures/trophy/trophy_1.png"],
+                    "poem": ["Foo"],
+                    "isCustomizeable": true
+                },
+                {
+                    "id": "mudashiru",
+                    "category": "sculpture",
+                    "title": "Mudashiru",
+                    "onSale": false,
+                    "priceOriginal": null,
+                    "priceCurrent": "$450.00",
+                    "image": "images/sculptures/mudashiru/mudashiru_front_1.png",
+                    "profileImage": "images/sculptures/mudashiru/mudashiru_vector.png",
+                    "altText": "trophy sculpture",
+                    "gallery": ["images/sculptures/mudashiru/mudashiru_front_1.png"],
+                    "poem": ["Foo"],
+                    "isCustomizeable": true
+                }
+            ]
+        };
+
+        // Filter database dynamically to strip out unpopulated mockup poems ("Foo")
+        const dynamicProfiles = productsData.products.filter(p => p.poem && p.poem[0] !== "Foo");
+        let currentIndex = 0;
+
+        function renderActiveProfile(index) {
+            if (index < 0 || index >= dynamicProfiles.length) return;
+            currentIndex = index;
+
+            const profile = dynamicProfiles[currentIndex];
+            const contentNode = document.getElementById('profileContent');
+
+            // Subtle transition breaks when moving between profiles
+            contentNode.style.opacity = '0';
+            contentNode.style.transform = 'translateY(4px)';
+
+            // Format array stanzas back into string blocks with break rules cleanly
+            const verifiedPoemString = profile.poem.join('\n');
+
+            setTimeout(() => {
+                contentNode.innerHTML = `
+                    <div class="profile-visual-pane">
+                        <img src="${profile.profileImage}" alt="${profile.altText}" class="sculpture-render-view">
+                    </div>
+                    <div class="profile-literary-pane">
+                        <h2 class="poetic-title-header">“${profile.title}”</h2>
+                        <div class="literary-verse-box">${verifiedPoemString}</div>
+                        <div class="profile-metadata-footer">
+                            <div class="metadata-item">Collection: <span class="metadata-value">${profile.category}</span></div>
+                            <div class="metadata-item">Value: <span class="metadata-value">${profile.priceCurrent}</span></div>
+                        </div>
+                    </div>
+                `;
+                contentNode.style.opacity = '1';
+                contentNode.style.transform = 'translateY(0)';
+                refreshPaginationElements();
+            }, 180);
+        }
+
+        function refreshPaginationElements() {
+            // Apply bounds state rules directly to toggle inputs
+            document.getElementById('prevBtnTop').disabled = currentIndex === 0;
+            document.getElementById('prevBtnBottom').disabled = currentIndex === 0;
+            document.getElementById('nextBtnTop').disabled = currentIndex === dynamicProfiles.length - 1;
+            document.getElementById('nextBtnBottom').disabled = currentIndex === dynamicProfiles.length - 1;
+
+            buildPaginationIndicators('indicatorsTop');
+            buildPaginationIndicators('indicatorsBottom');
+        }
+
+        function buildPaginationIndicators(targetContainerId) {
+            const container = document.getElementById(targetContainerId);
+            container.innerHTML = '';
+
+            dynamicProfiles.forEach((_, idx) => {
+                const stepIndicator = document.createElement('button');
+                stepIndicator.className = `page-dot ${idx === currentIndex ? 'active' : ''}`;
+                stepIndicator.textContent = (idx + 1).toString().padStart(2, '0');
+                stepIndicator.addEventListener('click', () => renderActiveProfile(idx));
+                container.appendChild(stepIndicator);
+            });
+        }
+
+        // Connect pagination click listeners
+        document.getElementById('prevBtnTop').addEventListener('click', () => renderActiveProfile(currentIndex - 1));
+        document.getElementById('prevBtnBottom').addEventListener('click', () => renderActiveProfile(currentIndex - 1));
+        document.getElementById('nextBtnTop').addEventListener('click', () => renderActiveProfile(currentIndex + 1));
+        document.getElementById('nextBtnBottom').addEventListener('click', () => renderActiveProfile(currentIndex + 1));
+
+        // Mount execution point on page render ready
+        document.addEventListener('DOMContentLoaded', () => {
+            renderActiveProfile(0);
+        });
+    </script>
+</body>
+
+</html>

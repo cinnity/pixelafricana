@@ -148,7 +148,7 @@
       "priceOriginal": null,
       "priceCurrent": "$350.00",
       "image": "images/sculptures/kesha/kesha_front_1.png",
-            "profileImage":"images/sculptures/kesha_vector.png",
+      "profileImage": "images/sculptures/kesha_vector.png",
       "altText": "Kesha in prayer sculpture bust",
       "gallery": [
         "images/sculptures/kesha/kesha_front_1.png",
@@ -157,21 +157,19 @@
         "images/sculptures/kesha/kesha_scale.png"
       ],
       "poem": [
-        "Elegant Prayer / pretty petitions,",
-        "No more strikes",
-        "No more kidnappings",
-        "Naming and claiming,",
-        "The husband of her dreams,",
-        "That job oh so elusive.",
-        "Now that school, on again, off again",
-        "Finally done",
-        "past courtyards where women pounded millet",
-        "to the rhythm of generations.",
-        "The morning knew her.",
-        "It settled softly upon the folds of her headscarf,",
-        "caught in the bronze rings at her ears,",
-        "and lingered upon her face",
-        "as though reluctant to leave."
+        "Naming and claiming, needs, wants and desires",
+        "binding and loosing, people and systems",
+        "that stand in her way",
+        "Fervent even in slience that change will come,",
+        "and tomorrow will be better",
+        "just as the man of God says it will be",
+        "So Here she kneels at the edge of a season",
+        "made long by strife of bandits and strikes of professors",
+        "So that school breaks separated not days and weeks",
+        "but years and seasons and three years became five",
+        "But here she is at the gates of tomorrow",
+        "daring to believe that dream job will come and husband in short order",
+        "and so she prays."
       ],
       "isCustomizeable": true
     },
@@ -183,8 +181,7 @@
       "priceOriginal": null,
       "priceCurrent": "$450.00",
       "image": "images/sculptures/trophy/trophy_1.png",
-            "profileImage":"images/sculptures/trophy/trophy_vector.png",
-
+      "profileImage": "images/sculptures/trophy/trophy_vector.png",
       "altText": "trophy sculpture",
       "gallery": [
         "images/sculptures/trophy/trophy_1.png",
@@ -194,7 +191,7 @@
         "images/sculptures/trophy/trophy_5.png"
       ],
       "poem": [
-        ""
+        "Foo"
       ],
       "isCustomizeable": true
     },
@@ -206,8 +203,7 @@
       "priceOriginal": null,
       "priceCurrent": "$450.00",
       "image": "images/sculptures/mudashiru/mudashiru_front_1.png",
-            "profileImage":"images/sculptures/mudashiru/mudashiru_vector.png",
-
+      "profileImage": "images/sculptures/mudashiru/mudashiru_vector.png",
       "altText": "trophy sculpture",
       "gallery": [
         "images/sculptures/mudashiru/mudashiru_front_1.png",
@@ -216,7 +212,7 @@
         "images/sculptures/mudashiru/mudashiru_back_left.png"
       ],
       "poem": [
-        ""
+        "Foo"
       ],
       "isCustomizeable": true
     }

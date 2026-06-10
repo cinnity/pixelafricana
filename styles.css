@@ -2523,8 +2523,7 @@ disable the tooltip momentarily
 }
 
 .sculptureImg {
-    max-width: 180px;
-    max-height: 240px;
+    max-width: 300px;
     object-fit: contain;
     border-radius: 4px;
     animation: fadeIn 1.2s ease-in-out;
@@ -2536,8 +2535,6 @@ disable the tooltip momentarily
     --accent-color: #9c8465;
     --meta-color: #777777;
 }
-
-.poeticProfileBody {}
 
 .container {
     max-width: 600px;
@@ -2592,3 +2589,179 @@ disable the tooltip momentarily
     color: #777777;
     margin-bottom: 25px;
 }
+
+   /* Base / Layout Normalizations built around verse.html specification templates */
+        .shop-view-wrapper {
+            flex-grow: 1;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Pagination Toolbars Layout Config (Top and Bottom Rows) */
+        .poetry-pagination-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ffffff;
+            border: 1px solid #e2e2e2;
+            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .poetry-pagination-bar.bottom-bar {
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .nav-chevron-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem;
+            color: #111111;
+            transition: color 0.2s;
+        }
+
+        .nav-chevron-btn:disabled {
+            color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .nav-chevron-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .page-indicators {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .page-dot {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: #666666;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .page-dot:hover {
+            color: #111111;
+            background-color: #f5f5f5;
+        }
+
+        .page-dot.active {
+            font-weight: 700;
+            color: #ffffff;
+            background-color: #111111;
+        }
+
+        /* Profile Interactive Component Card Frame */
+        .profile-showcase-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e2e2;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
+
+        .profile-grid-layout {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            min-height: 550px;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        .profile-visual-pane {
+            background-color: #faf8f5;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-right: 1px solid #e2e2e2;
+        }
+
+        .sculpture-render-view {
+            max-width: 100%;
+            max-height: 420px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .profile-literary-pane {
+            padding: 3.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .poetic-title-header {
+            font-size: 2.2rem;
+            font-weight: 400;
+            color: #111111;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .literary-verse-box {
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333333;
+            white-space: pre-line;
+            margin-bottom: 2rem;
+            border-left: 1px solid #8c6239;
+            padding-left: 1.5rem;
+        }
+
+        .profile-metadata-footer {
+            margin-top: auto;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eeeeee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .metadata-item {
+            font-size: 0.85rem;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .metadata-value {
+            font-weight: 600;
+            color: #111111;
+        }
+
+        /* Screen responsive breakdown properties */
+        @media (max-width: 900px) {
+            .profile-grid-layout {
+                grid-template-columns: 1fr;
+            }
+            .profile-visual-pane {
+                border-right: none;
+                border-bottom: 1px solid #e2e2e2;
+                padding: 2rem;
+            }
+            .profile-literary-pane {
+                padding: 2rem;
+            }
+            .poetic-title-header {
+                font-size: 1.8rem;
+            }
+        }
