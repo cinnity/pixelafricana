@@ -89,6 +89,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const currentCategoryScope = urlParams.get('type') || 'sculpture';
         initializeCatalogProductDeck(currentCategoryScope);
     }
+    // 5. ROUTE CHECK: Sculpture Poetic Profile QR Landing Interface
+    if (currentPath.includes('sculpture.html') || document.getElementById('sculpturePoeticProfileInjectionNode')) {
+        initializePoeticProfileEngine();
+        return;
+    }
 });
 
 // ==========================================
@@ -560,7 +565,7 @@ function bindProductDetailActions(product) { // <--- FIXED: Added product parame
             }
         }
         // Sync active styling rings across the thumbnail strip elements
-        
+
         document.querySelectorAll('.thumb-node').forEach(t => t.classList.remove('active'));
         thumbElement.classList.add('active');
 
@@ -789,4 +794,78 @@ function calculateDynamicHomepageCounters() {
             console.error("Error calculating runtime collection badges:", err);
             badgeNodes.forEach(badge => badge.innerText = "Explore Collection");
         });
+}
+// ==========================================
+// 7. SCULPTURE POETIC PROFILE ROUTE PIPELINE
+// ==========================================
+function initializePoeticProfileEngine() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const targetSculptureId = urlParams.get('id');
+    const statusNode = document.getElementById('poeticProfileStatusNode');
+    
+    if (!targetSculptureId) {
+        if (statusNode) statusNode.innerText = "Please scan a valid QR code to view the profile.";
+        return;
+    }
+
+    fetch('productsData.json')
+        .then(response => response.json())
+        .then(data => {
+            const sculptureMatch = data.products.find(
+                p => p.id.toLowerCase() === targetSculptureId.toLowerCase()
+            );
+
+            if (!sculptureMatch) {
+                if (statusNode) statusNode.innerText = "Sculpture profile not found.";
+                return;
+            }
+
+            // Ensure the page tab updates to match the context
+            document.title = `Pixel Africana - ${sculptureMatch.title} Profile`;
+
+            buildPoeticProfileHTML(sculptureMatch);
+        })
+        .catch(err => {
+            console.error("Error executing dynamic poetic layout generation:", err);
+            if (statusNode) statusNode.innerText = "An error occurred while loading the verse.";
+        });
+}
+
+function buildPoeticProfileHTML(sculpture) {
+    const targetNode = document.getElementById('sculpturePoeticProfileInjectionNode');
+    if (!targetNode) return;
+
+    // Check for empty elements inside the poetry array arrays
+    const poemArray = sculpture.poem || [];
+    const plainPoemString = poemArray.join('\n').trim();
+
+    if (!plainPoemString) {
+        targetNode.innerHTML = `
+            <div class="status-message" id="poeticProfileStatusNode">
+                The verse for "${sculpture.title}" is still being written in stone.
+            </div>`;
+        return;
+    }
+
+    // Unroll text rows with clean formatting matching product-detail template mechanics
+    let dynamicPoemLinesHTML = "";
+    poemArray.forEach(line => {
+        dynamicPoemLinesHTML += `<p class="poem-stanza-line" style="margin: 0 0 12px 0;">${line}</p>`;
+    });
+
+    // Generate inner DOM while routing the preview image through your native asset path resolver
+    targetNode.innerHTML = `
+        <div class="sculpture-img-wrapper" >
+            <img class="sculptureImg" 
+                 src="${resolveAbsoluteImagePath(sculpture.profileImage)}" 
+                 alt="${sculpture.altText || sculpture.title}" 
+                 >
+        </div>
+        <h1 class="sculpture-title" style="font-size: 2.6rem; font-weight: 300; margin: 0 0 10px 0; letter-spacing: 1px;">${sculpture.title}</h1>
+        <div class="sculpture-meta" >${sculpture.category}</div>
+        <div class="divider" ></div>
+        <div class="poem-content" style="font-size: 1.2rem; font-style: italic; color: #333; line-height: 1.8; animation: fadeIn 1.8s ease-in-out;">
+            ${dynamicPoemLinesHTML}
+        </div>
+    `;
 }

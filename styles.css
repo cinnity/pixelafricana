@@ -2498,3 +2498,97 @@ disable the tooltip momentarily
     color: white;
     -webkit-text-stroke: 2px #909090;
 }
+
+.container {
+    max-width: 600px;
+    width: 90%;
+    padding: 60px 20px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+
+.poeticProfile {
+    font-family: 'Georgia', serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.8;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+
+}
+
+.sculptureImg {
+    max-width: 180px;
+    max-height: 240px;
+    object-fit: contain;
+    border-radius: 4px;
+    animation: fadeIn 1.2s ease-in-out;
+}
+
+:root {
+    --bg-color: #fbfbfa;
+    --text-color: #222222;
+    --accent-color: #9c8465;
+    --meta-color: #777777;
+}
+
+.poeticProfileBody {}
+
+.container {
+    max-width: 600px;
+    width: 90%;
+    padding: 60px 20px;
+    text-align: center;
+    box-sizing: border-box;
+    font-family: 'Georgia', serif;
+    background-color: #fbfbfa;
+    color: #222222;
+    margin: 0 auto;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+
+}
+
+.status-message {
+    font-size: 1.1rem;
+    color: #777777;
+    font-style: italic;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.sculpture-img-wrapper {
+    margin-bottom: 10px
+}
+
+.divider {
+    width: 40px;
+    height: 1px;
+    background-color: #9c8465;
+    margin: 0 auto 20px auto;
+}
+
+.sculpture-meta {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #777777;
+    margin-bottom: 25px;
+}

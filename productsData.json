@@ -8,6 +8,7 @@
       "priceOriginal": "$300.00",
       "priceCurrent": "$300.00",
       "image": "images/sculptures/zainab/zainab_front_1.png",
+      "profileImage": "images/sculptures/zainab/zainab_vector.png",
       "altText": "Zainab sculpture bust",
       "gallery": [
         "images/sculptures/zainab/zainab_front_1.png",
@@ -43,6 +44,7 @@
       "priceOriginal": null,
       "priceCurrent": "$350.00",
       "image": "images/sculptures/gbenga/gbenga_front_1.png",
+      "profileImage": "images/sculptures/gbenga/gbenga_vector.png",
       "altText": "Gbenga sculpture work",
       "gallery": [
         "images/sculptures/gbenga/gbenga_front_1.png",
@@ -81,6 +83,7 @@
       "priceOriginal": null,
       "priceCurrent": "$350.00",
       "image": "images/sculptures/ronkeh/ronkeh_front_2.png",
+      "profileImage": "images/sculptures/ronkeh/ronkeh_vector.png",
       "altText": "Ronkeh sculpture bust",
       "gallery": [
         "images/sculptures/ronkeh/ronkeh_front_2.png",
@@ -111,6 +114,7 @@
       "priceOriginal": null,
       "priceCurrent": "$350.00",
       "image": "images/sculptures/amina/amina_front_1.png",
+      "profileImage": "images/sculptures/amina/amina_vector.png",
       "altText": "Amina golden reflective sculpture bust",
       "gallery": [
         "images/sculptures/amina/amina_front_1.png",
@@ -144,6 +148,7 @@
       "priceOriginal": null,
       "priceCurrent": "$350.00",
       "image": "images/sculptures/kesha/kesha_front_1.png",
+            "profileImage":"images/sculptures/kesha_vector.png",
       "altText": "Kesha in prayer sculpture bust",
       "gallery": [
         "images/sculptures/kesha/kesha_front_1.png",
@@ -178,6 +183,8 @@
       "priceOriginal": null,
       "priceCurrent": "$450.00",
       "image": "images/sculptures/trophy/trophy_1.png",
+            "profileImage":"images/sculptures/trophy/trophy_vector.png",
+
       "altText": "trophy sculpture",
       "gallery": [
         "images/sculptures/trophy/trophy_1.png",
@@ -199,6 +206,8 @@
       "priceOriginal": null,
       "priceCurrent": "$450.00",
       "image": "images/sculptures/mudashiru/mudashiru_front_1.png",
+            "profileImage":"images/sculptures/mudashiru/mudashiru_vector.png",
+
       "altText": "trophy sculpture",
       "gallery": [
         "images/sculptures/mudashiru/mudashiru_front_1.png",
