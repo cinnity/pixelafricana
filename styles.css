@@ -2765,3 +2765,147 @@ disable the tooltip momentarily
                 font-size: 1.8rem;
             }
         }
+
+        /* =========================================================================
+   RESPONSIVE MAIN MENU ARCHITECTURE
+   ========================================================================= */
+
+/* Desktop Baseline Configurations */
+.main-navigation {
+    border-bottom: 1px solid #222222;
+    position: relative;
+    z-index: 100;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.nav-links-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.nav-item {
+    display: inline-block;
+    padding: 15px 0;
+    color: #aaaaaa;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    transition: color 0.2s ease;
+}
+
+.nav-item:hover, .nav-item.active {
+    color: #ffffff;
+}
+
+/* Hide the technical checkbox engine and mobile trigger button on desktops */
+.menu-toggle-checkbox,
+.menu-toggle-btn {
+    display: none;
+}
+
+/* ==========================================
+   MOBILE STYLING (RESPONSIVE BREAKPOINT)
+   ========================================== */
+@media screen and (max-width: 768px) {
+    /* Reset layout container settings */
+    .main-navigation {
+        background-color: #ffffff !important;
+        border-bottom: 1px solid #e0e0e0 !important;
+        border-top: 1px solid #e0e0e0 !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .nav-container {
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        display: block !important; /* Prevents parent flex misalignment */
+        position: relative;
+    }
+
+    /* 1. FIXED HAMBURGER BAR: Spans full width cleanly */
+    .menu-toggle-btn {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important; /* Aligns content cleanly to the left */
+        gap: 12px !important;
+        padding: 16px 24px !important; /* Perfect breathing room for fingers */
+        color: #111111 !important;
+        background-color: #ffffff !important;
+        cursor: pointer !important;
+        user-select: none !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
+    }
+    
+    /* Centers the icon vector beautifully inside the trigger bar line */
+    .hamburger-icon {
+        display: block !important;
+        flex-shrink: 0;
+    }
+    
+    .menu-text-label {
+        font-weight: 600 !important;
+        font-size: 0.95rem !important;
+        letter-spacing: 0.03em;
+        color: #111111 !important;
+    }
+
+    /* 2. FIXED DRAWER CONTAINER: Starts completely flat and hidden */
+    .nav-links-wrapper {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        background-color: #fafafa !important; /* Soft grey background differentiator */
+        padding: 0 !important;
+        margin: 0 !important;
+        gap: 0 !important;
+        box-sizing: border-box !important;
+        
+        /* Clean opening transition animation engine */
+        max-height: 0 !important;
+        overflow: hidden !important;
+        transition: max-height 0.3s ease-in-out !important;
+    }
+
+    /* 3. FIXED LINKS: Clean full-width alignment with no stray padding offsets */
+    .nav-item {
+        width: 100% !important;
+        padding: 16px 24px !important; /* Perfectly mirrors the header bar bounds */
+        margin: 0 !important;
+        color: #333333 !important;
+        border-bottom: 1px solid #eeeeee !important;
+        box-sizing: border-box !important;
+        display: block !important;
+        text-align: left !important; /* Forces all links left, matching the button */
+        font-size: 0.95rem !important;
+        font-weight: 500 !important;
+    }
+
+    /* Bold active style indicator line highlighting */
+    .nav-item.active {
+        font-weight: 700 !important;
+        color: #000000 !important;
+        background-color: #f0f0f0 !important;
+    }
+
+    /* Clean up the border radius on the very last link element box */
+    .nav-item:last-child {
+        border-bottom: none !important;
+    }
+
+    /* 4. DRIVER TRIGGER: Safely opens the drawer when the checkbox is checked */
+    .menu-toggle-checkbox:checked ~ .nav-links-wrapper {
+        max-height: 400px !important; 
+        border-top: 1px solid #e0e0e0 !important;
+    }
+}
