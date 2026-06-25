@@ -4,11 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PixelAfricana - Cultural Poetic Profiles</title>
-    <link rel="icon" type="image/x-icon" href="/cinnity_favicon.ico">
+    <title>Pixel Africana - How It Works</title>
+    <link rel="icon" type="image/svg+xml" href="cinnity_favicon.ico">
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?&family=Quicksand:wght@300..700&family=Manufacturing+Consent&display=swap&family=Cormorant+Garamond:ital,wght@1,500&family=Playfair+Display:ital,wght@1,500&family=Syne:wght@500&display=swap"
+        rel="stylesheet">
     <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
-
 </head>
 
 <body>
@@ -61,8 +65,6 @@
             <!-- Navigation Links Wrapper Group -->
             <div class="nav-links-wrapper">
                 <a href="index.html" class="nav-item">Home</a>
-                <a href="cart.html" class="nav-item">Cart</a>
-                <a href="checkout.html" class="nav-item">Checkout</a>
                 <a href="about.html" class="nav-item">About</a>
                 <a href="how-it-works.html" class="nav-item">How It Works</a>
                 <a href="poetry.html" class="nav-item active">Poetry</a>
@@ -112,226 +114,80 @@
         </div>
     </footer>
 
-    <script>
-        // Directly mapped database from user-provided production productsData JSON structure
-        const productsData = {
-            "products": [
-                {
-                    "id": "zainab",
-                    "category": "sculpture",
-                    "title": "Zainab",
-                    "onSale": false,
-                    "priceOriginal": "$300.00",
-                    "priceCurrent": "$300.00",
-                    "image": "images/sculptures/zainab/zainab_front_1.png",
-                    "profileImage": "images/sculptures/zainab/zainab_vector.png",
-                    "altText": "Zainab sculpture bust",
-                    "gallery": [
-                        "images/sculptures/zainab/zainab_front_1.png",
-                        "images/sculptures/zainab/zainab_side_right_1.png",
-                        "images/sculptures/zainab/zainab_side_left_1.png",
-                        "images/sculptures/zainab/zainab_scale.png"
-                    ],
-                    "poem": [
-                        "Where desert and grassland meet beneath a vast sky,",
-                        "she sat in quiet majesty—",
-                        "a daughter of the Sahel,",
-                        "a keeper of memory,",
-                        "Around her neck rested beads like small moons,",
-                        "each one holding a memory:",
-                        "a grandmother's song,",
-                        "the rhythm of pestles against millet",
-                        "the laughter of girls gathering water",
-                        "beneath an acacia's patient shade.",
-                        "And when evening descended across the savanna,",
-                        "painting gold across the dust-filled air,",
-                        "she remained still as a sculpture,",
-                        "yet alive with the stories of countless women",
-                        "whose names history forgot",
-                        "but whose strength shaped the land."
-                    ],
-                    "isCustomizeable": true
-                },
-                {
-                    "id": "gbenga",
-                    "category": "sculpture",
-                    "title": "Gbenga",
-                    "onSale": false,
-                    "priceOriginal": null,
-                    "priceCurrent": "$350.00",
-                    "image": "images/sculptures/gbenga/gbenga_front_1.png",
-                    "profileImage": "images/sculptures/gbenga/gbenga_vector.png",
-                    "altText": "Gbenga sculpture work",
-                    "gallery": [
-                        "images/sculptures/gbenga/gbenga_front_1.png",
-                        "images/sculptures/gbenga/gbenga_right.png",
-                        "images/sculptures/gbenga/gbenga_left.png",
-                        "images/sculptures/gbenga/gbenga_rear.png",
-                        "images/sculptures/gbenga/gbenga_scale.png"
-                    ],
-                    "poem": [
-                        "As the lagoon meets the Atlantic,",
-                        "and ancient waters become one with new currents",
-                        "So too tradition, flows into modernity",
-                        "If dignity were a cloak, it would fit him well.",
-                        "Not the loud dignity of titles and achievements,",
-                        "but the kind that comes from honoring both heritage and possibility,",
-                        "the kind earned through consistency, through integrity,",
-                        "old values, even in a new time"
-                    ],
-                    "custom_options": {
-                        "image": "images/sculptures/gbenga/gbenga_edit.png",
-                        "headgear": ["type_1", "type_2", "type_3"],
-                        "earring": [], "necklace": [], "top": []
-                    }
-                },
-                {
-                    "id": "ronkeh",
-                    "category": "sculpture",
-                    "title": "Ronkeh",
-                    "onSale": false,
-                    "priceOriginal": null,
-                    "priceCurrent": "$350.00",
-                    "image": "images/sculptures/ronkeh/ronkeh_front_2.png",
-                    "profileImage": "images/sculptures/ronkeh/ronkeh_vector.png",
-                    "altText": "Ronkeh sculpture bust",
-                    "gallery": [
-                        "images/sculptures/ronkeh/ronkeh_front_2.png",
-                        "images/sculptures/ronkeh/ronkeh_side_1.png",
-                        "images/sculptures/ronkeh/ronkeh_scale.png"
-                    ],
-                    "poem": [
-                        "They knew when Ronke had arrived.",
-                        "No, she did not seek attention,",
-                        "just that elegance followed her like perfume.",
-                        "as though Victoria Island itself had stepped through the door,",
-                        "draped in silk and gold,",
-                        "carrying the scent of ambition and ocean air.",
-                        "Layer upon layer of sculpted fabric,",
-                        "sweeping outward in graceful folds,",
-                        "framing her face with the grandeur of a royal crown.",
-                        "less of an accessory, more of a declaration—",
-                        "tribute perhaps, to the women who came before her,",
-                        "who understood that dignity could be worn as beautifully as silk."
-                    ],
-                    "isCustomizeable": false
-                },
-                {
-                    "id": "amina",
-                    "category": "sculpture",
-                    "title": "Amina",
-                    "onSale": false,
-                    "priceOriginal": null,
-                    "priceCurrent": "$350.00",
-                    "image": "images/sculptures/amina/amina_front_1.png",
-                    "profileImage": "images/sculptures/amina/amina_vector.png",
-                    "altText": "Amina golden reflective sculpture bust",
-                    "gallery": [
-                        "images/sculptures/amina/amina_front_1.png",
-                        "images/sculptures/amina/amina_side_2.png",
-                        "images/sculptures/amina/amina_rear_1.png",
-                        "images/sculptures/amina/amina_rear_2.png",
-                        "images/sculptures/amina/amina_scale.png",
-                        "images/sculptures/amina/amina_scale_ruler.png"
-                    ],
-                    "poem": [
-                        "Before the sun rose over the red earth of Zazzau,",
-                        "before merchants unfolded indigo cloth beneath the market awnings,",
-                        "She was already awake.",
-                        "Moving through the ancient city like a quiet song,",
-                        "past walls the color of clay and memory,",
-                        "past courtyards where women pounded millet",
-                        "to the rhythm of generations.",
-                        "The morning knew her.",
-                        "It settled softly upon the folds of her headscarf,",
-                        "caught in the bronze rings at her ears,",
-                        "and lingered upon her face",
-                        "as though reluctant to leave."
-                    ],
-                    "isCustomizeable": true
-                },
-                {
-                    "id": "kesha",
-                    "category": "sculpture",
-                    "title": "Kesha",
-                    "onSale": false,
-                    "priceOriginal": null,
-                    "priceCurrent": "$350.00",
-                    "image": "images/sculptures/kesha/kesha_front_1.png",
-                    "profileImage": "images/sculptures/kesha/kesha_vector.png",
-                    "altText": "Kesha in prayer sculpture bust",
-                    "gallery": [
-                        "images/sculptures/kesha/kesha_front_1.png",
-                        "images/sculptures/kesha/kesha_side_left.png",
-                        "images/sculptures/kesha/kesha_back_left.png",
-                        "images/sculptures/kesha/kesha_scale.png"
-                    ],
-                    "poem": [
-                        "Naming and claiming, needs, wants and desires",
-                        "binding and loosing the people and systems",
-                        "that stand in her way",
-                        "Fervent even in slience that change will come,",
-                        "and tomorrow will be better",
-                        "just as the man of God says it will be",
-                        "So Here she kneels at the edge of a season",
-                        "made long by strife of bandits and strikes of professors",
-                        "So that school breaks separated not days and weeks",
-                        "but years and seasons and three years became five",
-                        "But here she is at the gates of tomorrow",
-                        "daring to believe that dream job will come and husband in short order",
-                        "and so she prays."
-                    ],
-                    "isCustomizeable": true
-                },
-                {
-                    "id": "trophy",
-                    "category": "sculpture",
-                    "title": "Trophy",
-                    "onSale": false,
-                    "priceOriginal": null,
-                    "priceCurrent": "$450.00",
-                    "image": "images/sculptures/trophy/trophy_1.png",
-                    "profileImage": "images/sculptures/trophy/trophy_vector.png",
-                    "altText": "trophy sculpture",
-                    "gallery": ["images/sculptures/trophy/trophy_1.png"],
-                    "poem": ["Foo"],
-                    "isCustomizeable": true
-                },
-                {
-                    "id": "mudashiru",
-                    "category": "sculpture",
-                    "title": "Mudashiru",
-                    "onSale": false,
-                    "priceOriginal": null,
-                    "priceCurrent": "$450.00",
-                    "image": "images/sculptures/mudashiru/mudashiru_front_1.png",
-                    "profileImage": "images/sculptures/mudashiru/mudashiru_vector.png",
-                    "altText": "trophy sculpture",
-                    "gallery": ["images/sculptures/mudashiru/mudashiru_front_1.png"],
-                    "poem": ["Foo"],
-                    "isCustomizeable": true
-                }
-            ]
-        };
-
-        // Filter database dynamically to strip out unpopulated mockup poems ("Foo")
-        const dynamicProfiles = productsData.products.filter(p => p.poem && p.poem[0] !== "Foo");
+<script>
+        // Global variables for internal state tracking
+        let dynamicProfiles = [];
         let currentIndex = 0;
+
+        // Async initialization hook to pull the raw products data layer
+        async function initializePoetryPlatform() {
+            try {
+                // Fetch the relative JSON file
+                const response = await fetch('productsData.json');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP network error encountered: Fetch status ${response.status}`);
+                }
+                
+                const fullData = await response.json();
+                
+                // Filter database dynamically to strip out unpopulated mockup poems ("Foo")
+                dynamicProfiles = fullData.products.filter(p => p.poem && p.poem[0] !== "Foo");
+                
+                if (dynamicProfiles.length > 0) {
+                    // Check URL for specific ID query strings
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const targetId = urlParams.get('id') || urlParams.get('product');
+                    
+                    let initialIndex = 0; // Default fallback to first element
+                    
+                    if (targetId) {
+                        // Find match based on a lowercase comparison of the title or an explicit id field
+                        const matchedIndex = dynamicProfiles.findIndex(p => 
+                            (p.id && p.id.toLowerCase() === targetId.toLowerCase()) || 
+                            (p.title && p.title.toLowerCase() === targetId.toLowerCase())
+                        );
+                        
+                        if (matchedIndex !== -1) {
+                            initialIndex = matchedIndex;
+                        } else {
+                            console.warn(`Query string ID "${targetId}" did not match any active profiles. Defaulting to index 0.`);
+                        }
+                    }
+                    
+                    renderActiveProfile(initialIndex);
+                } else {
+                    document.getElementById('profileContent').innerHTML = `
+                        <div style="padding: 3rem; text-align: center; width: 100%;" class="status-message">
+                            No cultural poetry profiles available in the dataset right now.
+                        </div>
+                    `;
+                }
+                
+            } catch (error) {
+                console.error("Critical failure during JSON profile ingestion:", error);
+                document.getElementById('profileContent').innerHTML = `
+                    <div style="padding: 3rem; text-align: center; width: 100%; color: #a64b2a;" class="status-message">
+                        Failure loading the cultural profiles. Please verify productsData.json is present in the server root.
+                    </div>
+                `;
+            }
+        }
 
         function renderActiveProfile(index) {
             if (index < 0 || index >= dynamicProfiles.length) return;
             currentIndex = index;
-
+            
             const profile = dynamicProfiles[currentIndex];
             const contentNode = document.getElementById('profileContent');
-
+            
             // Subtle transition breaks when moving between profiles
             contentNode.style.opacity = '0';
             contentNode.style.transform = 'translateY(4px)';
-
+            
             // Format array stanzas back into string blocks with break rules cleanly
             const verifiedPoemString = profile.poem.join('\n');
-
+            
             setTimeout(() => {
                 contentNode.innerHTML = `
                     <div class="profile-visual-pane">
@@ -366,7 +222,7 @@
         function buildPaginationIndicators(targetContainerId) {
             const container = document.getElementById(targetContainerId);
             container.innerHTML = '';
-
+            
             dynamicProfiles.forEach((_, idx) => {
                 const stepIndicator = document.createElement('button');
                 stepIndicator.className = `page-dot ${idx === currentIndex ? 'active' : ''}`;
@@ -382,11 +238,9 @@
         document.getElementById('nextBtnTop').addEventListener('click', () => renderActiveProfile(currentIndex + 1));
         document.getElementById('nextBtnBottom').addEventListener('click', () => renderActiveProfile(currentIndex + 1));
 
-        // Mount execution point on page render ready
-        document.addEventListener('DOMContentLoaded', () => {
-            renderActiveProfile(0);
-        });
-    </script>
+        // Mount asynchronous engine execution point on page render ready
+        document.addEventListener('DOMContentLoaded', initializePoetryPlatform);
+    </script>    
 </body>
 
 </html>

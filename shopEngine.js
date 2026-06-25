@@ -262,7 +262,7 @@ function renderActiveCartPageDisplay() {
         mainSplitGrid.innerHTML = `
             <div style="padding: 60px 20px; text-align: center; grid-column: 1/-1;">
                 <p style="color: #666; font-size: 1.15rem; margin-bottom: 20px;">Your cart is empty.</p>
-                <a href="index.html" style="display: inline-block; background-color: #2e2e2e; color: #fff; padding: 12px 30px; text-decoration: none; border-radius: 4px;">Return to shop</a>
+                <a href="index.html" class="return-to-shop-btn">Return to shop</a>
             </div>`;
         return;
     }
@@ -861,10 +861,10 @@ function buildPoeticProfileHTML(sculpture) {
                  alt="${sculpture.altText || sculpture.title}" 
                  >
         </div>
-        <h1 class="sculpture-title" style="font-size: 2.6rem; font-weight: 300; margin: 0 0 10px 0; letter-spacing: 1px;">${sculpture.title}</h1>
+        <h1 class="sculpture-title" >${sculpture.title}</h1>
         <div class="sculpture-meta" >${sculpture.category}</div>
         <div class="divider" ></div>
-        <div class="poem-content" style="font-size: 1.2rem; font-style: italic; color: #333; line-height: 1.8; animation: fadeIn 1.8s ease-in-out;">
+        <div class="poem-content" >
             ${dynamicPoemLinesHTML}
         </div>
     `;

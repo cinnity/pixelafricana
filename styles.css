@@ -1,9 +1,13 @@
 /* --- Core Interface Color Variables & Structural Foundations --- */
 :root {
-    --text-primary: #333333;
-    --text-muted: #777777;
-    --border-light: #eaeaea;
-    --bg-nav-active: #f9f9f9;
+    --text-primary: #4a3b2c;
+    /* Rich roasted espresso instead of #333333 */
+    --text-muted: #8c7355;
+    /* Balanced earth-toned brown instead of #777777 */
+    --border-light: #e3d6c6;
+    /* Soft warm sand divider instead of #eaeaea */
+    --bg-nav-active: #faf5ee;
+    /* Pale warm cream container tone instead of #f9f9f9 */
     --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
@@ -16,7 +20,10 @@
 body {
     font-family: var(--font-stack);
     color: var(--text-primary);
-    background-color: #ffffff;
+    background-color: #fcf9f5;
+    /* Smooth ivory base color instead of plain #ffffff */
+    background-image: url('images/background_tile_7.png');
+    background-size: 400px;
     line-height: 1.4;
     padding-bottom: 60px;
     font-family: "Source Sans Pro", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -25,7 +32,7 @@ body {
 /* --- Normalized Navigation Layout Engine --- */
 .main-navigation {
     border-bottom: 1px solid var(--border-light);
-    background-color: #ffffff;
+    background-color: #fdfbf7;
 }
 
 .nav-container {
@@ -34,7 +41,6 @@ body {
     padding: 0 20px;
     display: flex;
     align-items: center;
-    /* Forces every element to align to the same center baseline */
     gap: 25px;
 }
 
@@ -42,25 +48,20 @@ body {
 .cart-status-widget {
     display: flex;
     align-items: center;
-    /* Vertically aligns price, count, and vector icon along a single baseline */
     gap: 12px;
-    /* Puts clean, fixed spacing between each individual element */
     font-size: 0.95rem;
     cursor: pointer;
     white-space: nowrap;
-    /* CRITICAL: Prevents the "0 items" text from ever breaking into two lines */
     min-width: max-content;
-    /* Guarantees the browser container stretches to fit the contents */
 }
 
 /* --- Re-engineered Vector Search Input Box --- */
 .search-box {
     display: flex;
     align-items: center;
-    /* Vertically matches vector center with input text baseline */
     gap: 10px;
-    /* Uniform spacing between vector glass and text string entry */
-    background-color: #f1f1f1;
+    background-color: #f5ece1;
+    /* Light sepia tint box instead of cold #f1f1f1 */
     border-radius: 4px;
     padding: 8px 14px;
     width: 260px;
@@ -68,8 +69,8 @@ body {
 }
 
 .search-box:focus-within {
-    background-color: #eaeaea;
-    /* Subtle interactive depth change when typing */
+    background-color: #ebdcd0;
+    /* Enhanced earthy undertone shift on active typing */
 }
 
 .brand-name {
@@ -79,12 +80,10 @@ body {
 /* Vector Search Icon Alignment Parameters */
 .search-vector-icon {
     width: 18px;
-    /* Perfectly balanced footprint to scale with 20px cart footprint */
     height: 18px;
-    fill: #000000;
-    /* Solid black matching style definition */
+    fill: #362517;
+    /* Dark chocolate fill instead of flat #000000 */
     flex-shrink: 0;
-    /* Prevents deformation on ultra-narrow displays */
 }
 
 .search-box input {
@@ -93,37 +92,37 @@ body {
     outline: none;
     width: 100%;
     font-size: 0.9rem;
-    color: #333333;
+    color: #4a3b2c;
 }
 
 .search-box input::placeholder {
-    color: #777777;
-    /* Soft, non-intrusive gray placeholder state */
+    color: #8c7355;
 }
 
 /* Optional styling to make the text color look clean and crisp */
 .cart-total {
     font-weight: 600;
-    color: #333333;
+    color: #4a3b2c;
 }
 
 .cart-totals-section {
-    background: #fafafa;
+    background: #faf5ee;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #d4c4b0;
+    /* Muted clay edge border line */
     border-radius: 5px;
 }
 
 .cart-count {
-    color: #777777;
+    color: #8c7355;
 }
 
 .cart-vector-icon {
     width: 20px;
     height: 20px;
-    fill: #000000;
+    fill: #5c4028;
+    /* Warm umber color path instead of flat black */
     flex-shrink: 0;
-    /* Prevents the vector cart image from squishing down on tight screens */
 }
 
 /* Unified target rules for all links inside the bar container */
@@ -135,22 +134,20 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    /* Perfectly gaps your text from the little arrow symbol */
     border-bottom: 2px solid transparent;
-    /* Hidden placeholder border to prevent text jumping */
     transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .nav-container a:hover {
-    color: #000000;
+    color: #362517;
 }
 
 /* --- Perfect Underline State Highlight --- */
 .nav-container a.active {
-    border-bottom-color: #000000;
-    /* Turns on the indicator line precisely on the link baseline */
+    border-bottom-color: #8c6239;
+    /* Rich amber-brown accent underline marker */
     font-weight: 600;
-    color: #000000;
+    color: #362517;
 }
 
 /* --- Top Branding and Utility Row Styling --- */
@@ -190,14 +187,23 @@ body {
 }
 
 .brand-name {
-    font-size: 1.6rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
+    font-family: 'Cormorant Garamond', serif;
+    /* Swap out with your choice */
+    font-family: "Manufacturing Consent", system-ui;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+    color: #362517;
+    /* High contrast roasted-coffee brown */
 }
 
 .brand-sub {
-    font-size: 0.8rem;
-    color: var(--text-muted);
+    font-family: var(--font-stack);
+    /* text-transform: uppercase;
+    letter-spacing: 2px; Airy spacing for the subtitle */
+    color: #8c7355;
+    /* Soft sepia urember */
 }
 
 .header-utilities {
@@ -209,7 +215,7 @@ body {
 /* Search bar field styling */
 .search-box {
     position: relative;
-    background-color: #f1f1f1;
+    background-color: #f5ece1;
     border-radius: 4px;
     padding: 8px 12px;
     display: flex;
@@ -257,18 +263,19 @@ body {
     text-decoration: none;
     color: var(--text-primary);
     font-size: 0.95rem;
-    padding: 16px 0;
+    padding: 10px 0;
+    cursor: pointer;
     display: inline-block;
     transition: color 0.2s ease;
 }
 
 .main-navigation a:hover,
 .dropdown-item:hover a {
-    color: #000000;
+    color: #362517;
 }
 
 .dropdown-item.active {
-    border-bottom: 2px solid var(--text-primary);
+    border-bottom: 2px solid #8c6239;
     font-weight: 600;
 }
 
@@ -282,7 +289,7 @@ body {
 .page-main-title {
     font-size: 2.5rem;
     font-weight: 300;
-    color: #222222;
+    color: #362517;
     margin-bottom: 40px;
 }
 
@@ -306,7 +313,7 @@ body {
     aspect-ratio: 1 / 1;
     overflow: hidden;
     border-radius: 8px;
-    background-color: #fcfcfc;
+    background-color: #faf5ee;
     border: 1px solid var(--border-light);
     margin-bottom: 20px;
 }
@@ -318,7 +325,6 @@ body {
     transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Grow the thumbnail picture slightly when hovered */
 .category-card:hover .category-thumb {
     transform: scale(1.04);
 }
@@ -326,12 +332,12 @@ body {
 .category-label {
     font-size: 1.1rem;
     font-weight: 500;
-    color: #111111;
+    color: #362517;
 }
 
 .count-badge {
     font-weight: bold;
-    color: #000000;
+    color: #8c6239;
     margin-left: 2px;
 }
 
@@ -341,7 +347,7 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #f9f9f9;
+    background-color: #fdfbf7;
     border-top: 1px solid var(--border-light);
     padding: 15px 0;
     z-index: 10;
@@ -392,7 +398,7 @@ body {
 /* Breadcrumb indexing layout */
 .breadcrumb-trail {
     font-size: 0.88rem;
-    color: #777777;
+    color: #8c7355;
     margin-bottom: 35px;
     display: flex;
     align-items: center;
@@ -400,51 +406,57 @@ body {
 }
 
 .breadcrumb-trail a {
-    color: #666666;
+    color: #70583f;
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 .breadcrumb-trail a:hover {
-    color: #000000;
+    color: #362517;
     text-decoration: underline;
 }
 
 .trail-separator {
-    color: #b5b5b5;
+    color: #d4c4b0;
     font-size: 1.1rem;
     user-select: none;
 }
 
 .current-trail-node {
-    color: #888888;
+    color: #8c7355;
 }
 
 /* Typography Body Parameters */
 .about-narrative-content {
     max-width: 1000px;
-    /* Gently constraints narrative width for optimal line reading fatigue */
+    background: #fdfbf8;
+    padding: 30px;
+    border: 1px solid #e3d6c6;
+    border-radius: 5px;
+    font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    font-size: 1.15rem;
+    line-height: 1.85;
+    color: #4a3b2c;
+    margin-bottom: 28px;
+    text-align: justify;
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
 }
 
 .about-narrative-content .page-main-title {
     font-size: 2.6rem;
     font-weight: 300;
-    color: #222222;
+    color: #362517;
     margin-bottom: 25px;
     letter-spacing: -0.5px;
 }
 
 .narrative-paragraph {
-    font-size: 1.05rem;
-    line-height: 1.75;
-    /* Matches the airy, legible line spatial layout in your comp */
-    color: #555555;
+    color: #4a3b2c;
     margin-bottom: 28px;
     text-align: justify;
-    /* Aligns both margins evenly precisely like the image sample */
 }
 
-/* Ensure mobile presentation handles justified copy legibly */
 @media (max-width: 600px) {
     .narrative-paragraph {
         text-align: left;
@@ -460,8 +472,8 @@ body {
 /* --- Re-engineered Vector Breadcrumb Home Link --- */
 .breadcrumb-trail {
     font-size: 0.88rem;
-    color: #777777;
-    margin-bottom: 35px;
+    color: #8c7355;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
     gap: 6px;
@@ -471,31 +483,26 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    /* Spaces the vector graphic neatly away from the word "Home" */
-    color: #666666;
+    color: #70583f;
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
-.home-vector-link :hover {
-    color: #000000;
+.home-vector-link:hover {
+    color: #362517;
 }
 
-/* Vector Home Icon Alignment & Sizing (Matches Cart Engine Scales) */
+/* Vector Home Icon Alignment & Sizing */
 .home-vector-icon {
     width: 16px;
-    /* Proportionally scaled down slightly to sit elegantly within breadcrumb text */
     height: 16px;
-    fill: #666666;
-    /* Matches default text state color */
+    fill: #8c7355;
     transition: fill 0.2s ease;
     flex-shrink: 0;
-    /* Prevents icon distortion */
 }
 
 .home-vector-link:hover .home-vector-icon {
-    fill: #000000;
-    /* Shifts to solid black on active link hover */
+    fill: #362517;
 }
 
 /* --- Catalog and Category Page Structural Setup --- */
@@ -508,7 +515,7 @@ body {
 .catalog-main-title {
     font-size: 2.6rem;
     font-weight: 300;
-    color: #222222;
+    color: #362517;
     margin-bottom: 25px;
     letter-spacing: -0.5px;
 }
@@ -523,9 +530,9 @@ body {
 
 .catalog-sort-select {
     font-size: 0.95rem;
-    color: #333333;
+    color: #4a3b2c;
     padding: 8px 12px;
-    border: 1px solid #cccccc;
+    border: 1px solid #d4c4b0;
     border-radius: 4px;
     background-color: #ffffff;
     outline: none;
@@ -534,7 +541,7 @@ body {
 
 .results-counter {
     font-size: 0.9rem;
-    color: #777777;
+    color: #8c7355;
 }
 
 /* --- Core Product Loop Layout Matrix --- */
@@ -556,7 +563,7 @@ body {
     overflow: hidden;
     border-radius: 6px;
     border: 1px solid var(--border-light);
-    background-color: #fcfcfc;
+    background-color: #faf5ee;
     margin-bottom: 15px;
 }
 
@@ -577,10 +584,10 @@ body {
 .product-title {
     font-size: 1.05rem;
     font-weight: 500;
-    color: #111111;
+    color: #362517;
 }
 
-/* Clean, non-intrusive gray-bordered SALE badge */
+/* Clean, sepia-bordered SALE badge */
 .badge-row {
     height: 24px;
     display: flex;
@@ -591,8 +598,8 @@ body {
 .sale-badge {
     font-size: 0.72rem;
     font-weight: bold;
-    color: #555555;
-    border: 1px solid #aaaaaa;
+    color: #70583f;
+    border: 1px solid #c5b49f;
     padding: 3px 10px;
     border-radius: 3px;
     letter-spacing: 0.5px;
@@ -609,13 +616,12 @@ body {
 }
 
 .price-original {
-    color: #aaaaaa;
+    color: #c5b49f;
     text-decoration: line-through;
-    /* Slashes out original retail pricing metric */
 }
 
 .price-current {
-    color: #666666;
+    color: #70583f;
     font-weight: 500;
 }
 
@@ -623,8 +629,9 @@ body {
 .add-to-cart-btn {
     font-size: 0.88rem;
     font-weight: 500;
-    color: #444444;
-    background-color: #eeeeee;
+    color: #5c4028;
+    background-color: #f1ebd9;
+    /* Warm tan button base instead of #eeeeee */
     border: none;
     padding: 10px 20px;
     border-radius: 4px;
@@ -633,8 +640,8 @@ body {
 }
 
 .add-to-cart-btn:hover {
-    background-color: #e2e2e2;
-    color: #111111;
+    background-color: #e3d6c6;
+    color: #362517;
 }
 
 /* --- Dynamic Viewport Overrides --- */
@@ -667,9 +674,8 @@ body {
 .cart-main-title {
     font-size: 3rem;
     font-weight: 300;
-    color: #222222;
+    color: #362517;
     text-align: center;
-    /* Centers the title exactly as shown in the composition */
     margin: 30px 0 60px 0;
 }
 
@@ -726,8 +732,8 @@ body {
 
 .item-title-link {
     font-size: 1.15rem;
-    color: #512da8;
-    /* Distinct deep violet color structure shown in mockup */
+    color: #8c6239;
+    /* Warm copper brown instead of purple #512da8 */
     text-decoration: none;
     font-weight: 500;
 }
@@ -743,12 +749,12 @@ body {
 }
 
 .item-orig-price {
-    color: #aaaaaa;
+    color: #c5b49f;
     text-decoration: line-through;
 }
 
 .item-sale-price {
-    color: #333333;
+    color: #4a3b2c;
     font-weight: 500;
 }
 
@@ -756,8 +762,8 @@ body {
 .saving-badge {
     font-size: 0.7rem;
     font-weight: bold;
-    color: #555555;
-    border: 1px solid #cccccc;
+    color: #70583f;
+    border: 1px solid #d4c4b0;
     padding: 3px 8px;
     border-radius: 3px;
 }
@@ -765,7 +771,7 @@ body {
 /* Quantity Incrementor Controls block */
 .qty-stepper-box {
     display: inline-flex;
-    border: 1px solid #dddddd;
+    border: 1px solid #d4c4b0;
     border-radius: 4px;
     overflow: hidden;
     margin: 8px 0;
@@ -778,25 +784,25 @@ body {
     height: 32px;
     cursor: pointer;
     font-size: 1rem;
-    color: #777777;
+    color: #8c7355;
     transition: background-color 0.15s ease;
 }
 
 .stepper-btn:hover {
-    background-color: #f5f5f5;
-    color: #000000;
+    background-color: #faf5ee;
+    color: #362517;
 }
 
 .qty-input {
     border: none;
-    border-left: 1px solid #dddddd;
-    border-right: 1px solid #dddddd;
+    border-left: 1px solid #d4c4b0;
+    border-right: 1px solid #d4c4b0;
     width: 45px;
     height: 32px;
     text-align: center;
     font-size: 0.95rem;
     outline: none;
-    color: #333333;
+    color: #4a3b2c;
     -moz-appearance: textfield;
 }
 
@@ -809,7 +815,7 @@ body {
 .remove-item-trigger {
     background: transparent;
     border: none;
-    color: #777777;
+    color: #8c7355;
     font-size: 0.82rem;
     text-decoration: underline;
     cursor: pointer;
@@ -817,12 +823,13 @@ body {
 }
 
 .remove-item-trigger:hover {
-    color: #cc0000;
+    color: #a64b2a;
+    /* Terracotta-red hazard warning alert color */
 }
 
 .product-total-block {
     font-size: 1.05rem;
-    color: #333333;
+    color: #4a3b2c;
     padding-top: 2px;
 }
 
@@ -844,13 +851,13 @@ body {
     border-top: 1px solid var(--border-light);
     border-bottom: 1px solid var(--border-light);
     font-size: 0.95rem;
-    color: #555555;
+    color: #70583f;
     cursor: pointer;
 }
 
 .coupon-dropdown-trigger .chevron-symbol {
     font-size: 0.65rem;
-    color: #888888;
+    color: #8c7355;
 }
 
 /* Summary Financial Layout Matrix */
@@ -867,22 +874,22 @@ body {
 }
 
 .metric-label {
-    color: #666666;
+    color: #8c7355;
 }
 
 .font-highlight {
     font-weight: 600;
-    color: #222222;
+    color: #362517;
 }
 
 .inline-action-link {
-    color: #333333;
+    color: #4a3b2c;
     text-decoration: underline;
     font-weight: 500;
 }
 
 .inline-action-link:hover {
-    color: #000000;
+    color: #362517;
 }
 
 .text-right {
@@ -900,26 +907,27 @@ body {
 
 .total-label {
     font-weight: bold;
-    color: #222222;
+    color: #362517;
 }
 
 .total-value {
     font-weight: bold;
-    color: #222222;
+    color: #362517;
 }
 
 .currency-code {
     font-size: 0.95rem;
     font-weight: normal;
-    color: #666666;
+    color: #8c7355;
     margin-left: 2px;
 }
 
 /* Pro Proceed action button */
-.proceed-to-checkout-btn {
+.proceed-to-checkout-btn,
+.return-to-shop-btn {
     width: 100%;
-    background-color: #2e2e2e;
-    /* Deep grey charcoal tone matching design spec exactly */
+    background-color: #5c4028;
+    /* Unified deep sepia button background */
     color: #ffffff;
     border: none;
     padding: 16px;
@@ -928,11 +936,12 @@ body {
     text-transform: none;
     border-radius: 3px;
     cursor: pointer;
+    text-decoration: none;
     transition: background-color 0.2s ease;
 }
 
 .proceed-to-checkout-btn:hover {
-    background-color: #111111;
+    background-color: #362517;
 }
 
 /* --- Dynamic Viewport Device Overrides --- */
@@ -974,7 +983,7 @@ body {
 .checkout-main-title {
     font-size: 3rem;
     font-weight: 300;
-    color: #222222;
+    color: #362517;
     text-align: center;
     margin: 20px 0 60px 0;
 }
@@ -994,18 +1003,18 @@ body {
 .block-heading {
     font-size: 1.3rem;
     font-weight: 400;
-    color: #333333;
+    color: #4a3b2c;
     margin-bottom: 6px;
 }
 
 .block-subtext {
     font-size: 0.88rem;
-    color: #666666;
+    color: #8c7355;
     margin-bottom: 20px;
 }
 
 .block-subtext.muted-prompt {
-    color: #666666;
+    color: #8c7355;
     padding: 5px 0;
 }
 
@@ -1019,7 +1028,7 @@ body {
 .form-toggle-link {
     background: transparent;
     border: none;
-    color: #000000;
+    color: #362517;
     font-size: 0.9rem;
     font-weight: bold;
     cursor: pointer;
@@ -1039,10 +1048,10 @@ body {
     width: 100%;
     padding: 18px 14px 6px 14px;
     font-size: 0.95rem;
-    color: #333333;
+    color: #4a3b2c;
     background-color: #ffffff;
-    border: 1px solid #444444;
-    /* Clean dark structural line definitions from comp */
+    border: 1px solid #70583f;
+    /* Balanced earth-line boundaries */
     border-radius: 5px;
     outline: none;
     height: 54px;
@@ -1056,7 +1065,7 @@ body {
     top: 50%;
     transform: translateY(-50%);
     font-size: 0.95rem;
-    color: #666666;
+    color: #8c7355;
     transition: all 0.2s ease;
     pointer-events: none;
 }
@@ -1068,13 +1077,13 @@ body {
 .input-group select:valid~label {
     top: 14px;
     font-size: 0.72rem;
-    color: #666666;
+    color: #8c7355;
 }
 
 /* Dynamic handling for clean dropdown positioning */
 .input-group select {
     padding-top: 20px;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M0 0l5 5 5-5z' fill='%23666666'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M0 0l5 5 5-5z' fill='%238c7355'/></svg>");
     background-repeat: no-repeat;
     background-position: right 14px center;
 }
@@ -1085,7 +1094,7 @@ body {
     align-items: center;
     gap: 12px;
     font-size: 0.88rem;
-    color: #333333;
+    color: #4a3b2c;
     line-height: 1.4;
     cursor: pointer;
     margin: 20px 0;
@@ -1103,7 +1112,7 @@ body {
 .checkbox-box {
     width: 18px;
     height: 18px;
-    border: 1px solid #444444;
+    border: 1px solid #70583f;
     border-radius: 4px;
     flex-shrink: 0;
     position: relative;
@@ -1118,14 +1127,15 @@ body {
     top: 2px;
     width: 5px;
     height: 9px;
-    border: solid #000000;
+    border: solid #8c6239;
+    /* Accent color checkmark track line */
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }
 
 /* --- Stripe Emulated Credit Card Container --- */
 .payment-gateway-container {
-    border: 1px solid #444444;
+    border: 1px solid #70583f;
     border-radius: 6px;
     overflow: hidden;
     margin-bottom: 25px;
@@ -1133,13 +1143,13 @@ body {
 
 .gateway-header {
     background-color: #ffffff;
-    border-bottom: 1px solid #e2e2e2;
+    border-bottom: 1px solid #e3d6c6;
     padding: 14px 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 0.95rem;
-    color: #333333;
+    color: #4a3b2c;
 }
 
 .card-logos {
@@ -1162,7 +1172,7 @@ body {
     top: 17px;
     width: 20px;
     height: 20px;
-    fill: #888888;
+    fill: #a6937c;
 }
 
 /* --- Form Footer Disclaimers and Actions --- */
@@ -1170,12 +1180,12 @@ body {
     border-top: 1px solid var(--border-light);
     padding: 25px 0;
     font-size: 0.88rem;
-    color: #444444;
+    color: #5c4028;
     line-height: 1.5;
 }
 
 .compliance-row a {
-    color: #333333;
+    color: #4a3b2c;
     text-decoration: underline;
 }
 
@@ -1190,7 +1200,7 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: #333333;
+    color: #4a3b2c;
     text-decoration: underline;
     font-size: 0.95rem;
     font-weight: 500;
@@ -1203,8 +1213,7 @@ body {
 }
 
 .place-order-btn {
-    background-color: #2e2e2e;
-    /* Dark slate charcoal tone matching checkout image profile spec exactly */
+    background-color: #5c4028;
     color: #ffffff;
     border: none;
     padding: 16px 45px;
@@ -1216,19 +1225,19 @@ body {
 }
 
 .place-order-btn:hover {
-    background-color: #111111;
+    background-color: #362517;
 }
 
 /* --- Right Side: Persistent Sticky Order Summary Review Panel --- */
 .summary-sticky-card {
-    border: 1px solid #eaeaea;
+    border: 1px solid #e3d6c6;
     border-radius: 6px;
     background-color: #ffffff;
     padding: 10px 24px;
 }
 
 .summary-accordion-item {
-    border-bottom: 1px solid #eaeaea;
+    border-bottom: 1px solid #e3d6c6;
 }
 
 .accordion-header {
@@ -1237,13 +1246,13 @@ body {
     align-items: center;
     padding: 20px 0;
     font-size: 0.95rem;
-    color: #444444;
+    color: #5c4028;
     cursor: pointer;
 }
 
 .accordion-header .chevron {
     font-size: 0.65rem;
-    color: #777777;
+    color: #8c7355;
 }
 
 .accordion-content {
@@ -1268,14 +1277,15 @@ body {
     height: 100%;
     object-fit: cover;
     border-radius: 5px;
-    border: 1px solid #eaeaea;
+    border: 1px solid #e3d6c6;
 }
 
 .qty-badge {
     position: absolute;
     top: -7px;
     right: -7px;
-    background-color: #808080;
+    background-color: #a6937c;
+    /* Neutral brown clay badge instead of cold #808080 */
     color: #ffffff;
     font-size: 0.7rem;
     font-weight: bold;
@@ -1296,7 +1306,7 @@ body {
 
 .item-name {
     font-size: 0.95rem;
-    color: #222222;
+    color: #362517;
 }
 
 .item-prices {
@@ -1306,18 +1316,18 @@ body {
 }
 
 .item-prices .orig {
-    color: #b5b5b5;
+    color: #c5b49f;
     text-decoration: line-through;
 }
 
 .item-prices .current {
-    color: #666666;
+    color: #8c7355;
 }
 
 .item-row-total {
     font-size: 0.95rem;
     font-weight: 600;
-    color: #222222;
+    color: #362517;
 }
 
 /* Financial summary tables metrics layout */
@@ -1330,21 +1340,21 @@ body {
     justify-content: space-between;
     padding: 16px 0;
     font-size: 0.95rem;
-    color: #444444;
+    color: #5c4028;
 }
 
 .metric-line .value.italic-muted {
     font-style: italic;
-    color: #777777;
+    color: #8c7355;
     font-size: 0.9rem;
 }
 
 .metric-line.total-line {
-    border-top: 1px solid #eaeaea;
+    border-top: 1px solid #e3d6c6;
     margin-top: 5px;
     padding: 24px 0 15px 0;
     font-size: 1.25rem;
-    color: #111111;
+    color: #362517;
 }
 
 .total-line span:first-child {
@@ -1358,7 +1368,7 @@ body {
 .total-line small {
     font-size: 0.8rem;
     font-weight: normal;
-    color: #666666;
+    color: #8c7355;
     margin-left: 2px;
 }
 
@@ -1371,7 +1381,6 @@ body {
 
     .checkout-summary-section {
         grid-row: 1;
-        /* Pushes the order review summary block to the very top on tablets and mobiles */
     }
 }
 
@@ -1400,7 +1409,6 @@ body {
 .input-group {
     position: relative;
     margin-bottom: 20px;
-    /* Slightly increased for improved structural line breathing */
     width: 100%;
 }
 
@@ -1408,11 +1416,10 @@ body {
 .input-group select {
     width: 100%;
     padding: 22px 14px 6px 14px;
-    /* Shifted padding downward to give text a perfect lower baseline */
     font-size: 0.95rem;
-    color: #333333;
+    color: #4a3b2c;
     background-color: #ffffff;
-    border: 1px solid #444444;
+    border: 1px solid #70583f;
     border-radius: 5px;
     outline: none;
     height: 56px;
@@ -1427,32 +1434,27 @@ body {
     top: 50%;
     transform: translateY(-50%);
     font-size: 0.95rem;
-    color: #777777;
+    color: #8c7355;
     transition: all 0.2s ease-in-out;
-    /* Smoother transition curve */
     pointer-events: none;
     background-color: transparent;
 }
 
-/* --- THE CORRECTION --- */
-/* Target fields when focused OR when the placeholder is NOT showing (user typed something) */
+/* Target fields when focused OR when placeholder is NOT showing */
 .input-group input:focus~label,
 .input-group input:not(:placeholder-shown)~label,
 .input-group select:focus~label,
 .input-group select:valid~label {
     top: 13px;
-    /* Pulls the label up high toward the top border line */
     font-size: 0.72rem;
-    color: #666666;
+    color: #70583f;
     transform: translateY(0);
-    /* Resets vertical offset to prevent alignment stutter */
 }
 
 /* Style placeholders so they look subtle and don't compete with the label when resting */
 .input-group input::placeholder {
-    color: #cccccc;
+    color: #e3d6c6;
     opacity: 0;
-    /* Keeps placeholder invisible while label is resting in center */
     transition: opacity 0.2s ease;
 }
 
@@ -1470,26 +1472,26 @@ body {
 
 .success-icon {
     font-size: 3.5rem;
-    color: #333333;
+    color: #4a3b2c;
     margin-bottom: 20px;
 }
 
 .success-wrapper h1 {
     font-size: 2.5rem;
     font-weight: 300;
-    color: #222222;
+    color: #362517;
     margin-bottom: 15px;
 }
 
 .success-wrapper p {
-    color: #666666;
+    color: #8c7355;
     line-height: 1.6;
     margin-bottom: 30px;
 }
 
 .continue-shopping-btn {
     display: inline-block;
-    background-color: #2e2e2e;
+    background-color: #5c4028;
     color: #ffffff;
     text-decoration: none;
     padding: 14px 35px;
@@ -1499,21 +1501,20 @@ body {
 }
 
 .continue-shopping-btn:hover {
-    background-color: #111111;
+    background-color: #362517;
 }
 
 /* --- Circular Checkmark Vector Specifications --- */
 .success-vector-circle-icon {
     width: 64px;
-    /* Perfectly balanced footprint to anchor the text underneath */
     height: 64px;
-    fill: #14b309;
-    /* Matches your dark slate charcoal design palette signature */
+    fill: #8c6239;
+    /* Smooth brown motif fill instead of green */
     margin-bottom: 25px;
     display: inline-block;
 }
 
-/* Ensure the wrapper respects structural spacing limits */
+/* Ensure wrapper respects structural spacing limits */
 .success-wrapper {
     max-width: 600px;
     margin: 100px auto;
@@ -1522,7 +1523,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* Ensures everything stacks evenly centered on the axis line */
 }
 
 /* --- Product Detail Section Layouts --- */
@@ -1550,12 +1550,11 @@ body {
 .main-stage-image-wrap {
     width: 100%;
     aspect-ratio: 4 / 5;
-    /* Gives a vertical presentation footprint perfect for apparel imagery */
-    background-color: #fcfcfc;
+    background-color: #faf5ee;
     border-radius: 6px;
     overflow: hidden;
     position: relative;
-    border: 1px solid #eaeaea;
+    border: 1px solid #e3d6c6;
 }
 
 .stage-img {
@@ -1600,7 +1599,7 @@ body {
 .thumb-node:hover,
 .thumb-node.active {
     opacity: 1;
-    border-color: #444444;
+    border-color: #70583f;
 }
 
 /* --- Right Side: Details and Variant Options UI --- */
@@ -1620,30 +1619,32 @@ body {
 }
 
 .stars-gold {
-    /* color: #d4af37;
-    Clean golden muted tone */
     letter-spacing: 1px;
 }
 
 .reviews-count {
-    color: #888888;
+    color: #8c7355;
 }
 
 /* Metadata lists block */
 .p-technical-ledger {
     font-size: 0.85rem;
-    color: #666666;
+    color: #8c7355;
     line-height: 1.6;
     margin-bottom: 20px;
+    background: #fdfbf7;
+    padding: 5px;
+    border: 1px solid #e3d6c6;
+    border-radius: 5px;
 }
 
 .p-technical-ledger .lbl {
     font-weight: 500;
-    color: #333333;
+    color: #4a3b2c;
 }
 
 .p-technical-ledger a {
-    color: #666666;
+    color: #8c7355;
     text-decoration: none;
 }
 
@@ -1654,34 +1655,34 @@ body {
 .p-price-display {
     font-size: 1.65rem;
     font-weight: 400;
-    color: #43496e;
-    /* Deep indigo hue precisely matching image asset sample */
+    color: #8c6239;
+    /* Dynamic warm amber instead of indigo blue #43496e */
     margin-bottom: 25px;
 }
 
 /* Soft information banner card */
 .model-spec-badge-card {
-    background-color: #f7f8fc;
+    background-color: #faf5ee;
     border-radius: 4px;
     padding: 16px 20px;
     margin-bottom: 30px;
     font-size: 0.88rem;
     line-height: 1.5;
-    color: #555555;
-    border-left: 3px solid #dbdeeb;
+    color: #70583f;
+    border-left: 3px solid #d4c4b0;
 }
 
 .ref-code {
     display: block;
     font-size: 0.82rem;
-    color: #888888;
+    color: #8c7355;
     margin-bottom: 4px;
     letter-spacing: 0.5px;
 }
 
 /* Select Menus Options Fields */
 .variants-selectors-panel {
-    border-top: 1px solid #eaeaea;
+    border-top: 1px solid #e3d6c6;
     padding-top: 25px;
     display: flex;
     flex-direction: column;
@@ -1698,9 +1699,8 @@ body {
 .variant-select-group label {
     font-size: 0.95rem;
     font-weight: 500;
-    color: #333333;
+    color: #4a3b2c;
     width: 60px;
-    /* Aligns dropdowns on identical columns */
 }
 
 .variant-select-group select {
@@ -1708,8 +1708,8 @@ body {
     max-width: 320px;
     padding: 10px 14px;
     font-size: 0.9rem;
-    color: #555555;
-    border: 1px solid #cccccc;
+    color: #70583f;
+    border: 1px solid #d4c4b0;
     border-radius: 4px;
     background-color: #ffffff;
     outline: none;
@@ -1724,8 +1724,8 @@ body {
 }
 
 .add-to-cart-action-btn {
-    background-color: #888;
-    /* Muted plum palette matching button frame from mock exactly */
+    background-color: #a6937c;
+    /* Deep warm taupe button instead of grey #888 */
     color: #ffffff;
     border: none;
     padding: 0 45px;
@@ -1740,12 +1740,12 @@ body {
 }
 
 .add-to-cart-action-btn:hover {
-    background-color: #555;
+    background-color: #70583f;
 }
 
 /* --- Trust Compliance Seals Badge Block --- */
 .trust-badge-container {
-    border: 1px solid #e5e5e5;
+    border: 1px solid #e3d6c6;
     border-radius: 6px;
     padding: 18px 20px;
     text-align: center;
@@ -1755,7 +1755,7 @@ body {
     display: block;
     font-size: 0.85rem;
     font-weight: bold;
-    color: #555555;
+    color: #70583f;
     letter-spacing: 0.5px;
     margin-bottom: 14px;
 }
@@ -1768,7 +1768,7 @@ body {
     gap: 12px 16px;
     font-size: 0.82rem;
     font-weight: bold;
-    color: #b5b5b5;
+    color: #c5b49f;
 }
 
 /* Uniform design typography badges mimicking image row cards */
@@ -1780,38 +1780,38 @@ body {
 }
 
 .pay-paypal {
-    color: #003087;
-    background-color: #f5f7fa;
+    color: #5c4028;
+    background-color: #faf5ee;
     font-size: 0.85rem;
 }
 
 .pay-visa {
-    color: #1a1f71;
-    background-color: #f8f9fa;
-    border: 1px solid #e0e4e8;
+    color: #70583f;
+    background-color: #fdfbf7;
+    border: 1px solid #e3d6c6;
 }
 
 .pay-mc {
-    color: #f79e1b;
-    background-color: #222222;
+    color: #ff6000;
+    background-color: #362517;
     font-size: 0.75rem;
     padding: 3px 6px;
 }
 
 .pay-discover {
-    color: #ff6000;
+    color: #8c6239;
     font-family: sans-serif;
     font-size: 0.75rem;
 }
 
 .pay-amex {
-    color: #016fd0;
-    border: 1px solid #016fd0;
+    color: #5c4028;
+    border: 1px solid #5c4028;
     font-size: 0.7rem;
 }
 
 .status-mcafee {
-    color: #cc0000;
+    color: #a64b2a;
     font-weight: normal;
     font-size: 0.8rem;
     margin-left: 5px;
@@ -1840,17 +1840,16 @@ body {
 }
 
 /* --- Core Structural Framework for category.html --- */
-
 .catalog-page-wrapper {
     max-width: 1200px;
-    margin: 40px auto;
+    margin: 20px auto;
     padding: 0 20px;
 }
 
 .catalog-main-title {
     font-size: 2.5rem;
     font-weight: 300;
-    color: #111111;
+    color: #362517;
     margin: 10px 0 20px 0;
     text-transform: capitalize;
 }
@@ -1860,20 +1859,22 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #eaeaea;
-    padding-bottom: 15px;
+    border-bottom: 1px solid #e3d6c6;
+    padding: 5px 10px;
     margin-bottom: 30px;
     font-size: 0.9rem;
-    color: #666666;
+    color: #8c7355;
+    background: #fdfbf8;
 }
 
 .sort-dropdown-menu {
     padding: 8px 12px;
-    border: 1px solid #cccccc;
-    color: #444444;
+    border: 1px solid #d4c4b0;
+    color: #4a3b2c;
     background-color: #ffffff;
     outline: none;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 /* Ensure this matches your multi-column card layout footprint */
@@ -1886,10 +1887,10 @@ body {
 
 .current-trail-node {
     font-weight: bold;
-    color: black;
+    color: #362517;
 }
 
-/* Ensure the image container frames elements cleanly */
+/* Ensure image container frames elements cleanly */
 .main-stage-image-wrap {
     position: relative;
     overflow: hidden;
@@ -1904,7 +1905,7 @@ body {
     height: 40px;
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.9);
-    border: 1px solid #eaeaea;
+    border: 1px solid #e3d6c6;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1922,8 +1923,6 @@ body {
     top: 65px;
 }
 
-/* Stacked precisely right under the zoom glass */
-
 .zoom-overlay-trigger:hover,
 .poem-overlay-trigger:hover {
     background-color: #ffffff;
@@ -1933,34 +1932,27 @@ body {
 .action-vector-icon {
     width: 20px;
     height: 20px;
-    fill: #111111;
+    fill: #362517;
 }
 
 /* ==========================================
    MOBILE-OPTIMIZED ART POEM OVERLAY SHEET
    ========================================== */
-
 .art-poem-overlay-sheet {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.9);
-    /* Slightly more solid white background to hide background image lines on small mobile screens */
+    background-color: rgba(253, 251, 247, 0.95);
+    /* Soft ivory background block overlay layer */
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-
-    /* FIX 1: Force vertical scrolling inside the overlay container boundaries if text overflows */
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    /* Ensures butter-smooth inertial scrolling momentum on iOS safari devices */
-
-    /* FIX 2: Align text starting from the top block instead of forcing flex-center positioning */
     display: block;
     padding: 60px 24px 30px 24px;
-    /* Generous top padding prevents text from running directly underneath the absolute close button */
     box-sizing: border-box;
     z-index: 10;
 }
@@ -1979,26 +1971,22 @@ body {
     background: none;
     border: none;
     font-size: 1.8rem;
-    /* Slightly enlarged target for finger tap accessibility on mobile touch layers */
     cursor: pointer;
-    color: #666666;
+    color: #8c7355;
     line-height: 1;
     z-index: 11;
-    /* Stays locked comfortably above the text while scrolling happens below it */
     padding: 5px 10px;
 }
 
 .poem-close-btn:hover {
-    color: #111111;
+    color: #362517;
 }
 
 /* Text Context Layout Content Adjustments */
 .poem-text-content {
     width: 100%;
     max-width: 450px;
-    /* Restricts line lengths to an ultra-readable text column width */
     margin: 0 auto;
-    /* Horizontally centers the structural poem text block container on all viewports */
     text-align: center;
 }
 
@@ -2008,31 +1996,28 @@ body {
     margin-top: 10px;
     margin-bottom: 24px;
     letter-spacing: 1px;
-    color: #111111;
+    color: #362517;
+}
+
+#sculpturePoeticProfileInjectionNode {
+    font-family: "Cormorant Garamond";
 }
 
 .poem-stanza-line {
-    font-family: Georgia, serif;
-    font-style: italic;
-    font-size: 1.05rem;
-    line-height: 1.8;
-    /* Expands line spacing to ensure comfortable legibility across all handheld displays */
-    color: #222222;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    color: #4a3b2c;
     margin-bottom: 10px;
     white-space: normal;
-    /* Prevents text from trying to run off the screen horizontally */
 }
 
-/* Media Query Specific Fallback Overrides for Extra Tiny Smartphone viewports */
 @media (max-width: 480px) {
     .art-poem-overlay-sheet {
         padding: 55px 16px 25px 16px;
-        /* Tightens side padding margins on micro-screens to give words maximal layout real estate */
     }
 
     .poem-stanza-line {
         font-size: 0.95rem;
-        /* Subtly dials back font sizing to keep stanzas clean and well-balanced */
         line-height: 1.6;
     }
 }
@@ -2040,72 +2025,53 @@ body {
 /* ==========================================
    IMAGE-SPECIFIC HOVER POP EFFECT
    ========================================== */
-
-/* 1. Reset the outer card container to stay static */
 .product-card {
-    border: 1px solid #eaeaea;
+    border: 1px solid #e3d6c6;
     border-radius: 4px;
     background-color: #ffffff;
     padding: 16px;
-    /* Remove any structural hover lifting movements from the outer shell */
     transition: border-color 0.3s ease;
 }
 
 .product-card:hover {
-    border-color: #b5b5b5;
-    /* Subtle frame shift on the background border link */
+    border-color: #8c7355;
 }
 
-/* 2. Define the baseline properties for the image wrap frame */
 .product-image-wrapper {
     position: relative;
     overflow: hidden;
-    background-color: #f9f9f9;
+    background-color: #faf5ee;
     border-radius: 2px;
-
-    /* Smoothly handle the scale and shadow transitions on the frame container */
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
         box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform, box-shadow;
     z-index: 1;
-    /* Ensures the rising shadow floats over background layers cleanly */
 }
 
-/* 3. When the user hovers anywhere over the product card, make ONLY the image pop */
 .product-card:hover .product-image-wrapper {
-    /* Create a deep, soft shadow underneath the image layer boundary box */
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-
-    /* Scale the entire image container slightly up and out toward the viewer */
+    box-shadow: 0 15px 35px rgba(92, 64, 40, 0.08);
+    /* Soft sepia shadow architecture instead of stark black */
     transform: scale(1.02);
 }
 
-/* 4. Optional: Keep the inner source picture crisp and aligned */
 .product-img {
     display: block;
     width: 100%;
     height: auto;
-    /* Ensures no inner clipping jumps during the container scale transition */
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Clean target handler inside your styles.css file */
 .poem-overlay-trigger .action-vector-icon {
     width: 30px;
     height: 30px;
     fill: none !important;
-    /* Prevents the browser from filling lines with solid black blocks */
-    stroke: #111111;
-    /* Clean, stark black lines */
+    stroke: #362517;
     stroke-width: 1px;
-    /* Consistently matches the magnifying glass width */
 }
 
 /* ==========================================
    HOMEPAGE CATEGORIES GRID GRID LAYOUT
    ========================================== */
-
-/* Wrapper structure formatting */
 .shop-view-wrapper {
     max-width: 1200px;
     margin: 0 auto;
@@ -2116,10 +2082,9 @@ body {
     font-size: 3rem;
     font-weight: 300;
     margin-bottom: 40px;
-    color: #111111;
+    color: #362517;
 }
 
-/* Force elements out of a column stack into an inline layout grid row */
 .collection-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -2127,10 +2092,9 @@ body {
     margin-top: 20px;
 }
 
-/* Individual Category Presentation Box */
 .collection-card {
-    background-color: #fcfcfc;
-    border: 1px solid #eaeaea;
+    background-color: #faf5ee;
+    border: 1px solid #e3d6c6;
     border-radius: 6px;
     padding: 30px 24px;
     display: flex;
@@ -2140,11 +2104,10 @@ body {
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Micro interaction lift on hover */
 .collection-card:hover {
     background-color: #ffffff;
-    border-color: #111111;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    border-color: #8c6239;
+    box-shadow: 0 10px 25px rgba(92, 64, 40, 0.05);
     transform: translateY(-2px);
 }
 
@@ -2153,27 +2116,29 @@ body {
     font-weight: 500;
     margin-top: 0;
     margin-bottom: 10px;
-    color: #111111;
+    color: #362517;
 }
 
-/* Dynamic counter text spacing formatting label */
+a.collection-card {
+    text-decoration: none;
+}
+
 .category-count-badge {
     font-size: 0.95rem;
-    color: #666666;
+    color: #8c7355;
     margin-bottom: 20px;
     display: block;
     text-transform: capitalize;
 }
 
-/* Explore button styling alignment layout */
 .view-collection-link {
     display: inline-block;
     align-self: flex-start;
-    color: #111111;
+    color: #362517;
     text-decoration: none;
     font-weight: 600;
     font-size: 0.95rem;
-    border-bottom: 2px solid #111111;
+    border-bottom: 2px solid #8c6239;
     padding-bottom: 4px;
     transition: opacity 0.2s ease;
 }
@@ -2185,47 +2150,37 @@ body {
 /* ==========================================
    HOMEPAGE CARD COLLECTION IMAGES LAYOUT
    ========================================== */
-
-/* Update your base collection card to stack its image above its text details cleanly */
 .collection-card {
     background-color: #ffffff;
-    border: 1px solid #c5c5c5;
+    border: 1px solid #d4c4b0;
     border-radius: 6px;
     padding: 0;
-    /* Clear padding so the image frames out flush against the top boundaries */
     display: flex;
     flex-direction: column;
     overflow: hidden;
     min-height: 340px;
-    /* Expands height dimensions to leave room for both the photo and typography */
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Image preview frame constraints */
 .collection-image-preview {
     width: 100%;
     height: 200px;
-    /* Locks the thumbnail frame height */
     overflow: hidden;
-    background-color: #f9f9f9;
-    border-bottom: 1px solid #f0f0f0;
+    background-color: #faf5ee;
+    border-bottom: 1px solid #e3d6c6;
 }
 
-/* Force the sculpture thumbnail to fill out its bounding box area elegantly */
 .collection-thumb-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Crops and scales the artwork natively without warping or distorting aspect ratios */
     transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Subtle image zoom scaling trick when users hover anywhere on the card */
 .collection-card:hover .collection-thumb-img {
     transform: scale(1.04);
 }
 
-/* Shift the padding completely down onto the text container details layer */
 .collection-card-details {
     padding: 24px;
     display: flex;
@@ -2237,96 +2192,57 @@ body {
 /* ==========================================
    CONDITIONAL EMPTY STATE CLASS DEFINITIONS
    ========================================== */
-
-/* Freezes and dims any card category that has 0 items inside the database */
 .collection-card.card-empty {
     opacity: 0.35 !important;
-    /* Fades down the image lookbooks and typography uniformly */
     pointer-events: none !important;
-    /* Disables all hover animations, zoom tricks, and clicks */
     box-shadow: none !important;
-    /* Prevents card shadows from popping out on mouse over */
     transform: none !important;
-    /* Stops the card from physically lifting up on hover */
     cursor: default !important;
-    /* Forces the mouse pointer back to a default arrow state */
 }
 
-/* Core absolute layout parameters for the floating media stage badges */
 .zoom-overlay-trigger,
 .poem-overlay-trigger,
 .customize-overlay-trigger {
     position: absolute;
     right: 20px;
-    /* Aligns them uniformly along the right boundary wall of the image */
     width: 44px;
     height: 44px;
     border-radius: 50% !important;
     background: #ffffff !important;
-    color: #111111 !important;
+    color: #362517 !important;
     border: none !important;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 3px 12px rgba(92, 64, 40, 0.08) !important;
     transition: background-color 0.2s ease, transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     z-index: 10;
 }
 
-/* Perfect Vertical Stacking Positions */
 .zoom-overlay-trigger {
     top: 20px;
 }
 
 .poem-overlay-trigger {
     top: 74px;
-    /* Suspends neatly below the zoom lens button */
 }
 
 .customize-overlay-trigger {
     top: 128px;
-    /* Standard 54px vertical offset places it right beneath the poem */
-    opacity: 0.3
-        /*disable temporarily*/
+    opacity: 0.3;
 }
 
-/* Hover Adjustments */
 .zoom-overlay-trigger:hover,
 .poem-overlay-trigger:hover,
 .customize-overlay-trigger:hover {
-    background: #f7f7f7 !important;
+    background: #faf5ee !important;
 }
 
-/* Enforce the solid dark filled vector requirements onto internal paths */
 .customize-overlay-trigger .inline-icon {
-    fill: #111111 !important;
-    stroke: #111111 !important;
+    fill: #362517 !important;
+    stroke: #362517 !important;
 }
-
-/* Adjust Tooltip Alignment so it shifts to the left (avoiding getting clipped by screen edges) 
-disable the tooltip momentarily
-.customize-overlay-trigger::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    right: 125%; 
-    top: 50%;
-    transform: translateY(-50%) translateX(4px);
-    background-color: #111111;
-    color: #ffffff;
-    font-size: 0.72rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    white-space: nowrap;
-    padding: 0.5rem 0.8rem;
-    pointer-events: none;
-    opacity: 0;
-    visibility: hidden;
-    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.2s ease;
-    z-index: 99;
-    display: none;/
-}
-*/
 
 .customize-overlay-trigger:hover::after {
     opacity: 1;
@@ -2334,7 +2250,6 @@ disable the tooltip momentarily
     transform: translateY(-50%) translateX(0);
 }
 
-/* Ensure the image container is relative so absolute arrows lock securely to its frame edges */
 .main-stage-image-wrap {
     position: relative;
 }
@@ -2348,21 +2263,19 @@ disable the tooltip momentarily
     height: 40px;
     border-radius: 50% !important;
     background: rgba(255, 255, 255, 0.85) !important;
-    color: #111111 !important;
+    color: #362517 !important;
     border: none !important;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 3px 10px rgba(92, 64, 40, 0.06);
     z-index: 5;
     opacity: 0;
-    /* Keeps layout clean by default */
     visibility: hidden;
     transition: opacity 0.25s ease, visibility 0.25s ease, background-color 0.2s ease;
 }
 
-/* Horizontal positioning anchors */
 .stage-nav-arrow.left-arrow {
     left: 15px;
 }
@@ -2371,16 +2284,14 @@ disable the tooltip momentarily
     right: 15px;
 }
 
-/* Hovering the photo frame brings up navigation triggers dynamically */
 .main-stage-image-wrap:hover .stage-nav-arrow {
     opacity: 1;
     visibility: visible;
 }
 
-/* Dark contrast shift on button hover */
 .stage-nav-arrow:hover {
     background: #ffffff !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 12px rgba(92, 64, 40, 0.12);
 }
 
 /* Core thumbnail styles inside your gallery column strip */
@@ -2390,17 +2301,14 @@ disable the tooltip momentarily
     object-fit: cover;
     cursor: pointer;
     border: 2px solid transparent;
-    /* Hidden base buffer padding prevents layout jumps */
     transition: border-color 0.2s ease, opacity 0.2s ease;
     opacity: 0.6;
 }
 
-/* The active frame selector class updated dynamically by the script engine */
 .thumb-img.active-thumb-ring {
-    border-color: #111111 !important;
-    /* Sharp black frame matching your branding guide */
+    border-color: #8c6239 !important;
+    /* Muted brown signature thumbnail highlight border ring */
     opacity: 1 !important;
-    /* Brings thumbnail back to full visual strength */
 }
 
 /* CSS specifically styled to match the horizontal card grid from your screenshot */
@@ -2414,7 +2322,7 @@ disable the tooltip momentarily
 
 .step-card {
     background: #ffffff;
-    border: 1px solid #e2e2e2;
+    border: 1px solid #d4c4b0;
     border-radius: 8px;
     overflow: hidden;
     display: flex;
@@ -2424,26 +2332,24 @@ disable the tooltip momentarily
 
 .step-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 8px 24px rgba(92, 64, 40, 0.04);
 }
 
 .step-image-preview {
     width: 100%;
     height: 240px;
-    /* Aligns card height beautifully */
-    background-color: #fafafa;
+    background-color: #faf5ee;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #e3d6c6;
 }
 
 .step-thumb-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Ensures consistency across varied image aspects */
 }
 
 .step-card-details {
@@ -2451,6 +2357,12 @@ disable the tooltip momentarily
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+
+    font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    color: #4a3b2c;
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
+
 }
 
 .step-number {
@@ -2464,20 +2376,19 @@ disable the tooltip momentarily
 
 .step-card-details h3 {
     font-size: 1.4rem;
-    color: #111111;
+    color: #362517;
     margin-bottom: 1rem;
     font-weight: 500;
     line-height: 1.2;
 }
 
 .step-card-details p {
-    font-size: 0.95rem;
-    color: #666666;
-    line-height: 1.6;
+    font-size: 1.1rem;
+    color: #70583f;
+    line-height: 1.3;
     margin: 0;
 }
 
-/* Mobile Breakpoint to cleanly transition to a vertical stack */
 @media (max-width: 900px) {
     .step-grid {
         grid-template-columns: 1fr;
@@ -2495,8 +2406,8 @@ disable the tooltip momentarily
     font-weight: bold;
     margin-top: -15px;
     padding-top: 0;
-    color: white;
-    -webkit-text-stroke: 2px #909090;
+    color: #ffffff;
+    -webkit-text-stroke: 2px #a6937c;
 }
 
 .container {
@@ -2506,7 +2417,6 @@ disable the tooltip momentarily
     text-align: center;
     box-sizing: border-box;
 }
-
 
 .poeticProfile {
     font-family: 'Georgia', serif;
@@ -2519,7 +2429,6 @@ disable the tooltip momentarily
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-
 }
 
 .sculptureImg {
@@ -2530,10 +2439,10 @@ disable the tooltip momentarily
 }
 
 :root {
-    --bg-color: #fbfbfa;
-    --text-color: #222222;
-    --accent-color: #9c8465;
-    --meta-color: #777777;
+    --bg-color: #fcf9f5;
+    --text-color: #4a3b2c;
+    --accent-color: #8c6239;
+    --meta-color: #8c7355;
 }
 
 .container {
@@ -2543,19 +2452,18 @@ disable the tooltip momentarily
     text-align: center;
     box-sizing: border-box;
     font-family: 'Georgia', serif;
-    background-color: #fbfbfa;
-    color: #222222;
+    /*background-color: #fcf9f5;*/
+    color: #4a3b2c;
     margin: 0 auto;
     padding: 0;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-
 }
 
 .status-message {
     font-size: 1.1rem;
-    color: #777777;
+    color: #8c7355;
     font-style: italic;
 }
 
@@ -2572,13 +2480,13 @@ disable the tooltip momentarily
 }
 
 .sculpture-img-wrapper {
-    margin-bottom: 10px
+    margin-bottom: 10px;
 }
 
 .divider {
     width: 40px;
     height: 1px;
-    background-color: #9c8465;
+    background-color: #8c6239;
     margin: 0 auto 20px auto;
 }
 
@@ -2586,193 +2494,203 @@ disable the tooltip momentarily
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: #777777;
+    color: #8c7355;
     margin-bottom: 25px;
 }
 
-   /* Base / Layout Normalizations built around verse.html specification templates */
-        .shop-view-wrapper {
-            flex-grow: 1;
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 2rem;
-        }
+.shop-view-wrapper {
+    flex-grow: 1;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem;
+}
 
-        /* Pagination Toolbars Layout Config (Top and Bottom Rows) */
-        .poetry-pagination-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #ffffff;
-            border: 1px solid #e2e2e2;
-            border-radius: 8px;
-            padding: 0.75rem 1.5rem;
-            margin-bottom: 2.5rem;
-        }
+/* Pagination Toolbars Layout Config (Top and Bottom Rows) */
+.poetry-pagination-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #e3d6c6;
+    border-radius: 8px;
+    padding: 0.35rem 1.5rem;
+    margin-bottom: 2.5rem;
+}
 
-        .poetry-pagination-bar.bottom-bar {
-            margin-top: 2.5rem;
-            margin-bottom: 1rem;
-        }
+.poetry-pagination-bar.bottom-bar {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+}
 
-        .nav-chevron-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.5rem;
-            color: #111111;
-            transition: color 0.2s;
-        }
+.nav-chevron-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    color: #5c4028;
+    transition: color 0.2s;
+}
 
-        .nav-chevron-btn:disabled {
-            color: #cccccc;
-            cursor: not-allowed;
-        }
+.nav-chevron-btn:disabled {
+    color: #ebdcd0;
+    cursor: not-allowed;
+}
 
-        .nav-chevron-btn svg {
-            width: 24px;
-            height: 24px;
-            fill: currentColor;
-        }
+.nav-chevron-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
 
-        .page-indicators {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-        }
+.page-indicators {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
 
-        .page-dot {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 0.9rem;
-            color: #666666;
-            padding: 0.25rem 0.6rem;
-            border-radius: 4px;
-            transition: all 0.2s;
-        }
+.page-dot {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #8c7355;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
 
-        .page-dot:hover {
-            color: #111111;
-            background-color: #f5f5f5;
-        }
+.page-dot:hover {
+    color: #362517;
+    background-color: #f5ece1;
+}
 
-        .page-dot.active {
-            font-weight: 700;
-            color: #ffffff;
-            background-color: #111111;
-        }
+.page-dot.active {
+    font-weight: 700;
+    color: #ffffff;
+    background-color: #8c6239;
+}
 
-        /* Profile Interactive Component Card Frame */
-        .profile-showcase-card {
-            background-color: #ffffff;
-            border: 1px solid #e2e2e2;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
-        }
+/* Profile Interactive Component Card Frame */
+.profile-showcase-card {
+    /*background-color: #ffffff;*/
+    border: 1px solid #e3d6c6;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(92, 64, 40, 0.02);
+}
 
-        .profile-grid-layout {
-            display: grid;
-            grid-template-columns: 1.1fr 1fr;
-            min-height: 550px;
-            transition: opacity 0.25s ease, transform 0.25s ease;
-        }
+.profile-grid-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    min-height: 550px;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
 
-        .profile-visual-pane {
-            background-color: #faf8f5;
-            padding: 3rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border-right: 1px solid #e2e2e2;
-        }
+.profile-visual-pane {
+    /*background-color: #faf5ee;
+    justify-content: center;*/
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+    border-right: 1px solid #8c6239;
+}
 
-        .sculpture-render-view {
-            max-width: 100%;
-            max-height: 420px;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-        }
+.sculpture-render-view {
+    max-width: 100%;
+    max-height: 420px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
 
-        .profile-literary-pane {
-            padding: 3.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+.profile-literary-pane {
+    padding: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
-        .poetic-title-header {
-            font-size: 2.2rem;
-            font-weight: 400;
-            color: #111111;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.5px;
-        }
+}
 
-        .literary-verse-box {
-            font-style: italic;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #333333;
-            white-space: pre-line;
-            margin-bottom: 2rem;
-            border-left: 1px solid #8c6239;
-            padding-left: 1.5rem;
-        }
+.poetic-title-header {
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: #362517;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.5px;
+    font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
 
-        .profile-metadata-footer {
-            margin-top: auto;
-            padding-top: 1.5rem;
-            border-top: 1px solid #eeeeee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+}
 
-        .metadata-item {
-            font-size: 0.85rem;
-            color: #666666;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+.literary-verse-box {
+    font-style: italic;
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: #4a3b2c;
+    white-space: pre-line;
+    margin-bottom: 2rem;
+    /*border-left: 1px solid #8c6239;*/
+    padding-left: 1.5rem;
+    font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+}
 
-        .metadata-value {
-            font-weight: 600;
-            color: #111111;
-        }
+.poem-content {
+    font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+}
 
-        /* Screen responsive breakdown properties */
-        @media (max-width: 900px) {
-            .profile-grid-layout {
-                grid-template-columns: 1fr;
-            }
-            .profile-visual-pane {
-                border-right: none;
-                border-bottom: 1px solid #e2e2e2;
-                padding: 2rem;
-            }
-            .profile-literary-pane {
-                padding: 2rem;
-            }
-            .poetic-title-header {
-                font-size: 1.8rem;
-            }
-        }
+.profile-metadata-footer {
+    margin-top: auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid #f2e9dc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        /* =========================================================================
+.metadata-item {
+    font-size: 0.85rem;
+    color: #8c7355;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.metadata-value {
+    font-weight: 600;
+    color: #362517;
+}
+
+/* Screen responsive breakdown properties */
+@media (max-width: 900px) {
+    .profile-grid-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-visual-pane {
+        border-right: none;
+        border-bottom: 1px solid #e3d6c6;
+        padding: 2rem;
+    }
+
+    .profile-literary-pane {
+        padding: 2rem;
+    }
+
+    .poetic-title-header {
+        font-size: 1.8rem;
+    }
+}
+
+/* =========================================================================
    RESPONSIVE MAIN MENU ARCHITECTURE
    ========================================================================= */
-
-/* Desktop Baseline Configurations */
 .main-navigation {
-    border-bottom: 1px solid #222222;
+    border-bottom: 1px solid #362517;
+    /* Dark coffee grounding baseline instead of #222222 */
     position: relative;
     z-index: 100;
 }
@@ -2792,7 +2710,7 @@ disable the tooltip momentarily
 .nav-item {
     display: inline-block;
     padding: 15px 0;
-    color: #aaaaaa;
+    color: #8c7355;
     text-decoration: none;
     font-size: 0.95rem;
     font-weight: 500;
@@ -2800,11 +2718,11 @@ disable the tooltip momentarily
     transition: color 0.2s ease;
 }
 
-.nav-item:hover, .nav-item.active {
-    color: #ffffff;
+.nav-item:hover,
+.nav-item.active {
+    color: #362517;
 }
 
-/* Hide the technical checkbox engine and mobile trigger button on desktops */
 .menu-toggle-checkbox,
 .menu-toggle-btn {
     display: none;
@@ -2814,11 +2732,10 @@ disable the tooltip momentarily
    MOBILE STYLING (RESPONSIVE BREAKPOINT)
    ========================================== */
 @media screen and (max-width: 768px) {
-    /* Reset layout container settings */
     .main-navigation {
         background-color: #ffffff !important;
-        border-bottom: 1px solid #e0e0e0 !important;
-        border-top: 1px solid #e0e0e0 !important;
+        border-bottom: 1px solid #e3d6c6 !important;
+        border-top: 1px solid #e3d6c6 !important;
         width: 100% !important;
         padding: 0 !important;
         margin: 0 !important;
@@ -2828,84 +2745,76 @@ disable the tooltip momentarily
         width: 100% !important;
         padding: 0 !important;
         margin: 0 !important;
-        display: block !important; /* Prevents parent flex misalignment */
+        display: block !important;
         position: relative;
     }
 
-    /* 1. FIXED HAMBURGER BAR: Spans full width cleanly */
     .menu-toggle-btn {
         display: flex !important;
         align-items: center !important;
-        justify-content: flex-start !important; /* Aligns content cleanly to the left */
+        justify-content: flex-start !important;
         gap: 12px !important;
-        padding: 16px 24px !important; /* Perfect breathing room for fingers */
-        color: #111111 !important;
+        padding: 10px 24px !important;
+        color: #362517 !important;
         background-color: #ffffff !important;
         cursor: pointer !important;
         user-select: none !important;
         box-sizing: border-box !important;
         width: 100% !important;
     }
-    
-    /* Centers the icon vector beautifully inside the trigger bar line */
+
     .hamburger-icon {
         display: block !important;
         flex-shrink: 0;
     }
-    
+
     .menu-text-label {
         font-weight: 600 !important;
         font-size: 0.95rem !important;
         letter-spacing: 0.03em;
-        color: #111111 !important;
+        color: #362517 !important;
     }
 
-    /* 2. FIXED DRAWER CONTAINER: Starts completely flat and hidden */
     .nav-links-wrapper {
         display: flex !important;
         flex-direction: column !important;
         width: 100% !important;
-        background-color: #fafafa !important; /* Soft grey background differentiator */
+        background-color: #faf5ee !important;
+        /* Soft cream background for open menu state drawer */
         padding: 0 !important;
         margin: 0 !important;
         gap: 0 !important;
         box-sizing: border-box !important;
-        
-        /* Clean opening transition animation engine */
         max-height: 0 !important;
         overflow: hidden !important;
         transition: max-height 0.3s ease-in-out !important;
     }
 
-    /* 3. FIXED LINKS: Clean full-width alignment with no stray padding offsets */
     .nav-item {
         width: 100% !important;
-        padding: 16px 24px !important; /* Perfectly mirrors the header bar bounds */
+        padding: 16px 24px !important;
         margin: 0 !important;
-        color: #333333 !important;
-        border-bottom: 1px solid #eeeeee !important;
+        color: #4a3b2c !important;
+        border-bottom: 1px solid #f2e9dc !important;
         box-sizing: border-box !important;
         display: block !important;
-        text-align: left !important; /* Forces all links left, matching the button */
+        text-align: left !important;
         font-size: 0.95rem !important;
         font-weight: 500 !important;
     }
 
-    /* Bold active style indicator line highlighting */
     .nav-item.active {
         font-weight: 700 !important;
-        color: #000000 !important;
-        background-color: #f0f0f0 !important;
+        color: #362517 !important;
+        background-color: #ebdcd0 !important;
     }
 
-    /* Clean up the border radius on the very last link element box */
     .nav-item:last-child {
         border-bottom: none !important;
     }
 
-    /* 4. DRIVER TRIGGER: Safely opens the drawer when the checkbox is checked */
-    .menu-toggle-checkbox:checked ~ .nav-links-wrapper {
-        max-height: 400px !important; 
-        border-top: 1px solid #e0e0e0 !important;
+    .menu-toggle-checkbox:checked~.nav-links-wrapper {
+        max-height: 400px !important;
+        border-top: 1px solid #e3d6c6 !important;
     }
 }

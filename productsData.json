@@ -8,7 +8,7 @@
       "priceOriginal": "$300.00",
       "priceCurrent": "$300.00",
       "image": "images/sculptures/zainab/zainab_front_1.png",
-      "profileImage": "images/sculptures/zainab/zainab_vector.png",
+      "profileImage": "images/sculptures/zainab/zainab_vector_clear.png",
       "altText": "Zainab sculpture bust",
       "gallery": [
         "images/sculptures/zainab/zainab_front_1.png",
@@ -44,7 +44,7 @@
       "priceOriginal": null,
       "priceCurrent": "$300.00",
       "image": "images/sculptures/gbenga/gbenga_front_1.png",
-      "profileImage": "images/sculptures/gbenga/gbenga_vector.png",
+      "profileImage": "images/sculptures/gbenga/gbenga_vector_clear.png",
       "altText": "Gbenga sculpture work",
       "gallery": [
         "images/sculptures/gbenga/gbenga_front_1.png",
@@ -83,7 +83,7 @@
       "priceOriginal": null,
       "priceCurrent": "$300.00",
       "image": "images/sculptures/ronkeh/ronkeh_front_2.png",
-      "profileImage": "images/sculptures/ronkeh/ronkeh_vector.png",
+      "profileImage": "images/sculptures/ronkeh/ronkeh_vector_clear.png",
       "altText": "Ronkeh sculpture bust",
       "gallery": [
         "images/sculptures/ronkeh/ronkeh_front_2.png",
@@ -114,7 +114,7 @@
       "priceOriginal": null,
       "priceCurrent": "$300.00",
       "image": "images/sculptures/amina/amina_front_1.png",
-      "profileImage": "images/sculptures/amina/amina_vector.png",
+      "profileImage": "images/sculptures/amina/amina_vector_clear.png",
       "altText": "Amina golden reflective sculpture bust",
       "gallery": [
         "images/sculptures/amina/amina_front_1.png",
@@ -148,7 +148,7 @@
       "priceOriginal": null,
       "priceCurrent": "$300.00",
       "image": "images/sculptures/kesha/kesha_front_1.png",
-      "profileImage": "images/sculptures/kesha_vector.png",
+      "profileImage": "images/sculptures/kesha/kesha_vector_clear.png",
       "altText": "Kesha in prayer sculpture bust",
       "gallery": [
         "images/sculptures/kesha/kesha_front_1.png",
@@ -196,9 +196,53 @@
       "isCustomizeable": true
     },
     {
-      "id": "mudashiru",
+      "id": "ayokunle",
       "category": "sculpture",
-      "title": "Mudashiru",
+      "title": "Ayokunle",
+      "onSale": false,
+      "priceOriginal": null,
+      "priceCurrent": "$450.00",
+      "image": "images/sculptures/ayokunle/ayokunle_front_1.png",
+      "profileImage": "images/sculptures/ayokunle/ayokunle_vector_clear.png",
+      "altText": "trophy sculpture",
+      "gallery": [
+        "images/sculptures/ayokunle/ayokunle_front_1.png",
+        "images/sculptures/ayokunle/ayokunle_side_left.png",
+        "images/sculptures/ayokunle/ayokunle_side_right.png",
+        "images/sculptures/ayokunle/ayokunle_back_left.png"
+      ],
+      "poem": [
+        "The day you came, the walls exhaled,",
+        "the ceiling lifted, rooms grew wide,",
+        "the quiet corners, long grown stale,",
+        "burst open like a door flung wide.",
+        "Ayokunle — joy has filled",
+        "every crack and corridor,",
+        "the kind that cannot be distilled,",
+        "that spills from roof to earthen floor.",
+        "The elders felt it in their bones,",
+        "the children heard it in the air,",
+        "a warmth that settled into stones",
+        "and made a dwelling something rare.",
+        "For houses hold more than their walls —",
+        "they hold the laughter, hold the song,",
+        "and when true joy moves through their halls",
+        "it lingers, lingers, all life long.",
+        "So light the lamps and set the table,",
+        "let every room receive its guest,",
+        "for joy, they say, when it is able,",
+        "will fill the house and fill the rest —",
+        "the hollow chest, the weary mind,",
+        "the grief that crouched behind the door —",
+        "Ayokunle comes to find",
+        "each empty space and give it more."
+      ],
+      "isCustomizeable": true
+    },
+    {
+      "id": "amarachi",
+      "category": "sculpture",
+      "title": "Amarachi",
       "onSale": false,
       "priceOriginal": null,
       "priceCurrent": "$450.00",
@@ -212,7 +256,26 @@
         "images/sculptures/mudashiru/mudashiru_back_left.png"
       ],
       "poem": [
-        "Foo"
+        "Before the morning knew its name,",
+        "before the sun had learned to rise,",
+        "a grace was written in the flame",
+        "of ancient, ever-watching eyes.",
+        "Amarachi — the word itself",
+        "is soft as rain on red-clay earth,",
+        "a gift no hand could take from shelf,",
+        "a love that predates even birth.",
+        "She carries what cannot be earned,",
+        "no coin can buy, no mind can plan —",
+        "the kind of blessing kingdoms yearned for,",
+        "pressed into the palm of man.",
+        "And when she laughs, you understand",
+        "why grace was never cold or still —",
+        "it moves, it breathes, it takes your hand",
+        "and pulls you up a sacred hill.",
+        "So speak her name and feel it land",
+        "like water on a thirsty place.",
+        "Amarachi — God's own hand,",
+        "outstretched and open, full of grace."
       ],
       "isCustomizeable": true
     }
