@@ -246,16 +246,17 @@
       "onSale": false,
       "priceOriginal": null,
       "priceCurrent": "$450.00",
-      "image": "images/sculptures/mudashiru/mudashiru_front_1.png",
-      "profileImage": "images/sculptures/mudashiru/mudashiru_vector.png",
-      "altText": "trophy sculpture",
+      "image": "images/sculptures/amarachi/amarachi_front_1.png",
+      "profileImage": "images/sculptures/amarachi/amarachi_vector.png",
+      "altText": "Amarachi",
       "gallery": [
         "images/sculptures/mudashiru/mudashiru_front_1.png",
         "images/sculptures/mudashiru/mudashiru_side_left.png",
         "images/sculptures/mudashiru/mudashiru_side_right.png",
         "images/sculptures/mudashiru/mudashiru_back_left.png"
       ],
-      "poem": [
+      "poem":["Foo"],
+      "poem_2": [
         "Before the morning knew its name,",
         "before the sun had learned to rise,",
         "a grace was written in the flame",
