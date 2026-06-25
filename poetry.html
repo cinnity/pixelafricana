@@ -131,9 +131,7 @@
                 
                 const fullData = await response.json();
                 
-                // Filter database dynamically to strip out unpopulated mockup poems ("Foo")
-                dynamicProfiles = fullData.products.filter(p => p.poem && p.poem[0] !== "Foo");
-                
+                dynamicProfiles = fullData.products.filter(p => p.status === "active" && p.poem.length>0);
                 if (dynamicProfiles.length > 0) {
                     // Check URL for specific ID query strings
                     const urlParams = new URLSearchParams(window.location.search);

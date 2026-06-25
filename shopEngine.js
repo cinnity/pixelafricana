@@ -165,7 +165,7 @@ function initializeCatalogProductDeck(categoryScope) {
         .then(response => response.json())
         .then(data => {
             inventoryMasterDataset = data.products.filter(
-                p => p.category && p.category.toLowerCase() === categoryScope.toLowerCase()
+                p => p.category && p.category.toLowerCase() === categoryScope.toLowerCase() && p.status === "active"
             );
 
             const formattedCategoryName = categoryScope.charAt(0).toUpperCase() + categoryScope.slice(1);

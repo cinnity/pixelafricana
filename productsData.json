@@ -4,7 +4,8 @@
       "id": "zainab",
       "category": "sculpture",
       "title": "Zainab",
-      "onSale": false,
+      "status":"active",
+      "onsale": false,
       "priceOriginal": "$300.00",
       "priceCurrent": "$300.00",
       "image": "images/sculptures/zainab/zainab_front_1.png",
@@ -40,7 +41,8 @@
       "id": "gbenga",
       "category": "sculpture",
       "title": "Gbenga",
-      "onSale": false,
+      "status":"active",
+      "onsale": false,
       "priceOriginal": null,
       "priceCurrent": "$300.00",
       "image": "images/sculptures/gbenga/gbenga_front_1.png",
@@ -79,7 +81,8 @@
       "id": "ronkeh",
       "category": "sculpture",
       "title": "Ronkeh",
-      "onSale": false,
+      "status":"active",
+      "onsale": false,
       "priceOriginal": null,
       "priceCurrent": "$300.00",
       "image": "images/sculptures/ronkeh/ronkeh_front_2.png",
@@ -110,7 +113,8 @@
       "id": "amina",
       "category": "sculpture",
       "title": "Amina",
-      "onSale": false,
+      "status":"active",
+      "onsale": false,
       "priceOriginal": null,
       "priceCurrent": "$300.00",
       "image": "images/sculptures/amina/amina_front_1.png",
@@ -144,7 +148,8 @@
       "id": "kesha",
       "category": "sculpture",
       "title": "Kesha",
-      "onSale": false,
+      "status":"active",
+      "onsale": false,
       "priceOriginal": null,
       "priceCurrent": "$300.00",
       "image": "images/sculptures/kesha/kesha_front_1.png",
@@ -168,7 +173,7 @@
         "So that school breaks separated not days and weeks",
         "but years and seasons and three years became five",
         "But here she is at the gates of tomorrow",
-        "daring to believe that dream job will come and husband in short order",
+        "daring to believe that dream job will come and change in short order",
         "and so she prays."
       ],
       "isCustomizeable": true
@@ -177,7 +182,8 @@
       "id": "trophy",
       "category": "sculpture",
       "title": "Trophy",
-      "onSale": false,
+      "status":"active",
+      "onsale": false,
       "priceOriginal": null,
       "priceCurrent": "$400.00",
       "image": "images/sculptures/trophy/trophy_1.png",
@@ -191,7 +197,7 @@
         "images/sculptures/trophy/trophy_5.png"
       ],
       "poem": [
-        "Foo"
+        ""
       ],
       "isCustomizeable": true
     },
@@ -199,7 +205,8 @@
       "id": "ayokunle",
       "category": "sculpture",
       "title": "Ayokunle",
-      "onSale": false,
+      "status":"active",
+      "onsale": false,
       "priceOriginal": null,
       "priceCurrent": "$450.00",
       "image": "images/sculptures/ayokunle/ayokunle_front_1.png",
@@ -243,7 +250,8 @@
       "id": "amarachi",
       "category": "sculpture",
       "title": "Amarachi",
-      "onSale": false,
+      "status":"draft",
+      "onsale": false,
       "priceOriginal": null,
       "priceCurrent": "$450.00",
       "image": "images/sculptures/amarachi/amarachi_front_1.png",
@@ -255,8 +263,7 @@
         "images/sculptures/mudashiru/mudashiru_side_right.png",
         "images/sculptures/mudashiru/mudashiru_back_left.png"
       ],
-      "poem":["Foo"],
-      "poem_2": [
+      "poem": [
         "Before the morning knew its name,",
         "before the sun had learned to rise,",
         "a grace was written in the flame",
