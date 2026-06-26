@@ -31,14 +31,14 @@ function resolvePath(imgSrc) {
  */
 function buildStaticDetailPages() {
     console.log('📦 Starting generation of static product detail view templates...');
-    
+
     // Read your master layout file as the structural frame wrapper
     const templatePath = path.join(__dirname, 'product-detail.html');
     let templateHtml = fs.readFileSync(templatePath, 'utf8');
 
     activeProducts.forEach(product => {
         let pageHtml = templateHtml;
-        
+
         // Unroll gallery thumbnails
         let thumbsHtml = '';
         if (product.gallery && product.gallery.length > 0) {
@@ -118,14 +118,14 @@ function buildStaticDetailPages() {
  */
 function buildStaticCategoryViews() {
     console.log('📂 Pre-rendering collection grids into layout pipelines...');
-    
+
     const categories = [...new Set(activeProducts.map(p => p.category.toLowerCase()))];
     const categoryTemplatePath = path.join(__dirname, 'category.html');
     let categoryTemplateHtml = fs.readFileSync(categoryTemplatePath, 'utf8');
 
     categories.forEach(cat => {
         const structuralScopeList = activeProducts.filter(p => p.category.toLowerCase() === cat);
-        
+
         let gridHtml = '';
         structuralScopeList.forEach(item => {
             gridHtml += `
@@ -165,6 +165,11 @@ function buildStaticCategoryViews() {
     indexHtml = indexHtml.replace('<span class="category-count-badge">7 Items</span>', `<span class="category-count-badge">${totalSculptures} Items</span>`);
     indexHtml = indexHtml.replace('href="category.html?type=sculpture"', 'href="category-sculpture.html"');
 
+    // Fixes the main menu navigation link on the homepage
+    indexHtml = indexHtml.replace('href="category.html"', 'href="category-sculpture.html"');
+
+    // Fixes the main menu navigation link on the category pages themselves
+    categoryTemplateHtml = categoryTemplateHtml.replace('href="category.html"', 'href="category-sculpture.html"');
     fs.writeFileSync(indexTemplatePath, indexHtml, 'utf8');
     console.log(' ✅ Homepage template counters patched successfully!');
 }
