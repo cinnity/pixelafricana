@@ -185,6 +185,7 @@ function initializeCatalogProductDeck(categoryScope) {
         });
 }
 
+// Locate this loop function inside your shopEngine.js file and update link strings:
 function renderProductCatalogGrid(productsList) {
     const containerGrid = document.getElementById('catalogProductInjectionNode');
     const counterString = document.getElementById('catalogResultsCount');
@@ -197,13 +198,13 @@ function renderProductCatalogGrid(productsList) {
         const cardHTML = `
             <article class="product-card">
                 <div class="product-image-wrapper">
-                    <a href="product-detail.html?id=${item.id}">
+                    <a href="product-detail-${item.id.toLowerCase()}.html">
                         <img src="${resolveAbsoluteImagePath(item.image)}" alt="${item.altText}" class="product-img">
                     </a>
                 </div>
                 <div class="product-details">
                     <h2 class="product-title">
-                        <a href="product-detail.html?id=${item.id}" style="text-decoration:none; color:inherit;">${item.title}</a>
+                        <a href="product-detail-${item.id.toLowerCase()}.html" style="text-decoration:none; color:inherit;">${item.title}</a>
                     </h2>
                     <div class="badge-row">${item.onSale ? '<span class="sale-badge">SALE!</span>' : ''}</div>
                     <div class="price-row">
