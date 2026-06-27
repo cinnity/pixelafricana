@@ -17,11 +17,11 @@ const dataPath = path.join(__dirname, 'productsData.json');
 function resolvePath(imgSrc) {
     if (!imgSrc) return '/images/placeholder.jpg';
     if (imgSrc.startsWith('http://') || imgSrc.startsWith('https://')) return imgSrc;
-    
+
     let clean = imgSrc.startsWith('./') ? imgSrc.slice(2) : imgSrc.startsWith('/') ? imgSrc.slice(1) : imgSrc;
     if (clean.startsWith('images/sculpture/')) clean = clean.replace('images/sculpture/', 'images/sculptures/');
     if (clean.startsWith('images/sculptures/') && clean.split('/').length >= 4) return '/' + clean;
-    
+
     const filename = clean.split('/').pop();
     let subfolder = filename.toLowerCase().split('_')[0].split('.')[0];
     if (subfolder === 'ronke') subfolder = 'ronkeh';
@@ -30,7 +30,7 @@ function resolvePath(imgSrc) {
 
 async function startBuildEngine() {
     console.log('🌐 Ingesting catalog datasets from local database and live Printify API streams...');
-    
+
     // Stream 1: Gather your custom, premium in-house fine art masterpieces
     let inHouseItems = [];
     try {
@@ -53,12 +53,12 @@ async function startBuildEngine() {
     if (token && shopId) {
         try {
             const res = await axios.get(`https://api.printify.com/v1/shops/${shopId}/products.json`, {
-                headers: { 
+                headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json;charset=utf-8'
                 }
             });
-            
+
             // Map Printify's schema array into your frontend data structures
             printifyItems = res.data.data.filter(p => p.visible).map(product => ({
                 id: product.id,
@@ -102,7 +102,7 @@ function buildStaticDetailPages(products) {
 
     products.forEach(product => {
         let pageHtml = templateHtml;
-        
+
         // Unroll layout thumbnail strips safely
         let thumbsHtml = '';
         if (product.gallery && product.gallery.length > 0) {
@@ -114,8 +114,17 @@ function buildStaticDetailPages(products) {
         }
 
         // Unroll poem line containers safely
+
+        // Locate this block in generateCatalog.js and replace it:
         const poemHtml = product.poem && product.poem.length > 0 && product.poem[0] !== ""
-            ? product.poem.map(line => `<p class="poem-stanza-line">${line}</p>`).join('')
+            ? product.poem.map(line => {
+                // If the line is completely empty, render a structural stanza break spacing div
+                if (line.trim() === "") {
+                    return `<div class="poem-stanza-break" style="height: 1.5rem;"></div>`;
+                }
+                // Otherwise, render the regular line entry text
+                return `<p class="poem-stanza-line" style="margin: 0 0 4px 0;">${line}</p>`;
+            }).join('')
             : `<p class="poem-stanza-line">Premium cultural art token documentation variables.</p>`;
 
         const staticDetailViewMarkup = `
@@ -186,7 +195,7 @@ function buildStaticCategoryViews(products) {
 
     categories.forEach(cat => {
         const matchingProducts = products.filter(p => p.category.toLowerCase() === cat);
-        
+
         let gridHtml = '';
         matchingProducts.forEach(item => {
             gridHtml += `
@@ -211,7 +220,7 @@ function buildStaticCategoryViews(products) {
         outputHtml = outputHtml.replace('<div class="product-grid-layout" id="catalogProductInjectionNode"></div>', `<div class="product-grid-layout" id="catalogProductInjectionNode">${gridHtml}</div>`);
         outputHtml = outputHtml.replace('<span class="results-counter-string" id="catalogResultsCount">Loading item logs...</span>', `<span class="results-counter-string" id="catalogResultsCount">Showing all ${matchingProducts.length} results</span>`);
         outputHtml = outputHtml.replace('<span class="current-trail-node" id="catalogBreadcrumbTitle"></span>', `<span class="current-trail-node" id="catalogBreadcrumbTitle" style="text-transform: capitalize;">${cat} Collection</span>`);
-        
+
         // Ensure menu links on sub-category pages point directly to your primary static collection page
         outputHtml = outputHtml.replace(/href=["']category\.html\s*["']/gi, 'href="category-sculpture.html"');
 
@@ -224,7 +233,7 @@ function buildStaticCategoryViews(products) {
     const indexTemplatePath = path.join(__dirname, 'index.html');
     if (fs.existsSync(indexTemplatePath)) {
         let indexHtml = fs.readFileSync(indexTemplatePath, 'utf8');
-        
+
         const totalSculptures = products.filter(p => p.category === 'sculpture').length;
         indexHtml = indexHtml.replace(/<span class="category-count-badge">.*?<\/span>/i, `<span class="category-count-badge">${totalSculptures} Items</span>`);
 

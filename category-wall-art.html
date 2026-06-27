@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PixelAfricana - Shop Categories</title>
-    <link rel="icon" type="image/x-icon" href="/cinnity_favicon.ico">
+    <title>Pixel Africana - Shop</title>
+    <link rel="icon" type="image/svg+xml" href="cinnity_favicon.ico">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?&family=Quicksand:wght@300..700&family=Manufacturing+Consent&display=swap&family=Cormorant+Garamond:ital,wght@1,500&family=Playfair+Display:ital,wght@1,500&family=Syne:wght@500&display=swap"
         rel="stylesheet">
-
     <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
+
 </head>
 
 <body>
@@ -41,7 +41,6 @@
                 <div class="cart-status-widget" onclick="location.href='cart.html'" style="cursor: pointer;">
                     <span class="cart-total">$0.00</span>
                     <span class="cart-count">0 items</span>
-
                     <svg class="cart-vector-icon" viewBox="0 0 24 24" aria-hidden="true">
                         <path
                             d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.05 1.4-2.55h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" />
@@ -53,6 +52,7 @@
 
     <nav class="main-navigation">
         <div class="nav-container">
+            <!-- Mobile Menu Toggle Trigger -->
             <input type="checkbox" id="mobile-menu-toggle" class="menu-toggle-checkbox">
             <label for="mobile-menu-toggle" class="menu-toggle-btn" aria-label="Toggle navigation menu">
                 <svg class="hamburger-icon" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
@@ -63,58 +63,51 @@
                 </svg>
             </label>
 
+            <!-- Navigation Links Wrapper Group -->
             <div class="nav-links-wrapper">
-                <a href="index.html" class="nav-item active">Home</a>
-                <a href="about.html" class="nav-item">About Us</a>
+                <a href="index.html" class="nav-item">Home</a>
+                <a href="about.html" class="nav-item">About</a>
                 <a href="how-it-works.html" class="nav-item">How It Works</a>
                 <a href="poetry.html" class="nav-item">Poetry</a>
             </div>
         </div>
     </nav>
 
-    <main class="shop-view-wrapper">
-        <div class="collection-grid">
+    <main class="catalog-page-wrapper">
 
-            <a href="category-sculpture.html" class="collection-card">
-                <div class="collection-image-preview">
-                    <img src="images/sculptures/zainab/zainab_front_1.png" alt="Sculptures Lookbook Preview" class="collection-thumb-img">
-                </div>
-                <div class="collection-card-details">
-                    <div>
-                        <h3>Sculptures</h3>
-                        <span class="category-count-badge" data-category="sculpture">7 Items</span>
-                    </div>
-                    <span class="view-collection-link">Explore Collection</span>
-                </div>
-            </a>
+        <nav class="breadcrumb-trail" aria-label="Breadcrumb">
+            <a href="index.html" class="home-vector-link">Home</a>
+            <span class="trail-separator">›</span>
+            <span class="current-trail-node" id="catalogBreadcrumbTitle" style="text-transform: capitalize;">wall-art Collection</span>
+        </nav>
 
-            <a href="category-digital-downloads.html" class="collection-card">
-                <div class="collection-image-preview">
-                    <img src="images/screaming_boy.png" alt="Digital Downloads Lookbook Preview" class="collection-thumb-img">
-                </div>
-                <div class="collection-card-details">
-                    <div>
-                        <h3>Digital Downloads</h3>
-                        <span class="category-count-badge" data-category="digital-downloads">0 Items</span>
-                    </div>
-                    <span class="view-collection-link">Explore Collection</span>
-                </div>
-            </a>
+        <div class="catalog-controls-bar">
+            <span class="results-counter-string" id="catalogResultsCount">Showing all 1 results</span>
 
-            <a href="category-wall-art.html" class="collection-card">
-                <div class="collection-image-preview">
-                    <img src="images/culture-of-soul.png" alt="Wall Art Lookbook Preview" class="collection-thumb-img">
-                </div>
-                <div class="collection-card-details">
-                    <div>
-                        <h3>Wall Art</h3>
-                        <span class="category-count-badge" data-category="wall-art">0 Items</span>
-                    </div>
-                    <span class="view-collection-link">Explore Collection</span>
-                </div>
-            </a>
+            <select id="sortEngineSelector" class="sort-dropdown-menu">
+                <option value="default">Default sorting</option>
+                <option value="price-low">Sort by price: low to high</option>
+                <option value="price-high">Sort by price: high to low</option>
+            </select>
+        </div>
 
-        </div>    
+        <div class="product-grid-layout" id="catalogProductInjectionNode">
+            <article class="product-card" data-fulfillment="printify">
+                <div class="product-image-wrapper">
+                    <a href="product-detail-6a3f52395c68ac92fc092d06.html">
+                        <img src="https://images-api.printify.com/mockup/6a3f52395c68ac92fc092d06/62034/3378/magnets-african-woman-bronze-bust-fridge-magnet-home-decor-kitchen-decoration-cultural-gift-black-history-month.jpg?camera_label=front" alt="Magnets - African Woman Bronze Bust Fridge Magnet, Home Decor, Kitchen Decoration, Cultural Gift, Black History Month" class="product-img">
+                    </a>
+                </div>
+                <div class="product-details">
+                    <h2 class="product-title">
+                        <a href="product-detail-6a3f52395c68ac92fc092d06.html" style="text-decoration:none; color:inherit;">Magnets - African Woman Bronze Bust Fridge Magnet, Home Decor, Kitchen Decoration, Cultural Gift, Black History Month</a>
+                    </h2>
+                    <div class="badge-row"></div>
+                    <div class="price-row"><span class="price-current">$8.08</span></div>
+                    <button class="add-to-cart-btn" data-id="6a3f52395c68ac92fc092d06">Add to cart</button>
+                </div>
+            </article></div>
+
     </main>
 
     <footer class="minimal-footer">
@@ -122,6 +115,7 @@
             <p>&copy; Pixel Africana 2026</p>
         </div>
     </footer>
+
     <script src="shopEngine.js" defer></script>
 </body>
 

@@ -17,7 +17,7 @@ let inventoryMasterDataset = [];
  */
 function resolveAbsoluteImagePath(imgSrc) {
     if (!imgSrc) return '/images/placeholder.jpg';
-    
+
     // Pass external Printify CDN routes through cleanly
     if (imgSrc.startsWith('http://') || imgSrc.startsWith('https://')) {
         return imgSrc;
@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const currentCategoryScope = urlParams.get('type') || 'sculpture';
         initializeCatalogProductDeck(currentCategoryScope);
     }
-    
+
     // Route 6: QR Landing Poetry Verse Interfaces
     if (currentPath.includes('sculpture.html') || document.getElementById('sculpturePoeticProfileInjectionNode')) {
         initializePoeticProfileEngine();
@@ -115,7 +115,7 @@ function addItemToCart(productId, productTitle, productPrice, productImage, fulf
             id: productId,
             title: productTitle,
             price: numericPrice,
-            image: productImage, 
+            image: productImage,
             quantity: 1,
             fulfillmentChannel: fulfillmentChannel // Save tracking tag into LocalStorage strings
         });
@@ -247,7 +247,7 @@ function setupCatalogEventListeners() {
                 const id = e.target.getAttribute('data-id');
                 const card = e.target.closest('.product-card');
                 const channel = card ? card.getAttribute('data-fulfillment') : "in-house";
-                
+
                 const match = inventoryMasterDataset.find(p => p.id === id);
                 if (match) {
                     addItemToCart(match.id, match.title, match.priceCurrent, match.image, channel);
@@ -391,10 +391,10 @@ function setupCheckoutFormSubmission() {
 function initializeProductDetailEngine() {
     const container = document.getElementById('productDetailContainer');
     if (!container) return;
-    
+
     const productId = container.getAttribute('data-product-id');
     const channel = container.getAttribute('data-fulfillment') || "in-house";
-    
+
     // Wire up events straight onto pre-rendered DOM structures
     bindProductDetailActions(productId, channel);
     bindPoemOverlayInteractions();
@@ -525,7 +525,12 @@ function buildPoeticProfileHTML(sculpture) {
     const targetNode = document.getElementById('sculpturePoeticProfileInjectionNode');
     if (!targetNode) return;
 
-    let dynamicPoemLinesHTML = (sculpture.poem || []).map(line => `<p class="poem-stanza-line" style="margin: 0 0 12px 0;">${line}</p>`).join('');
+    let dynamicPoemLinesHTML = (sculpture.poem || []).map(line => {
+        if (line.trim() === "") {
+            return `<div class="poem-stanza-break" style="height: 1.5rem;"></div>`;
+        }
+        return `<p class="poem-stanza-line" style="margin: 0 0 4px 0;">${line}</p>`;
+    }).join('');
 
     targetNode.innerHTML = `
         <div class="sculpture-img-wrapper">
