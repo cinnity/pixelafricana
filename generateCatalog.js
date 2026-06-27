@@ -1,45 +1,109 @@
 /**
- * Pixel Africana - Static Site Generation (SSG) Build-Time SEO Engine
+ * Pixel Africana - Dual-Stream Build Engine (Printify API + In-House Local Data)
  * Run this script prior to deployment (`node generateCatalog.js`)
+ * Generates static, crawlable html views fully optimized for SEO and AI discovery scrapers.
  */
 const fs = require('fs');
 const path = require('path');
+const axios = require('axios');
 
 // Target paths
 const dataPath = path.join(__dirname, 'productsData.json');
-const rawData = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
-
-// 1. FILTER ACTIVE PRODUCTS IMMEDIATELY
-const activeProducts = rawData.products.filter(p => p.status === 'active');
 
 /**
- * Universal absolute asset resolver mimicking frontend shopEngine logic
+ * Universal absolute asset resolver mimicking frontend shopEngine logic.
+ * Safely passes external Printify CDN URLs straight through.
  */
 function resolvePath(imgSrc) {
     if (!imgSrc) return '/images/placeholder.jpg';
+    if (imgSrc.startsWith('http://') || imgSrc.startsWith('https://')) return imgSrc;
+    
     let clean = imgSrc.startsWith('./') ? imgSrc.slice(2) : imgSrc.startsWith('/') ? imgSrc.slice(1) : imgSrc;
     if (clean.startsWith('images/sculpture/')) clean = clean.replace('images/sculpture/', 'images/sculptures/');
     if (clean.startsWith('images/sculptures/') && clean.split('/').length >= 4) return '/' + clean;
+    
     const filename = clean.split('/').pop();
     let subfolder = filename.toLowerCase().split('_')[0].split('.')[0];
     if (subfolder === 'ronke') subfolder = 'ronkeh';
     return subfolder ? `/images/sculptures/${subfolder}/${filename}` : `/images/sculptures/${filename}`;
 }
 
+async function startBuildEngine() {
+    console.log('🌐 Ingesting catalog datasets from local database and live Printify API streams...');
+    
+    // Stream 1: Gather your custom, premium in-house fine art masterpieces
+    let inHouseItems = [];
+    try {
+        const localCatalog = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+        inHouseItems = localCatalog.products.filter(p => p.status === 'active').map(item => ({
+            ...item,
+            fulfillmentChannel: item.fulfillmentChannel || "in-house" // Default fallback tracking metric
+        }));
+        console.log(` ✅ Loaded ${inHouseItems.length} active fine art masterpieces from local JSON.`);
+    } catch (err) {
+        console.error("❌ Critical Error reading local productsData.json file:", err.message);
+        process.exit(1);
+    }
+
+    // Stream 2: Pull your automated canvas merchandising prints via Printify API
+    let printifyItems = [];
+    const token = process.env.PRINTIFY_API_TOKEN;
+    const shopId = process.env.PRINTIFY_SHOP_ID;
+
+    if (token && shopId) {
+        try {
+            const res = await axios.get(`https://api.printify.com/v1/shops/${shopId}/products.json`, {
+                headers: { 
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            });
+            
+            // Map Printify's schema array into your frontend data structures
+            printifyItems = res.data.data.filter(p => p.visible).map(product => ({
+                id: product.id,
+                category: "wall-art", // Maps external products directly into your wall-art grid templates
+                title: product.title,
+                status: "active",
+                fulfillmentChannel: "printify",
+                priceCurrent: `$${(product.variants[0].price / 100).toFixed(2)}`, // Converts cents into decimal strings
+                image: product.images[0].src,
+                gallery: product.images.map(img => img.src),
+                poem: [product.description || "Premium canvas merchandise collection data tokens."],
+                altText: product.title
+            }));
+            console.log(` ✅ Ingested ${printifyItems.length} active canvas listings from Printify API.`);
+        } catch (err) {
+            console.log('⚠️ Printify connection skipped or offline. Building in-house assets only.');
+        }
+    } else {
+        console.log('💡 Printify API environment tokens not detected in this runtime context. Building local assets only.');
+    }
+
+    // Merge streams into one master unified layout catalog configuration array
+    const unifiedCatalog = [...inHouseItems, ...printifyItems];
+
+    buildStaticDetailPages(unifiedCatalog);
+    buildStaticCategoryViews(unifiedCatalog);
+    console.log('🚀 Optimization process complete! Storefront is pre-rendered for search networks and AI scrapers.');
+}
+
 /**
- * PHASE 1: Generate Static Product Detail Pages
+ * PHASE 1: Generate Self-Contained, Static Product Detail HTML Pages
  */
-function buildStaticDetailPages() {
-    console.log('📦 Starting generation of static product detail view templates...');
-
-    // Read your master layout file as the structural frame wrapper
+function buildStaticDetailPages(products) {
+    console.log('📦 Generating static product detail templates...');
     const templatePath = path.join(__dirname, 'product-detail.html');
-    let templateHtml = fs.readFileSync(templatePath, 'utf8');
+    if (!fs.existsSync(templatePath)) {
+        console.error("❌ Error: product-detail.html layout template missing from directory tree.");
+        return;
+    }
+    const templateHtml = fs.readFileSync(templatePath, 'utf8');
 
-    activeProducts.forEach(product => {
+    products.forEach(product => {
         let pageHtml = templateHtml;
-
-        // Unroll gallery thumbnails
+        
+        // Unroll layout thumbnail strips safely
         let thumbsHtml = '';
         if (product.gallery && product.gallery.length > 0) {
             product.gallery.forEach((img, i) => {
@@ -49,14 +113,13 @@ function buildStaticDetailPages() {
             thumbsHtml = `<img src="${resolvePath(product.image)}" class="thumb-node active" onclick="window.syncMainStageImageFromThumbnail(this)">`;
         }
 
-        // Unroll poem line wrappers
+        // Unroll poem line containers safely
         const poemHtml = product.poem && product.poem.length > 0 && product.poem[0] !== ""
             ? product.poem.map(line => `<p class="poem-stanza-line">${line}</p>`).join('')
-            : `<p class="poem-stanza-line">Premium cultural art token documentation.</p>`;
+            : `<p class="poem-stanza-line">Premium cultural art token documentation variables.</p>`;
 
-        // Build core static markup block injected on initial request load
         const staticDetailViewMarkup = `
-        <div class="product-split-grid" id="productDetailContainer" data-product-id="${product.id}">
+        <div class="product-split-grid" id="productDetailContainer" data-product-id="${product.id}" data-fulfillment="${product.fulfillmentChannel}">
             <div class="product-gallery-column">
                 <div class="main-stage-image-wrap">
                     <button class="stage-nav-arrow left-arrow" id="prevStageImageBtn" aria-label="Previous image">
@@ -85,7 +148,7 @@ function buildStaticDetailPages() {
                 <div class="p-reviews-row"><span class="stars-gold">★★★★★</span><span class="reviews-count">(0 customer reviews)</span></div>
                 <div class="p-technical-ledger">
                     <div class="ledger-line"><span class="lbl">SKU:</span> <span class="val">N/A</span></div>
-                    <div class="ledger-line"><span class="lbl">Category:</span> <span class="val"><a href="category.html?type=${product.category}" style="text-transform: capitalize;">${product.category}</a></span></div>
+                    <div class="ledger-line"><span class="lbl">Category:</span> <span class="val"><a href="category-${product.category.toLowerCase()}.html" style="text-transform: capitalize;">${product.category}</a></span></div>
                     <div class="ledger-line"><span class="lbl">Tag:</span> <span class="val">Premium</span></div>
                 </div>
                 <div class="p-price-display" id="productDisplayPrice">${product.priceCurrent}</div>
@@ -100,36 +163,34 @@ function buildStaticDetailPages() {
             </div>
         </div>`;
 
-        // Inject dynamic breadcrumbs and replace the runtime target container with static markup
+        // Inject dynamic titles and pre-bake static content tokens
         pageHtml = pageHtml.replace('<title>Pixel Africana - Product Detail</title>', `<title>PixelAfricana - ${product.title}</title>`);
         pageHtml = pageHtml.replace('<span class="current-trail-node" id="breadcrumbCurrentNode">Product Detail View</span>', `<span class="current-trail-node" id="breadcrumbCurrentNode">${product.title}</span>`);
-        pageHtml = pageHtml.replace('<a href="category.html" id="breadcrumbCategoryLink" style="text-transform: capitalize;">Collections</a>', `<a href="category.html?type=${product.category}" id="breadcrumbCategoryLink" style="text-transform: capitalize;">${product.category}</a>`);
+        pageHtml = pageHtml.replace('<a href="category.html" id="breadcrumbCategoryLink" style="text-transform: capitalize;">Collections</a>', `<a href="category-${product.category.toLowerCase()}.html" id="breadcrumbCategoryLink" style="text-transform: capitalize;">${product.category}</a>`);
         pageHtml = pageHtml.replace('<div class="product-split-grid" id="productDetailContainer"></div>', staticDetailViewMarkup);
 
-        // Save file down to a flat, crawlable path structure: e.g., /product-detail-zainab.html
         const outputFileName = `product-detail-${product.id.toLowerCase()}.html`;
         fs.writeFileSync(path.join(__dirname, outputFileName), pageHtml, 'utf8');
-        console.log(` ✅ Generated static target: ${outputFileName}`);
     });
 }
 
 /**
- * PHASE 2: Inject Pre-rendered Collection Grids into Category and Index Layout Blocks
+ * PHASE 2: Inject Pre-rendered Category Views and Enforce RegEx Navigation Patching
  */
-function buildStaticCategoryViews() {
-    console.log('📂 Pre-rendering collection grids into layout pipelines...');
-
-    const categories = [...new Set(activeProducts.map(p => p.category.toLowerCase()))];
+function buildStaticCategoryViews(products) {
+    console.log('📂 Compiling pre-rendered grid components into collection views...');
+    const categories = [...new Set(products.map(p => p.category.toLowerCase()))];
     const categoryTemplatePath = path.join(__dirname, 'category.html');
-    let categoryTemplateHtml = fs.readFileSync(categoryTemplatePath, 'utf8');
+    if (!fs.existsSync(categoryTemplatePath)) return;
+    const categoryTemplateHtml = fs.readFileSync(categoryTemplatePath, 'utf8');
 
     categories.forEach(cat => {
-        const structuralScopeList = activeProducts.filter(p => p.category.toLowerCase() === cat);
-
+        const matchingProducts = products.filter(p => p.category.toLowerCase() === cat);
+        
         let gridHtml = '';
-        structuralScopeList.forEach(item => {
+        matchingProducts.forEach(item => {
             gridHtml += `
-            <article class="product-card">
+            <article class="product-card" data-fulfillment="${item.fulfillmentChannel}">
                 <div class="product-image-wrapper">
                     <a href="product-detail-${item.id.toLowerCase()}.html">
                         <img src="${resolvePath(item.image)}" alt="${item.altText}" class="product-img">
@@ -148,33 +209,32 @@ function buildStaticCategoryViews() {
 
         let outputHtml = categoryTemplateHtml;
         outputHtml = outputHtml.replace('<div class="product-grid-layout" id="catalogProductInjectionNode"></div>', `<div class="product-grid-layout" id="catalogProductInjectionNode">${gridHtml}</div>`);
-        outputHtml = outputHtml.replace('<span class="results-counter-string" id="catalogResultsCount">Loading item logs...</span>', `<span class="results-counter-string" id="catalogResultsCount">Showing all ${structuralScopeList.length} results</span>`);
+        outputHtml = outputHtml.replace('<span class="results-counter-string" id="catalogResultsCount">Loading item logs...</span>', `<span class="results-counter-string" id="catalogResultsCount">Showing all ${matchingProducts.length} results</span>`);
         outputHtml = outputHtml.replace('<span class="current-trail-node" id="catalogBreadcrumbTitle"></span>', `<span class="current-trail-node" id="catalogBreadcrumbTitle" style="text-transform: capitalize;">${cat} Collection</span>`);
+        
+        // Ensure menu links on sub-category pages point directly to your primary static collection page
+        outputHtml = outputHtml.replace(/href=["']category\.html\s*["']/gi, 'href="category-sculpture.html"');
 
         const outputFileName = `category-${cat}.html`;
         fs.writeFileSync(path.join(__dirname, outputFileName), outputHtml, 'utf8');
-        console.log(` ✅ Generated static category node view: ${outputFileName}`);
     });
 
-    // Update Home Index Counters Static Layout elements
-    console.log('🏠 Updating homepage counter metrics dynamically...');
+    // Patch structural counter badges on the primary index homepage file layout 
+    console.log('🏠 Running RegEx routing updates on homepage templates...');
     const indexTemplatePath = path.join(__dirname, 'index.html');
-    let indexHtml = fs.readFileSync(indexTemplatePath, 'utf8');
+    if (fs.existsSync(indexTemplatePath)) {
+        let indexHtml = fs.readFileSync(indexTemplatePath, 'utf8');
+        
+        const totalSculptures = products.filter(p => p.category === 'sculpture').length;
+        indexHtml = indexHtml.replace(/<span class="category-count-badge">.*?<\/span>/i, `<span class="category-count-badge">${totalSculptures} Items</span>`);
 
-    const totalSculptures = activeProducts.filter(p => p.category === 'sculpture').length;
-    indexHtml = indexHtml.replace('<span class="category-count-badge">7 Items</span>', `<span class="category-count-badge">${totalSculptures} Items</span>`);
-    indexHtml = indexHtml.replace('href="category.html?type=sculpture"', 'href="category-sculpture.html"');
+        // Force both direct links and query configurations to fall back directly to your compiled static files
+        indexHtml = indexHtml.replace(/href=["']category\.html\?type=sculpture\s*["']/gi, 'href="category-sculpture.html"');
+        indexHtml = indexHtml.replace(/href=["']category\.html\s*["']/gi, 'href="category-sculpture.html"');
 
-    // Fixes the main menu navigation link on the homepage
-    indexHtml = indexHtml.replace('href="category.html"', 'href="category-sculpture.html"');
-
-    // Fixes the main menu navigation link on the category pages themselves
-    categoryTemplateHtml = categoryTemplateHtml.replace('href="category.html"', 'href="category-sculpture.html"');
-    fs.writeFileSync(indexTemplatePath, indexHtml, 'utf8');
-    console.log(' ✅ Homepage template counters patched successfully!');
+        fs.writeFileSync(indexTemplatePath, indexHtml, 'utf8');
+    }
 }
 
-// Execute execution workflow paths
-buildStaticDetailPages();
-buildStaticCategoryViews();
-console.log('🚀 Build optimization complete. Storefront is fully optimized for SEO and AI Discovery Engines.');
+// Execute compilation pipeline sequences
+startBuildEngine();
