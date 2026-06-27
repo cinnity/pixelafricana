@@ -2577,8 +2577,8 @@ a.collection-card {
 
 /* Profile Interactive Component Card Frame */
 .profile-showcase-card {
-    /*background-color: #ffffff;*/
-    border: 1px solid #e3d6c6;
+    /*background-color: #ffffff;
+    border: 1px solid #e3d6c6;*/
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(92, 64, 40, 0.02);
