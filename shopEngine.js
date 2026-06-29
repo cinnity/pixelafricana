@@ -52,6 +52,7 @@ function bootStorefrontEngine() {
     }
     renderCartPageTable();
     renderCheckoutSummary();
+    syncHomeCategoryBadges(); // Restores dynamic lookbook metrics
 }
 
 if (document.readyState === 'loading') {
@@ -279,6 +280,61 @@ function renderCheckoutSummary() {
 }
 
 /**
+ * DYNAMIC DATA-DRIVEN CATEGORY BADGES: Extracts quantities safely from productsData.json object models
+ */
+async function syncHomeCategoryBadges() {
+    const trackingBadges = document.querySelectorAll('.category-count-badge');
+    if (trackingBadges.length === 0) return;
+
+    try {
+        const response = await fetch('./productsData.json'); 
+        if (!response.ok) throw new Error(`HTTP Error Status: ${response.status}`);
+        
+        const rawData = await response.json();
+        
+        let products = [];
+        if (Array.isArray(rawData)) {
+            products = rawData;
+        } else if (rawData && typeof rawData === 'object') {
+            products = rawData.products || rawData.items || Object.values(rawData);
+        }
+
+        if (!Array.isArray(products)) {
+            throw new Error("Parsed data format is not an array.");
+        }
+
+        // DRAFT FILTER: Exclude any products that have a status of 'draft', 'hidden', or are marked as inactive
+        const activeProducts = products.filter(p => {
+            if (!p) return false;
+            
+            const status = String(p.status || p.visibility || '').toLowerCase();
+            // Returns false if the item explicitly matches your draft/hidden status configurations
+            return status !== 'draft' && status !== 'hidden' && status !== 'inactive';
+        });
+
+        console.log(`📊 Category Parser: Analyzing ${activeProducts.length} ACTIVE elements (excluding drafts)...`);
+
+        trackingBadges.forEach(badge => {
+            const catType = badge.getAttribute('data-category');
+            let tallyCount = 0;
+
+            if (catType === 'sculpture') {
+                tallyCount = activeProducts.filter(p => p.category?.toLowerCase() === 'sculptures' || p.category?.toLowerCase() === 'sculpture').length;
+            } else if (catType === 'digital-downloads') {
+                tallyCount = activeProducts.filter(p => p.category?.toLowerCase().includes('digital') || p.category?.toLowerCase().includes('download')).length;
+            } else if (catType === 'wall-art') {
+                tallyCount = activeProducts.filter(p => p.category?.toLowerCase().includes('wall') || p.category?.toLowerCase() === 'canvas' || p.category?.toLowerCase() === 'wall art').length;
+            }
+
+            badge.innerText = `${tallyCount} Item${tallyCount !== 1 ? 's' : ''}`;
+        });
+
+        console.log("✅ Category count visualization nodes synced successfully!");
+
+    } catch (error) {
+        console.error("❌ Category Parser Critical Failure:", error.message);
+    }
+}/**
  * HEADER CORE COMPILER BADGES
  */
 function initializeCartWidgetState() {
