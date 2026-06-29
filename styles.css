@@ -2284,6 +2284,7 @@ a.collection-card {
 
 .main-stage-image-wrap {
     position: relative;
+    border: 1px solid #d4c4b0;
 }
 
 /* Base structural layout for overlay slider arrows */

@@ -51,6 +51,7 @@ function bootStorefrontEngine() {
         initializeHeadlessVariantManager();
     }
     renderCartPageTable();
+    renderCheckoutSummary();
 }
 
 if (document.readyState === 'loading') {
@@ -88,7 +89,6 @@ function initializeHeadlessVariantManager() {
     const mountNode = document.getElementById('variantDropdownMountInjectionNode');
     if (!mountNode) return;
 
-    // CHROME FIX: Fallback sequence extracts clean text tokens avoiding HTML entity parsing bugs
     let rawVariants = container.dataset.variants || container.getAttribute('data-variants');
     let variants = [];
     
@@ -173,7 +173,6 @@ function renderCartPageTable() {
         return;
     }
 
-    // 1. Render the Product Items List
     if (itemsTarget) {
         itemsTarget.innerHTML = cart.map(item => `
             <div class="cart-item-row" style="display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #e1ded7; padding: 1rem 0; gap:1rem; font-family:'Quicksand', sans-serif;">
@@ -196,7 +195,6 @@ function renderCartPageTable() {
         `).join('');
     }
 
-    // 2. Render and Sync the Dynamic Pricing Totals Card Module
     if (summaryTarget) {
         let runningSubtotal = 0;
         cart.forEach(item => {
@@ -223,6 +221,64 @@ function renderCartPageTable() {
 }
 
 /**
+ * DYNAMIC CHECKOUT VIEW GENERATOR: Strict CSS isolated layout updates
+ */
+function renderCheckoutSummary() {
+    if (!window.location.pathname.toLowerCase().includes('checkout.html')) return;
+
+    const cart = JSON.parse(localStorage.getItem('pixel_cart_items') || '[]');
+    if (cart.length === 0) return;
+
+    console.log("🛒 Checkout Engine: Syncing order summary breakdown strictly...");
+
+    const asidePanel = document.querySelector('.cart-totals-section') || document.querySelector('aside');
+    if (!asidePanel) return;
+
+    const targetImg = asidePanel.querySelector('img');
+    let itemsContainer = null;
+    
+    if (targetImg) {
+        itemsContainer = targetImg.closest('div').parentElement;
+    } else {
+        itemsContainer = asidePanel.querySelector('.checkout-thumbnails-grid') || asidePanel.querySelector('div style*="display: flex"');
+    }
+
+    if (itemsContainer) {
+        itemsContainer.innerHTML = cart.map(item => `
+            <div class="checkout-item-row" style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem; font-family: 'Quicksand', sans-serif; width: 100%;">
+                <div style="position: relative; width: 56px; height: 56px; background: #fff; border: 1px solid #e1ded7; border-radius: 6px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                    <img src="${item.image}" alt="${item.title}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 5px;">
+                    <span style="position: absolute; top: -8px; right: -8px; background: #8e7a68; color: #fff; font-size: 0.7rem; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.15); z-index: 10;">${item.quantity}</span>
+                </div>
+                <div style="flex: 1; min-width: 0; text-align: left;">
+                    <h3 style="font-size: 0.85rem; font-weight: 600; margin: 0; color: #333; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: 'Quicksand', sans-serif;">${item.title}</h3>
+                </div>
+                <span style="font-size: 0.85rem; font-weight: 500; color: #111; font-family: 'Quicksand', sans-serif;">${item.price}</span>
+            </div>
+        `).join('');
+    }
+
+    let totalCents = 0;
+    cart.forEach(item => {
+        const cleanPrice = parseFloat(item.price.replace(/[^0-9.]/g, '')) || 0;
+        totalCents += Math.round(cleanPrice * 100) * item.quantity;
+    });
+    
+    const finalCalculatedAmount = (totalCents / 100).toFixed(2);
+
+    const summaryElements = asidePanel.querySelectorAll('div, span, p, strong, td');
+    summaryElements.forEach(node => {
+        const innerText = node.textContent.trim();
+        if (innerText === '$250.00') {
+            node.innerHTML = `$${finalCalculatedAmount}`;
+        }
+        if (innerText === '$250.00 USD') {
+            node.innerHTML = `$${finalCalculatedAmount} USD`;
+        }
+    });
+}
+
+/**
  * HEADER CORE COMPILER BADGES
  */
 function initializeCartWidgetState() {
@@ -240,9 +296,8 @@ function initializeCartWidgetState() {
 
 function executeAddToCartSequence(productId, quantity, variantId) {
     const cart = JSON.parse(localStorage.getItem('pixel_cart_items') || '[]');
-    
-    // STRICT SCOPING: Restricts metadata collection to the active product workspace node
     const detailContainer = document.getElementById('productDetailContainer');
+    
     let titleText = "Pixel Art Piece";
     let priceText = "$42.23";
     let imageSrc = "/images/placeholder.jpg";
