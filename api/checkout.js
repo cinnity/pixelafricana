@@ -25,12 +25,21 @@ module.exports = async (req, res) => {
 
         // 3. Transform frontend cart objects into formal Stripe line items
         const lineItems = cartItems.map(item => {
-            // Securely normalize the product mockup image URL for Stripe's checkout window
+            // FIX 1: Safely strip away '$' symbols and alpha strings, converting the value to a raw numeric decimal float
+            const cleanNumericPrice = parseFloat(item.price.replace(/[^0-9.]/g, '')) || 0;
+
+            // FIX 2: Securely normalize the image path and provide a real-world placeholder fallback if running on localhost
             let stripeCompatibleImage = '';
             if (item.image) {
-                stripeCompatibleImage = item.image.startsWith('http') 
-                    ? item.image 
-                    : `${req.headers.origin}${item.image.startsWith('/') ? '' : '/'}${item.image}`;
+                if (item.image.startsWith('http')) {
+                    stripeCompatibleImage = item.image;
+                } else {
+                    const hostOrigin = req.headers.origin || '';
+                    // If running locally, fall back to a public image so Stripe's crawler doesn't reject the URL
+                    stripeCompatibleImage = hostOrigin.includes('localhost') || hostOrigin.includes('127.0.0.1')
+                        ? 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=200' 
+                        : `${hostOrigin}${item.image.startsWith('/') ? '' : '/'}${item.image}`;
+                }
             }
 
             return {
@@ -40,10 +49,9 @@ module.exports = async (req, res) => {
                         name: item.title,
                         images: stripeCompatibleImage ? [stripeCompatibleImage] : []
                     },
-                    // Stripe requires values strictly wrapped as integers in cents
-                    unit_amount: Math.round(item.price * 100), 
+                    // Securely calculate cents from our cleaned, parsed numeric float
+                    unit_amount: Math.round(cleanNumericPrice * 100), 
                 },
-                // Pass quantity integers directly
                 quantity: item.quantity,
             };
         });
@@ -54,26 +62,22 @@ module.exports = async (req, res) => {
             line_items: lineItems,
             mode: 'payment',
             
-            // Allow Stripe to capture full address metrics required for shipping execution
             shipping_address_collection: {
                 allowed_countries: ['US', 'CA', 'GB'], 
             },
 
-            // CRUCIAL DATA ENGINE LINK: Append state tracking metadata flags to the payment record
             metadata: {
                 has_in_house: inHouseItems.length > 0 ? "true" : "false",
                 has_printify: printifyItems.length > 0 ? "true" : "false",
-                // Compress the Printify order profiles into a tight, lightweight string payload
                 printify_order_data: JSON.stringify(printifyItems.map(i => ({ 
                     id: i.id, 
                     qty: i.quantity 
                 })))
             },
             success_url: `${req.headers.origin}/success.html`,
-            cancel_url: `${req.headers.origin}/checkout.html`,
+            cancel_url: `${req.headers.origin}/cart.html`, // Redirect directly back to the active cart layout view
         });
 
-        // 5. Send the encrypted portal route directly back to your shopEngine script trigger
         return res.status(200).json({ url: session.url });
 
     } catch (error) {
