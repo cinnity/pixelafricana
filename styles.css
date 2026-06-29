@@ -512,7 +512,17 @@ body {
     margin: 30px auto 100px auto;
     padding: 0 20px;
 }
-
+.catalog-right-controls-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e3d6c6;
+    padding: 5px 10px;
+    margin-bottom: 30px;
+    font-size: 0.9rem;
+    color: #8c7355;
+    background: #fdfbf8;
+}
 .catalog-main-title {
     font-size: 2.6rem;
     font-weight: 300;
@@ -1548,21 +1558,42 @@ body {
     gap: 15px;
 }
 
-.main-stage-image-wrap {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    background-color: #faf5ee;
-    border-radius: 6px;
-    overflow: hidden;
-    position: relative;
-    border: 1px solid #e3d6c6;
+/* Ensure the grid doesn't explode from giant images */
+.product-split-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    align-items: start;
 }
 
+/* Force the image column to respect its bounds */
+.product-gallery-column {
+    width: 100%;
+    max-width: 600px; /* Limits the gallery footprint */
+}
+
+/* Restrain the primary main stage image */
+.main-stage-image-wrap {
+    position: relative;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f7f5f0; /* Soft beige placeholder color */
+}
+
+/* THE CRITICAL FIX: Restrain the raw image dimensions */
 .stage-img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    max-height: 550px; /* Keeps the canvas height elegant on laptop viewports */
+    object-fit: contain; /* Prevents stretching or weird aspect crops */
+    display: block;
 }
+
 
 .zoom-overlay-trigger {
     position: absolute;
