@@ -52,7 +52,10 @@ function bootStorefrontEngine() {
     }
     renderCartPageTable();
     renderCheckoutSummary();
-    syncHomeCategoryBadges(); // Restores dynamic lookbook metrics
+    
+    // RUNTIME INVENTORY & INTERACTION ENGINE EXTENSIONS
+    syncHomeCategoryBadges();
+    initializeCatalogSorting();
 }
 
 if (document.readyState === 'loading') {
@@ -199,7 +202,8 @@ function renderCartPageTable() {
     if (summaryTarget) {
         let runningSubtotal = 0;
         cart.forEach(item => {
-            const numericPrice = parseFloat(item.price.replace(/[^0-9.]/g, '')) || 0;
+            const priceString = String(item.price || '0');
+            const numericPrice = parseFloat(priceString.replace(/[^0-9.]/g, '')) || 0;
             runningSubtotal += (numericPrice * item.quantity);
         });
 
@@ -261,7 +265,8 @@ function renderCheckoutSummary() {
 
     let totalCents = 0;
     cart.forEach(item => {
-        const cleanPrice = parseFloat(item.price.replace(/[^0-9.]/g, '')) || 0;
+        const priceString = String(item.price || '0');
+        const cleanPrice = parseFloat(priceString.replace(/[^0-9.]/g, '')) || 0;
         totalCents += Math.round(cleanPrice * 100) * item.quantity;
     });
     
@@ -280,7 +285,49 @@ function renderCheckoutSummary() {
 }
 
 /**
- * DYNAMIC DATA-DRIVEN CATEGORY BADGES: Extracts quantities safely from productsData.json object models
+ * AUTOMATED STATIC CATALOG SORTING ENGINE: Reorders pre-baked HTML elements based on price metrics
+ */
+function initializeCatalogSorting() {
+    const sortSelect = document.querySelector('.catalog-sort-select');
+    const gridContainer = document.getElementById('catalogProductInjectionNode');
+
+    if (!sortSelect || !gridContainer) return;
+
+    console.log("⚙️ Sorting Engine: Active product collection grid detected.");
+
+    sortSelect.addEventListener('change', function(e) {
+        const sortingStrategy = e.target.value; 
+        
+        // 1. Convert live pre-baked category card children elements into an array list
+        const productCards = Array.from(gridContainer.querySelectorAll('.product-card'));
+        if (productCards.length === 0) return;
+
+        // 2. Perform DOM extraction sort calculations
+        productCards.sort((cardA, cardB) => {
+            const priceTextA = cardA.querySelector('.price-current')?.textContent || '0';
+            const priceTextB = cardB.querySelector('.price-current')?.textContent || '0';
+
+            const numericPriceA = parseFloat(priceTextA.replace(/[^0-9.]/g, '')) || 0;
+            const numericPriceB = parseFloat(priceTextB.replace(/[^0-9.]/g, '')) || 0;
+
+            if (sortingStrategy === 'price-low-high') {
+                return numericPriceA - numericPriceB;
+            } else if (sortingStrategy === 'price-high-low') {
+                return numericPriceB - numericPriceA;
+            }
+            return 0;
+        });
+
+        // 3. Purge grid container and mount the freshly sorted card elements directly back into view
+        gridContainer.innerHTML = '';
+        productCards.forEach(card => gridContainer.appendChild(card));
+
+        console.log(`✅ Collection layout reordered using strategy: "${sortingStrategy}"`);
+    });
+}
+
+/**
+ * DYNAMIC DATA-DRIVEN CATEGORY BADGES: Extracts quantities safely from productsData.json object structures
  */
 async function syncHomeCategoryBadges() {
     const trackingBadges = document.querySelectorAll('.category-count-badge');
@@ -300,19 +347,15 @@ async function syncHomeCategoryBadges() {
         }
 
         if (!Array.isArray(products)) {
-            throw new Error("Parsed data format is not an array.");
+            throw new Error("Parsed data format is not an iterable array list.");
         }
 
-        // DRAFT FILTER: Exclude any products that have a status of 'draft', 'hidden', or are marked as inactive
+        // DRAFT FILTER: Safely strips drafts or hidden template objects out of final counts
         const activeProducts = products.filter(p => {
             if (!p) return false;
-            
             const status = String(p.status || p.visibility || '').toLowerCase();
-            // Returns false if the item explicitly matches your draft/hidden status configurations
             return status !== 'draft' && status !== 'hidden' && status !== 'inactive';
         });
-
-        console.log(`📊 Category Parser: Analyzing ${activeProducts.length} ACTIVE elements (excluding drafts)...`);
 
         trackingBadges.forEach(badge => {
             const catType = badge.getAttribute('data-category');
@@ -329,12 +372,14 @@ async function syncHomeCategoryBadges() {
             badge.innerText = `${tallyCount} Item${tallyCount !== 1 ? 's' : ''}`;
         });
 
-        console.log("✅ Category count visualization nodes synced successfully!");
+        console.log("✅ Category lookbook badges synchronized perfectly with active data items.");
 
     } catch (error) {
-        console.error("❌ Category Parser Critical Failure:", error.message);
+        console.warn("❌ Category Badge Parser Lifecycle Interrupted:", error.message);
     }
-}/**
+}
+
+/**
  * HEADER CORE COMPILER BADGES
  */
 function initializeCartWidgetState() {
@@ -343,7 +388,11 @@ function initializeCartWidgetState() {
 
     cart.forEach(item => {
         totalItems += item.quantity;
-        totalPrice += (parseFloat(item.price.replace(/[^0-9.]/g, '')) || 0) * item.quantity;
+        
+        const priceString = String(item.price || '0');
+        const numericPrice = parseFloat(priceString.replace(/[^0-9.]/g, '')) || 0;
+        
+        totalPrice += numericPrice * item.quantity;
     });
 
     document.querySelectorAll('.cart-count').forEach(n => n.innerText = `${totalItems} item${totalItems !== 1 ? 's' : ''}`);

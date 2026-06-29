@@ -8,11 +8,9 @@
     <link rel="icon" type="image/x-icon" href="/cinnity_favicon.ico">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?&family=Quicksand:wght@300..700&family=Manufacturing+Consent&display=swap&family=Cormorant+Garamond:ital,wght@1,500&family=Playfair+Display:ital,wght@1,500&family=Syne:wght@500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght=1,500&family=Manufacturing+Consent&family=Playfair+Display:ital,wght=1,500&family=Quicksand:wght@300..700&family=Syne:wght@500&display=swap"
         rel="stylesheet">
-
     <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 </head>
 
@@ -30,7 +28,7 @@
                 </a>
             </div>
 
-            <div class="header-utilities">
+            <div class="header-utilities" style="display: flex; align-items: center; gap: 1rem;">
                 <div class="search-box">
                     <svg class="search-vector-icon" viewBox="0 0 24 24" aria-hidden="true">
                         <path
@@ -38,15 +36,26 @@
                     </svg>
                     <input type="text" placeholder="Search products...">
                 </div>
+
                 <div class="cart-status-widget" onclick="location.href='cart.html'" style="cursor: pointer;">
                     <span class="cart-total">$0.00</span>
                     <span class="cart-count">0 items</span>
-
                     <svg class="cart-vector-icon" viewBox="0 0 24 24" aria-hidden="true">
                         <path
                             d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.05 1.4-2.55h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" />
                     </svg>
                 </div>
+
+                <a href="https://instagram.com/pixelafricana" target="_blank" rel="noopener noreferrer"
+                    class="instagram-utility-link" aria-label="Follow PixelAfricana on Instagram"
+                    style="display: flex; align-items: center; justify-content: center; padding: 0.5rem; color: #333; transition: all 0.2s ease; margin-left: 0.25rem;">
+                    <svg class="instagram-vector-icon" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor"
+                        stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
             </div>
         </div>
     </header>
@@ -72,16 +81,16 @@
         </div>
     </nav>
 
-<main class="shop-view-wrapper">
+    <main class="shop-view-wrapper">
         <div class="category-header-meta">
             <nav class="breadcrumb-trail">
-                <a href="index.html">Home</a> › 
+                <a href="index.html">Home</a> ›
                 <span class="current-trail-node" id="catalogBreadcrumbTitle">Collection</span>
             </nav>
-            
+
             <div class="catalog-right-controls-wrapper" style="display: flex; align-items: center; gap: 1.5rem;">
                 <span class="results-counter-string" id="catalogResultsCount">Loading item logs...</span>
-                
+
                 <div class="catalog-filters-toolbar" style="margin: 0;">
                     <select class="catalog-sort-select" aria-label="Sort products">
                         <option value="default" selected>Default sorting</option>
@@ -99,7 +108,7 @@
             <p>&copy; Pixel Africana 2026</p>
         </div>
     </footer>
-    
+
     <script src="shopEngine.js" defer></script>
 </body>
 
