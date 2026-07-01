@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelAfricana - Douglas</title>
+    <link rel="icon" type="image/svg+xml" href="cinnity_favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500&family=Playfair+Display:ital,wght@1,500&family=Quicksand:wght@300..700&family=Syne:wght@500&display=swap"
+        rel="stylesheet">
+    <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="header-container">
+            <div class="brand-block">
+                <a href="index.html" class="logo-link">
+                    <img src="images/pixelafricana_logo.png" alt="Pixel Africana Logo Symbol" class="logo-img">
+                    <div class="brand-text">
+                        <span class="brand-name">PixelAfricana</span>
+                        <span class="brand-sub">Culture by the Pixel ™</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="header-utilities" style="display: flex; align-items: center; gap: 1rem;">
+                <div class="search-box">
+                    <svg class="search-vector-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                    </svg>
+                    <input type="text" placeholder="Search products...">
+                </div>
+
+                <div class="cart-status-widget" onclick="location.href='cart.html'" style="cursor: pointer;">
+                    <span class="cart-total">$0.00</span>
+                    <span class="cart-count">0 items</span>
+                    <svg class="cart-vector-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.05 1.4-2.55h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" />
+                    </svg>
+                </div>
+
+                <a href="https://instagram.com/pixelafricana" target="_blank" rel="noopener noreferrer" class="instagram-utility-link" aria-label="Follow PixelAfricana on Instagram" style="display: flex; align-items: center; justify-content: center; padding: 0.5rem; color: #333; transition: all 0.2s ease; margin-left: 0.25rem;">
+                    <svg class="instagram-vector-icon" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+            </div>        
+        </div>
+    </header>
+
+    <nav class="main-navigation">
+        <div class="nav-container">
+            <input type="checkbox" id="mobile-menu-toggle" class="menu-toggle-checkbox">
+            <label for="mobile-menu-toggle" class="menu-toggle-btn" aria-label="Toggle navigation menu">
+                <svg class="hamburger-icon" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
+                    stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </label>
+
+            <div class="nav-links-wrapper">
+                <a href="index.html" class="nav-item">Home</a>
+                <a href="about.html" class="nav-item">About</a>
+                <a href="how-it-works.html" class="nav-item">How It Works</a>
+                <a href="poetry.html" class="nav-item">Poetry</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <main class="shop-view-wrapper">
+        <div class="category-header-meta">
+            <nav class="breadcrumb-trail" aria-label="Breadcrumb">
+                <a href="index.html">Home</a> ›
+                <a href="category-sculpture.html" id="breadcrumbCategoryLink" style="text-transform: capitalize;">sculpture Collection</a>
+                ›
+                <span class="current-trail-node" id="breadcrumbCurrentNode">Douglas</span>
+            </nav>
+        </div>
+
+        
+        <div class="product-split-grid" id="productDetailContainer" 
+             data-product-id="douglas" 
+             data-fulfillment="in-house"
+             data-variants="[]"
+             data-images="[]">
+            
+            <div class="product-gallery-column">
+                <div class="main-stage-image-wrap">
+                    <button class="stage-nav-arrow left-arrow" id="prevStageImageBtn" aria-label="Previous image">
+                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <img src="/images/sculptures/amarachi/amarachi_front_1.png" alt="Douglas" id="mainStageImage" class="stage-img">
+                    <button class="stage-nav-arrow right-arrow" id="nextStageImageBtn" aria-label="Next image">
+                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                    
+                    <div class="art-poem-overlay-sheet" id="poemOverlaySheet">
+                        <button class="poem-close-btn" id="closePoemTrigger" aria-label="Close sheet">&times;</button>
+                        <div class="poem-text-content">
+                            <h3>Douglas</h3>
+                            <p class="poem-stanza-line" style="margin: 0 0 4px 0;">There is a man, it is said,</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">who crossed water in chains</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">and came back in words.</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">He carried the compound on his back</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">already one of ours.</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">just as he has always been.</p><div class="poem-stanza-break" style="height: 1.5rem;"></div><p class="poem-stanza-line" style="margin: 0 0 4px 0;">Hair the color</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">of the foam on the water he crossed —</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">white, full, uncombed by anyone's permission,</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">like a crown</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">that grew itself.</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">Not dyed back</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">into a younger lie.</p><div class="poem-stanza-break" style="height: 1.5rem;"></div><p class="poem-stanza-line" style="margin: 0 0 4px 0;">And beard like something</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">carved from a river stone,</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">the deep lines of the face</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">that had done the saying</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">no one else would say —</p><div class="poem-stanza-break" style="height: 1.5rem;"></div><p class="poem-stanza-line" style="margin: 0 0 4px 0;">When the cap was placed</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">over that white crown,</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">it did not cover the hair.</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">that spilled from beneath the brim</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">like proof</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">that some things</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">are older</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">than any title</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">they could give him.</p><div class="poem-stanza-break" style="height: 1.5rem;"></div><p class="poem-stanza-line" style="margin: 0 0 4px 0;">He had worn that presence</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">like a second skin</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">since Maryland,</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">since the shipyard,</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">since the night he became</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">the first thing he ever owned:</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">himself.</p><div class="poem-stanza-break" style="height: 1.5rem;"></div><p class="poem-stanza-line" style="margin: 0 0 4px 0;">So they gave the title</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">to the white-haired man,</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">Because in the old way of seeing,</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">before anyone learned</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">to fear the mirror,</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">there he was,</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">The lion with the white mane</p><p class="poem-stanza-line" style="margin: 0 0 4px 0;">come home to take his title</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-thumbnails-strip" id="detailThumbnailsStrip"><img src="/images/sculptures/amarachi/amarachi_front_1.png" class="thumb-node active" onclick="window.syncMainStageImageFromThumbnail(this)"></div>
+            </div>
+            
+            <div class="product-purchase-column">
+                <h1 class="p-title">Douglas</h1>
+                
+                <div class="p-reviews-row">
+                    <span class="stars-gold">★★★★★</span>
+                    <span class="reviews-count">(0 customer reviews)</span>
+                </div>
+                
+                <div class="p-technical-ledger">
+                    <div class="ledger-line"><span class="lbl">SKU:</span> <span class="val" id="variantSkuDisplay">N/A</span></div>
+                    <div class="ledger-line">
+                        <span class="lbl">Category:</span> 
+                        <span class="val">
+                            <a href="category-sculpture.html" style="text-transform: capitalize; text-decoration: none; color: inherit; font-weight: 500;">sculpture</a>
+                        </span>
+                    </div>
+                    <div class="ledger-line"><span class="lbl">Fulfillment:</span> <span class="val" style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.5px;">in-house</span></div>
+                </div>
+
+                <div class="variant-selection-container" id="variantDropdownMountInjectionNode"></div>
+                
+                <div class="p-price-display" id="productDisplayPrice">$450.00</div>
+                
+                <div class="purchase-actions-row">
+                    <div class="qty-stepper-box">
+                        <button class="stepper-btn" onclick="window.adjustLocalQuantityInput(-1)">−</button>
+                        <input type="number" id="detailQtyInput" class="qty-input" value="1" min="1" aria-label="Quantity">
+                        <button class="stepper-btn" onclick="window.adjustLocalQuantityInput(1)">+</button>
+                    </div>
+                    <button class="add-to-cart-action-btn" id="detailAddToCartBtn" data-id="douglas" data-selected-variant="">Add To Cart</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="minimal-footer">
+        <div class="footer-container">
+            <p>&copy; Pixel Africana 2026</p>
+        </div>
+    </footer>
+
+    <script src="shopEngine.js" defer></script>
+</body>
+
+</html>
